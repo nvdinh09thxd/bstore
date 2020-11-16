@@ -23,8 +23,10 @@ public class PublicIndexController extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		List<Products> listProducts = productDao.getItems();
-		request.setAttribute("listProducts", listProducts);
+		List<Products> listNewProducts = productDao.getNewProducts();
+		List<Products> listSaleProducts = productDao.getSaleProducts();
+		request.setAttribute("listNewProducts", listNewProducts);
+		request.setAttribute("listSaleProducts", listSaleProducts);
 		RequestDispatcher rd = request.getRequestDispatcher("/views/public/index.jsp");
 		rd.forward(request, response);
 	}

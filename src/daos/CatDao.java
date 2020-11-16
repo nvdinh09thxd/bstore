@@ -17,7 +17,7 @@ public class CatDao extends AbstractDAO {
 			st = con.createStatement();
 			rs = st.executeQuery(sql);
 			while (rs.next()) {
-				Categories item = new Categories(rs.getInt("id"), rs.getString("name"));
+				Categories item = new Categories(rs.getInt("id"), rs.getInt("parent_id"), rs.getString("name"));
 				listItems.add(item);
 			}
 		} catch (SQLException e) {
@@ -69,7 +69,7 @@ public class CatDao extends AbstractDAO {
 			pst.setInt(1, catId);
 			rs = pst.executeQuery();
 			if (rs.next()) {
-				item = new Categories(rs.getInt("id"), rs.getString("name"));
+				item = new Categories(rs.getInt("id"), rs.getInt("parent_id"), rs.getString("name"));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();

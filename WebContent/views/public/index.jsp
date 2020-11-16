@@ -1,13 +1,9 @@
+<%@page import="models.Products"%>
+<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="/templates/public/inc/header.jsp" %>
     <body>
-        <!--[if lt IE 8]>
-            <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
-        <![endif]-->
-
-        <!-- Add your site or application content here -->
-		
 		<!-- HEADER-TOP START -->
 		<div class="header-top">
 			<div class="container">
@@ -44,8 +40,8 @@
 										</a>
 									</li>
 									<li>
-										<a href="#" title="FranÃ§ais (French)">
-											<span>FranÃ§ais</span>
+										<a href="#" title="French (French)">
+											<span>French</span>
 										</a>
 									</li>
 								</ul>										
@@ -328,12 +324,17 @@
 										<!-- NEW-PRO-CAROUSEL START -->
 										<div class="new-pro-carousel">
 											<!-- NEW-PRODUCT-SINGLE-ITEM START -->
+											<%
+												List<Products> listNewProducts = (List<Products>) request.getAttribute("listNewProducts");
+												if(listNewProducts!=null && listNewProducts.size()>0){
+													for(Products objNewProduct: listNewProducts){
+											%>
 											<div class="item">
 												<div class="new-product">
 													<div class="single-product-item">
 														<div class="product-image">
 															<a href="#"><img src="<%=request.getContextPath() %>/templates/public/img/product/sale/8.jpg" alt="product-image" /></a>
-															<a href="#" class="new-mark-box">new</a>
+															<a href="#" class="new-mark-box">New</a>
 															<div class="overlay-content">
 																<ul>
 																	<li><a href="#" title="Quick view"><i class="fa fa-search"></i></a></li>
@@ -353,364 +354,20 @@
 																	<i class="fa fa-star-half-empty"></i>
 																</div>
 																<div class="review-box">
-																	<span>1 Review (s)</span>
+																	<span><%=objNewProduct.getPreview() %> Review (s)</span>
 																</div>
 															</div>
-															<a href="single-product.html">Printed Dress</a>
+															<a href="single-product.html"><%=objNewProduct.getCat().getName() %></a>
 															<div class="price-box">
-																<span class="price">$26.00</span>
+																<span class="price"><%=objNewProduct.getPrice() %></span>
 															</div>
 														</div>
 													</div>
 												</div>
 											</div>
-											<!-- NEW-PRODUCT-SINGLE-ITEM END -->
-											<!-- NEW-PRODUCT-SINGLE-ITEM START -->
-											<div class="item">
-												<div class="new-product">
-													<div class="single-product-item">
-														<div class="product-image">
-															<a href="#"><img src="<%=request.getContextPath() %>/templates/public/img/product/sale/6.jpg" alt="product-image" /></a>
-															<a href="#" class="new-mark-box">new</a>
-															<div class="overlay-content">
-																<ul>
-																	<li><a href="#" title="Quick view"><i class="fa fa-search"></i></a></li>
-																	<li><a href="#" title="Quick view"><i class="fa fa-shopping-cart"></i></a></li>
-																	<li><a href="#" title="Quick view"><i class="fa fa-retweet"></i></a></li>
-																	<li><a href="#" title="Quick view"><i class="fa fa-heart-o"></i></a></li>
-																</ul>
-															</div>
-														</div>
-														<div class="product-info">
-															<div class="customar-comments-box">
-																<div class="rating-box">
-																	<i class="fa fa-star"></i>
-																	<i class="fa fa-star"></i>
-																	<i class="fa fa-star"></i>
-																	<i class="fa fa-star"></i>
-																	<i class="fa fa-star"></i>
-																</div>
-																<div class="review-box">
-																	<span>1 Review (s)</span>
-																</div>
-															</div>
-															<a href="single-product.html">Printed Chiffon Dress</a>
-															<div class="price-box">
-																<span class="price">$16.40</span>
-																<span class="old-price">$20.50</span>
-															</div>
-														</div>
-													</div>
-												</div>
-											</div>
-											<!-- NEW-PRODUCT-SINGLE-ITEM END -->
-											<!-- NEW-PRODUCT-SINGLE-ITEM START -->
-											<div class="item">
-												<div class="new-product">
-													<div class="single-product-item">
-														<div class="product-image">
-															<a href="#"><img src="<%=request.getContextPath() %>/templates/public/img/product/sale/4.jpg" alt="product-image" /></a>
-															<a href="#" class="new-mark-box">new</a>
-															<div class="overlay-content">
-																<ul>
-																	<li><a href="#" title="Quick view"><i class="fa fa-search"></i></a></li>
-																	<li><a href="#" title="Quick view"><i class="fa fa-shopping-cart"></i></a></li>
-																	<li><a href="#" title="Quick view"><i class="fa fa-retweet"></i></a></li>
-																	<li><a href="#" title="Quick view"><i class="fa fa-heart-o"></i></a></li>
-																</ul>
-															</div>
-														</div>
-														<div class="product-info">
-															<div class="customar-comments-box">
-																<div class="rating-box">
-																	<i class="fa fa-star"></i>
-																	<i class="fa fa-star"></i>
-																	<i class="fa fa-star"></i>
-																	<i class="fa fa-star"></i>
-																	<i class="fa fa-star-half-empty"></i>
-																</div>
-																<div class="review-box">
-																	<span>1 Review (s)</span>
-																</div>
-															</div>
-															<a href="single-product.html">Faded Short Sleeves T-shirt</a>
-															<div class="price-box">
-																<span class="price">$16.51</span>
-																
-															</div>
-														</div>
-													</div>
-												</div>
-											</div>
-											<!-- NEW-PRODUCT-SINGLE-ITEM END -->
-											<!-- NEW-PRODUCT-SINGLE-ITEM START -->
-											<div class="item">
-												<div class="new-product">
-													<div class="single-product-item">
-														<div class="product-image">
-															<a href="#"><img src="<%=request.getContextPath() %>/templates/public/img/product/sale/2.jpg" alt="product-image" /></a>
-															<a href="#" class="new-mark-box">new</a>
-															<div class="overlay-content">
-																<ul>
-																	<li><a href="#" title="Quick view"><i class="fa fa-search"></i></a></li>
-																	<li><a href="#" title="Quick view"><i class="fa fa-shopping-cart"></i></a></li>
-																	<li><a href="#" title="Quick view"><i class="fa fa-retweet"></i></a></li>
-																	<li><a href="#" title="Quick view"><i class="fa fa-heart-o"></i></a></li>
-																</ul>
-															</div>
-														</div>
-														<div class="product-info">
-															<div class="customar-comments-box">
-																<div class="rating-box">
-																	<i class="fa fa-star"></i>
-																	<i class="fa fa-star"></i>
-																	<i class="fa fa-star"></i>
-																	<i class="fa fa-star"></i>
-																	<i class="fa fa-star"></i>
-																</div>
-																<div class="review-box">
-																	<span>1 Review (s)</span>
-																</div>
-															</div>
-															<a href="single-product.html">Blouse</a>
-															<div class="price-box">
-																<span class="price">$27.00</span>
-															</div>
-														</div>
-													</div>
-												</div>
-											</div>
-											<!-- NEW-PRODUCT-SINGLE-ITEM END -->
-											<!-- NEW-PRODUCT-SINGLE-ITEM START -->
-											<div class="item">
-												<div class="new-product">
-													<div class="single-product-item">
-														<div class="product-image">
-															<a href="#"><img src="<%=request.getContextPath() %>/templates/public/img/product/sale/10.jpg" alt="product-image" /></a>
-															<a href="#" class="new-mark-box">new</a>
-															<div class="overlay-content">
-																<ul>
-																	<li><a href="#" title="Quick view"><i class="fa fa-search"></i></a></li>
-																	<li><a href="#" title="Quick view"><i class="fa fa-shopping-cart"></i></a></li>
-																	<li><a href="#" title="Quick view"><i class="fa fa-retweet"></i></a></li>
-																	<li><a href="#" title="Quick view"><i class="fa fa-heart-o"></i></a></li>
-																</ul>
-															</div>
-														</div>
-														<div class="product-info">
-															<div class="customar-comments-box">
-																<div class="rating-box">
-																	<i class="fa fa-star"></i>
-																	<i class="fa fa-star"></i>
-																	<i class="fa fa-star"></i>
-																	<i class="fa fa-star-half-empty"></i>
-																	<i class="fa fa-star-half-empty"></i>
-																</div>
-																<div class="review-box">
-																	<span>1 Review (s)</span>
-																</div>
-															</div>
-															<a href="single-product.html">Printed Dress</a>
-															<div class="price-box">
-																<span class="price">$26.00</span>
-															</div>
-														</div>
-													</div>
-												</div>
-											</div>
-											<!-- NEW-PRODUCT-SINGLE-ITEM END -->
-											<!-- NEW-PRODUCT-SINGLE-ITEM START -->
-											<div class="item">
-												<div class="new-product">
-													<div class="single-product-item">
-														<div class="product-image">
-															<a href="#"><img src="<%=request.getContextPath() %>/templates/public/img/product/sale/11.jpg" alt="product-image" /></a>
-															<a href="#" class="new-mark-box">new</a>
-															<div class="overlay-content">
-																<ul>
-																	<li><a href="#" title="Quick view"><i class="fa fa-search"></i></a></li>
-																	<li><a href="#" title="Quick view"><i class="fa fa-shopping-cart"></i></a></li>
-																	<li><a href="#" title="Quick view"><i class="fa fa-retweet"></i></a></li>
-																	<li><a href="#" title="Quick view"><i class="fa fa-heart-o"></i></a></li>
-																</ul>
-															</div>
-														</div>
-														<div class="product-info">
-															<div class="customar-comments-box">
-																<div class="rating-box">
-																	<i class="fa fa-star"></i>
-																	<i class="fa fa-star"></i>
-																	<i class="fa fa-star"></i>
-																	<i class="fa fa-star-half-empty"></i>
-																	<i class="fa fa-star-half-empty"></i>
-																</div>
-																<div class="review-box">
-																	<span>1 Review (s)</span>
-																</div>
-															</div>
-															<a href="single-product.html">Printed Dress</a>
-															<div class="price-box">
-																<span class="price">$26.00</span>
-															</div>
-														</div>
-													</div>
-												</div>
-											</div>
-											<!-- NEW-PRODUCT-SINGLE-ITEM END -->
-											<!-- NEW-PRODUCT-SINGLE-ITEM START -->
-											<div class="item">
-												<div class="new-product">
-													<div class="single-product-item">
-														<div class="product-image">
-															<a href="#"><img src="<%=request.getContextPath() %>/templates/public/img/product/sale/3.jpg" alt="product-image" /></a>
-															<a href="#" class="new-mark-box">new</a>
-															<div class="overlay-content">
-																<ul>
-																	<li><a href="#" title="Quick view"><i class="fa fa-search"></i></a></li>
-																	<li><a href="#" title="Quick view"><i class="fa fa-shopping-cart"></i></a></li>
-																	<li><a href="#" title="Quick view"><i class="fa fa-retweet"></i></a></li>
-																	<li><a href="#" title="Quick view"><i class="fa fa-heart-o"></i></a></li>
-																</ul>
-															</div>
-														</div>
-														<div class="product-info">
-															<div class="customar-comments-box">
-																<div class="rating-box">
-																	<i class="fa fa-star"></i>
-																	<i class="fa fa-star"></i>
-																	<i class="fa fa-star"></i>
-																	<i class="fa fa-star"></i>
-																	<i class="fa fa-star-half-empty"></i>
-																</div>
-																<div class="review-box">
-																	<span>1 Review (s)</span>
-																</div>
-															</div>
-															<a href="single-product.html">Faded Short Sleeves T-shirt</a>
-															<div class="price-box">
-																<span class="price">$16.51</span>
-															</div>
-														</div>
-													</div>
-												</div>
-											</div>
-											<!-- NEW-PRODUCT-SINGLE-ITEM END -->
-											<!-- NEW-PRODUCT-SINGLE-ITEM START -->										
-											<div class="item">
-												<div class="new-product">
-													<div class="single-product-item">
-														<div class="product-image">
-															<a href="#"><img src="<%=request.getContextPath() %>/templates/public/img/product/sale/1.jpg" alt="product-image" /></a>
-															<a href="#" class="new-mark-box">sale!</a>
-															<div class="overlay-content">
-																<ul>
-																	<li><a href="#" title="Quick view"><i class="fa fa-search"></i></a></li>
-																	<li><a href="#" title="Quick view"><i class="fa fa-shopping-cart"></i></a></li>
-																	<li><a href="#" title="Quick view"><i class="fa fa-retweet"></i></a></li>
-																	<li><a href="#" title="Quick view"><i class="fa fa-heart-o"></i></a></li>
-																</ul>
-															</div>
-														</div>
-														<div class="product-info">
-															<div class="customar-comments-box">
-																<div class="rating-box">
-																	<i class="fa fa-star"></i>
-																	<i class="fa fa-star"></i>
-																	<i class="fa fa-star"></i>
-																	<i class="fa fa-star"></i>
-																	<i class="fa fa-star"></i>
-																</div>
-																<div class="review-box">
-																	<span>1 Review (s)</span>
-																</div>
-															</div>
-															<a href="single-product.html">Blouse</a>
-															<div class="price-box">
-																<span class="price">$22.95</span>
-																<span class="old-price">$27.00</span>
-															</div>
-														</div>
-													</div>
-												</div>
-											</div>
-											<!-- NEW-PRODUCT-SINGLE-ITEM END -->
-											<!-- NEW-PRODUCT-SINGLE-ITEM START -->										
-											<div class="item">
-												<div class="new-product">
-													<div class="single-product-item">
-														<div class="product-image">
-															<a href="#"><img src="<%=request.getContextPath() %>/templates/public/img/product/sale/9.jpg" alt="product-image" /></a>
-															<a href="#" class="new-mark-box">sale!</a>
-															<div class="overlay-content">
-																<ul>
-																	<li><a href="#" title="Quick view"><i class="fa fa-search"></i></a></li>
-																	<li><a href="#" title="Quick view"><i class="fa fa-shopping-cart"></i></a></li>
-																	<li><a href="#" title="Quick view"><i class="fa fa-retweet"></i></a></li>
-																	<li><a href="#" title="Quick view"><i class="fa fa-heart-o"></i></a></li>
-																</ul>
-															</div>
-														</div>
-														<div class="product-info">
-															<div class="customar-comments-box">
-																<div class="rating-box">
-																	<i class="fa fa-star"></i>
-																	<i class="fa fa-star"></i>
-																	<i class="fa fa-star"></i>
-																	<i class="fa fa-star-half-empty"></i>
-																	<i class="fa fa-star-half-empty"></i>
-																</div>
-																<div class="review-box">
-																	<span>1 Review (s)</span>
-																</div>
-															</div>
-															<a href="single-product.html">Printed Dress</a>
-															<div class="price-box">
-																<span class="price">$23.40</span>
-																<span class="old-price">$26.00</span>
-															</div>
-														</div>
-													</div>
-												</div>
-											</div>
-											<!-- NEW-PRODUCT-SINGLE-ITEM END -->
-											<!-- NEW-PRODUCT-SINGLE-ITEM START -->										
-											<div class="item">
-												<div class="new-product">
-													<div class="single-product-item">
-														<div class="product-image">
-															<a href="#"><img src="<%=request.getContextPath() %>/templates/public/img/product/sale/5.jpg" alt="product-image" /></a>
-															<a href="#" class="new-mark-box">new</a>
-															<div class="overlay-content">
-																<ul>
-																	<li><a href="#" title="Quick view"><i class="fa fa-search"></i></a></li>
-																	<li><a href="#" title="Quick view"><i class="fa fa-shopping-cart"></i></a></li>
-																	<li><a href="#" title="Quick view"><i class="fa fa-retweet"></i></a></li>
-																	<li><a href="#" title="Quick view"><i class="fa fa-heart-o"></i></a></li>
-																</ul>
-															</div>
-														</div>
-														<div class="product-info">
-															<div class="customar-comments-box">
-																<div class="rating-box">
-																	<i class="fa fa-star"></i>
-																	<i class="fa fa-star"></i>
-																	<i class="fa fa-star"></i>
-																	<i class="fa fa-star"></i>
-																	<i class="fa fa-star-half-empty"></i>
-																</div>
-																<div class="review-box">
-																	<span>1 Review (s)</span>
-																</div>
-															</div>
-															<a href="single-product.html">Printed Dress</a>
-															<div class="price-box">
-																<span class="price">$50.99</span>
-															</div>
-														</div>
-													</div>
-												</div>
-											</div>
-											<!-- NEW-PRODUCT-SINGLE-ITEM END -->
+											<%
+												}}
+											%>
 											<!-- NEW-PRODUCT-SINGLE-ITEM START -->										
 										</div>
 										<!-- NEW-PRO-CAROUSEL END -->
@@ -732,12 +389,17 @@
 										<!-- SALE-CAROUSEL START -->
 										<div class="sale-carousel">
 											<!-- SALE-PRODUCTS-SINGLE-ITEM START -->
+											<%
+												List<Products> listSaleProducts = (List<Products>) request.getAttribute("listSaleProducts");
+												if(listSaleProducts!=null && listSaleProducts.size()>0){
+													for(Products objSaleProduct: listSaleProducts){
+											%>
 											<div class="item">
 												<div class="new-product">
 													<div class="single-product-item">
 														<div class="product-image">
 															<a href="#"><img src="<%=request.getContextPath() %>/templates/public/img/product/sale/12.jpg" alt="product-image" /></a>
-															<a href="#" class="new-mark-box">new</a>
+															<a href="#" class="new-mark-box">Sale</a>
 															<div class="overlay-content">
 																<ul>
 																	<li><a href="#" title="Quick view"><i class="fa fa-search"></i></a></li>
@@ -757,175 +419,22 @@
 																	<i class="fa fa-star-half-empty"></i>
 																</div>
 																<div class="review-box">
-																	<span>1 Review (s)</span>
+																	<span><%=objSaleProduct.getPreview() %> Review (s)</span>
 																</div>
 															</div>
-															<a href="single-product.html">Printed Summer Dress</a>
+															<a href="single-product.html"><%=objSaleProduct.getCat().getName() %></a>
 															<div class="price-box">
-																<span class="price">$28.98</span>
-																<span class="old-price">$30.51</span>
+																<span class="price"><%=objSaleProduct.getPrice() %></span>
+																<span class="old-price"><%=objSaleProduct.getOldPrice() %></span>
 															</div>
 														</div>
 													</div>
 												</div>
 											</div>
+											<%
+													}}
+											%>
 											<!-- SALE-PRODUCTS-SINGLE-ITEM END -->
-											<!-- SALE-PRODUCTS-SINGLE-ITEM START -->
-											<div class="item">
-												<div class="new-product">
-													<div class="single-product-item">
-														<div class="product-image">
-															<a href="#"><img src="<%=request.getContextPath() %>/templates/public/img/product/sale/9.jpg" alt="product-image" /></a>
-															<a href="#" class="new-mark-box">sale!</a>
-															<div class="overlay-content">
-																<ul>
-																	<li><a href="#" title="Quick view"><i class="fa fa-search"></i></a></li>
-																	<li><a href="#" title="Quick view"><i class="fa fa-shopping-cart"></i></a></li>
-																	<li><a href="#" title="Quick view"><i class="fa fa-retweet"></i></a></li>
-																	<li><a href="#" title="Quick view"><i class="fa fa-heart-o"></i></a></li>
-																</ul>
-															</div>
-														</div>
-														<div class="product-info">
-															<div class="customar-comments-box">
-																<div class="rating-box">
-																	<i class="fa fa-star"></i>
-																	<i class="fa fa-star"></i>
-																	<i class="fa fa-star"></i>
-																	<i class="fa fa-star-half-empty"></i>
-																	<i class="fa fa-star-half-empty"></i>
-																</div>
-																<div class="review-box">
-																	<span>1 Review (s)</span>
-																</div>
-															</div>
-															<a href="single-product.html">Printed Dress</a>
-															<div class="price-box">
-																<span class="price">$23.40</span>
-																<span class="old-price">$26.00</span>
-															</div>
-														</div>
-													</div>
-												</div>
-											</div>
-											<!-- SALE-PRODUCTS-SINGLE-ITEM END -->
-											<!-- SALE-PRODUCTS-SINGLE-ITEM START -->		
-											<div class="item">
-												<div class="new-product">
-													<div class="single-product-item">
-														<div class="product-image">
-															<a href="#"><img src="<%=request.getContextPath() %>/templates/public/img/product/sale/1.jpg" alt="product-image" /></a>
-															<a href="#" class="new-mark-box">sale!</a>
-															<div class="overlay-content">
-																<ul>
-																	<li><a href="#" title="Quick view"><i class="fa fa-search"></i></a></li>
-																	<li><a href="#" title="Quick view"><i class="fa fa-shopping-cart"></i></a></li>
-																	<li><a href="#" title="Quick view"><i class="fa fa-retweet"></i></a></li>
-																	<li><a href="#" title="Quick view"><i class="fa fa-heart-o"></i></a></li>
-																</ul>
-															</div>
-														</div>
-														<div class="product-info">
-															<div class="customar-comments-box">
-																<div class="rating-box">
-																	<i class="fa fa-star"></i>
-																	<i class="fa fa-star"></i>
-																	<i class="fa fa-star"></i>
-																	<i class="fa fa-star"></i>
-																	<i class="fa fa-star"></i>
-																</div>
-																<div class="review-box">
-																	<span>1 Review (s)</span>
-																</div>
-															</div>
-															<a href="single-product.html">Blouse</a>
-															<div class="price-box">
-																<span class="price">$22.95</span>
-																<span class="old-price">$27.00</span>
-															</div>
-														</div>
-													</div>
-												</div>
-											</div>
-											<!-- SALE-PRODUCTS-SINGLE-ITEM END -->
-											<!-- SALE-PRODUCTS-SINGLE-ITEM START -->									
-											<div class="item">
-												<div class="new-product">
-													<div class="single-product-item">
-														<div class="product-image">
-															<a href="#"><img src="<%=request.getContextPath() %>/templates/public/img/product/sale/6.jpg" alt="product-image" /></a>
-															<a href="#" class="new-mark-box">new</a>
-															<div class="overlay-content">
-																<ul>
-																	<li><a href="#" title="Quick view"><i class="fa fa-search"></i></a></li>
-																	<li><a href="#" title="Quick view"><i class="fa fa-shopping-cart"></i></a></li>
-																	<li><a href="#" title="Quick view"><i class="fa fa-retweet"></i></a></li>
-																	<li><a href="#" title="Quick view"><i class="fa fa-heart-o"></i></a></li>
-																</ul>
-															</div>
-														</div>
-														<div class="product-info">
-															<div class="customar-comments-box">
-																<div class="rating-box">
-																	<i class="fa fa-star"></i>
-																	<i class="fa fa-star"></i>
-																	<i class="fa fa-star"></i>
-																	<i class="fa fa-star"></i>
-																	<i class="fa fa-star"></i>
-																</div>
-																<div class="review-box">
-																	<span>1 Review (s)</span>
-																</div>
-															</div>
-															<a href="single-product.html">Printed Chiffon Dress</a>
-															<div class="price-box">
-																<span class="price">$16.40</span>
-																<span class="old-price">$20.50</span>
-															</div>
-														</div>
-													</div>
-												</div>
-											</div>
-											<!-- SALE-PRODUCTS-SINGLE-ITEM END -->
-											<!-- SALE-PRODUCTS-SINGLE-ITEM START -->									
-											<div class="item">
-												<div class="new-product">
-													<div class="single-product-item">
-														<div class="product-image">
-															<a href="#"><img src="<%=request.getContextPath() %>/templates/public/img/product/sale/7.jpg" alt="product-image" /></a>
-															<a href="#" class="new-mark-box">new</a>
-															<div class="overlay-content">
-																<ul>
-																	<li><a href="#" title="Quick view"><i class="fa fa-search"></i></a></li>
-																	<li><a href="#" title="Quick view"><i class="fa fa-shopping-cart"></i></a></li>
-																	<li><a href="#" title="Quick view"><i class="fa fa-retweet"></i></a></li>
-																	<li><a href="#" title="Quick view"><i class="fa fa-heart-o"></i></a></li>
-																</ul>
-															</div>
-														</div>
-														<div class="product-info">
-															<div class="customar-comments-box">
-																<div class="rating-box">
-																	<i class="fa fa-star"></i>
-																	<i class="fa fa-star"></i>
-																	<i class="fa fa-star"></i>
-																	<i class="fa fa-star-half-empty"></i>
-																	<i class="fa fa-star-half-empty"></i>
-																</div>
-																<div class="review-box">
-																	<span>1 Review (s)</span>
-																</div>
-															</div>
-															<a href="single-product.html">Printed Chiffon Dress</a>
-															<div class="price-box">
-																<span class="price">$16.40</span>
-																<span class="old-price">$20.50</span>
-															</div>
-														</div>
-													</div>
-												</div>
-											</div>
-											<!-- SALE-PRODUCTS-SINGLE-ITEM END -->									
 										</div>
 										<!-- SALE-CAROUSEL END -->
 									</div>
@@ -3540,6 +3049,4 @@
 		<!-- FOOTER-TOP-AREA START -->
 <%@ include file="/templates/public/inc/footer.jsp" %>
     </body>
-
-<!-- Nulled by http://www.baobinh.net by tieulonglanh -->
 </html>

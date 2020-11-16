@@ -1,45 +1,50 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-    
-<%@include file="inc/header.jsp"%>
-	<div class="container_12">
+﻿<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8" trimDirectiveWhitespaces="true"%>
+<%@ include file="/templates/admin/inc/header.jsp" %>
+<%@ include file="/templates/admin/inc/left-bar.jsp" %>
+<div id="page-wrapper">
+    <div id="page-inner">
+        <hr />
+        <div class="row">
+            <div class="col-md-4 col-sm-4 col-xs-4">
+                <div class="panel panel-back noti-box">
+                    <span class="icon-box bg-color-green set-icon">
+                    <i class="fa fa-bars"></i>
+                </span>
+                    <div class="text-box">
+                        <p class="main-text"><a href="" title="">Quản lý danh mục</a></p>
+                        <p class="text-muted">Có 5 danh mục</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 col-sm-4 col-xs-4">
+                <div class="panel panel-back noti-box">
+                    <span class="icon-box bg-color-blue set-icon">
+                    <i class="fa fa-bell-o"></i>
+                </span>
+                    <div class="text-box">
+                        <p class="main-text"><a href="" title="">Quản lý bài hát</a></p>
+                        <p class="text-muted">Có 10 bài hát</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 col-sm-4 col-xs-4">
+                <div class="panel panel-back noti-box">
+                    <span class="icon-box bg-color-brown set-icon">
+                    <i class="fa fa-rocket"></i>
+                </span>
+                    <div class="text-box">
+                        <p class="main-text"><a href="" title="">Quản lý người dùng</a></p>
+                        <p class="text-muted">Có 15 người dùng</p>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-	<%
-		String msg = request.getParameter("msg");
-		if("1".equals(msg)){
-		    out.print("<div style=\"background: yellow; color: green; font-weight: bold; padding: 4px\">Thêm loại hoa thành công!</div>");
-	    }
-	%>
-		<div class="grid_main_l">
-			<a href="<%=request.getContextPath() %>/mua-hoa" class="dashboard-module"> 
-				<img src="<%=request.getContextPath() %>/views/admin/images/Crystal_Clear_write.gif" width="64" height="64" alt="edit" /> 
-				<span>Thêm tin sản phẩm</span>
-			</a> 
-			<a href="<%=request.getContextPath() %>/xem-hoa" class="dashboard-module"> 
-				<img src="<%=request.getContextPath() %>/views/admin/images/Crystal_Clear_files.gif" width="64" height="64" alt="edit" /> 
-				<span>Xem danh sách</span>
-			</a>
-			<div style="clear: both"></div>
-		</div>
-
-		<div class="grid_main_r">
-			<div class="module">
-				<h2>
-					<span>Quản trị hệ thống</span>
-				</h2>
-				<div class="module-body">
-					<div class="p">
-						<strong>Phần mềm</strong> được viết trên nền tảng PHP&MySQL <br />
-						<strong>Học viên thực hiện: </strong>Trần Nguyễn Gia Huy<br /> 
-						<strong>Email:</strong>huytng@vinatab.net<br /> 
-						<strong>Phone: </strong>0909.123.456<br />
-					</div>
-				</div>
-			</div>
-			<div style="clear: both;"></div>
-			<div class="padding-bottom"></div>
-		</div>
-	</div>
-	<div style="clear: both;"></div>
-	
-<%@include file="inc/footer.jsp"%>
+    </div>
+</div>
+<script>
+    document.getElementById("index").classList.add('active-menu');
+</script>
+<!-- /. PAGE WRAPPER  -->
+<%@ include file="/templates/admin/inc/footer.jsp" %>

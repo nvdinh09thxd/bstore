@@ -4,18 +4,9 @@
 						<div class="mainmenu">
 							<nav>
 								<ul class="list-inline mega-menu">
-									<li class="active"><a href="index.html">Home</a>
-										<!-- DROPDOWN MENU START -->
-										<div class="home-var-menu">
-											<ul class="home-menu">
-												<li><a href="index.html">Home variation 1</a></li>
-												<li><a href="index-2.html">Home variation 2</a></li>
-											</ul>												
-										</div>
-										<!-- DROPDOWN MENU END -->
-									</li>
+									<li class="active"><a href="index.html">Home</a></li>
 									<li>
-										<a href="shop-gird.html">Women</a>
+										<a href="shop-gird.html">New</a>
 										<!-- DRODOWN-MEGA-MENU START -->
 										<div class="drodown-mega-menu">
 											<div class="left-mega col-xs-6">
@@ -28,22 +19,11 @@
 													</ul>
 												</div>
 											</div>
-											<div class="right-mega col-xs-6">
-												<div class="mega-menu-list">
-													<a class="mega-menu-title" href="shop-gird.html">Prodect</a>
-													<ul>
-														<li><a href="shop-gird.html">T-shirts</a></li>
-														<li><a href="shop-gird.html">clothing</a></li>
-														<li><a href="shop-gird.html">Watch</a></li>
-														<li><a href="shop-gird.html">Delivery</a></li>
-													</ul>
-												</div>
-											</div>
 										</div>
 										<!-- DRODOWN-MEGA-MENU END -->
 									</li>
 									<li>
-										<a href="shop-gird.html">Men</a>
+										<a href="shop-gird.html">Sale</a>
 										<!-- DRODOWN-MEGA-MENU START -->
 										<div class="drodown-mega-menu">
 											<div class="left-mega col-xs-6">

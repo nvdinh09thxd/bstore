@@ -14,6 +14,6 @@ public class Products {
 	private int rating;
 	private float oldPrice;
 	private float price;
-	private int prevew;
-	private int catId;
+	private int preview;
+	private Categories cat;
 }

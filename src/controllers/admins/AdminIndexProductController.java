@@ -17,7 +17,7 @@ public class AdminIndexProductController extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		RequestDispatcher rd = request.getRequestDispatcher("/views/admin/list.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("/views/admin/product/index.jsp");
 		rd.forward(request, response);
 	}
 
