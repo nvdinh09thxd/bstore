@@ -54,10 +54,18 @@
   </servlet-mapping>
   <servlet>
     <servlet-name>AdminIndexProductController</servlet-name>
-    <servlet-class>controllers.admins.AdminIndexProductController</servlet-class>
+    <servlet-class>controllers.admins.product.AdminIndexProductController</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>AdminIndexProductController</servlet-name>
     <url-pattern>/admin/product/index</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>AdminAddProductController</servlet-name>
+    <servlet-class>controllers.admins.product.AdminAddProductController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AdminAddProductController</servlet-name>
+    <url-pattern>/admin/product/add</url-pattern>
   </servlet-mapping>
 </web-app>

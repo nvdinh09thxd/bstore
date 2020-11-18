@@ -333,7 +333,9 @@
 												<div class="new-product">
 													<div class="single-product-item">
 														<div class="product-image">
-															<a href="#"><img src="<%=request.getContextPath() %>/templates/public/img/product/sale/8.jpg" alt="product-image" /></a>
+															<a href="<%=request.getContextPath() %>/detail?id=<%=objNewProduct.getId()%>">
+																<img src="<%=request.getContextPath() %>/uploads/images/<%=objNewProduct.getPicture() %>" alt="product-image" />
+															</a>
 															<a href="#" class="new-mark-box">New</a>
 															<div class="overlay-content">
 																<ul>
@@ -357,7 +359,7 @@
 																	<span><%=objNewProduct.getPreview() %> Review (s)</span>
 																</div>
 															</div>
-															<a href="single-product.html"><%=objNewProduct.getCat().getName() %></a>
+															<a href="#"><%=objNewProduct.getName() %></a>
 															<div class="price-box">
 																<span class="price"><%=objNewProduct.getPrice() %></span>
 															</div>
@@ -398,7 +400,9 @@
 												<div class="new-product">
 													<div class="single-product-item">
 														<div class="product-image">
-															<a href="#"><img src="<%=request.getContextPath() %>/templates/public/img/product/sale/12.jpg" alt="product-image" /></a>
+															<a href="<%=request.getContextPath() %>/detail?id=<%=objSaleProduct.getId()%>">
+																<img src="<%=request.getContextPath() %>/uploads/images/<%=objSaleProduct.getPicture() %>" alt="product-image" />
+															</a>
 															<a href="#" class="new-mark-box">Sale</a>
 															<div class="overlay-content">
 																<ul>
@@ -422,7 +426,7 @@
 																	<span><%=objSaleProduct.getPreview() %> Review (s)</span>
 																</div>
 															</div>
-															<a href="single-product.html"><%=objSaleProduct.getCat().getName() %></a>
+															<a href="single-product.html"><%=objSaleProduct.getName() %></a>
 															<div class="price-box">
 																<span class="price"><%=objSaleProduct.getPrice() %></span>
 																<span class="old-price"><%=objSaleProduct.getOldPrice() %></span>

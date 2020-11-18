@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th10 16, 2020 lúc 10:36 AM
+-- Thời gian đã tạo: Th10 18, 2020 lúc 10:09 AM
 -- Phiên bản máy phục vụ: 10.1.32-MariaDB
 -- Phiên bản PHP: 7.1.17
 
@@ -72,24 +72,24 @@ CREATE TABLE `products` (
 --
 
 INSERT INTO `products` (`id`, `name`, `picture`, `rating`, `old_price`, `price`, `preview`, `cat_id`) VALUES
-(1, 'Giầy nam', '', 0, 100000, 90000, 0, 3),
-(2, 'Giầy nữ', '', 0, 150000, 120000, 0, 3),
-(3, 'Đồng hồ nam', '', 0, 2000000, 1800000, 0, 4),
-(4, 'Đồng hồ nữ', '', 0, 2000000, 1800000, 0, 4),
-(5, 'Túi xách đi chợ', '', 0, 100000, 90000, 0, 5),
-(6, 'Túi xách đi chơi', '', 0, 100000, 90000, 0, 5),
-(7, 'Túi xách đi làm', '', 0, 100000, 90000, 0, 5),
-(8, 'Áo nam', '', 0, 150000, 120000, 0, 6),
-(9, 'Áo nữ', '', 0, 150000, 120000, 0, 6),
-(10, 'Giầy nam', '', 0, 100000, 91000, 0, 7),
-(11, 'Giầy nữ', '', 0, 150000, 121000, 0, 7),
-(12, 'Đồng hồ nam', '', 0, 2000000, 1810000, 0, 8),
-(13, 'Đồng hồ nữ', '', 0, 2000000, 1810000, 0, 8),
-(14, 'Túi xách đi chợ', '', 0, 100000, 91000, 0, 9),
-(15, 'Túi xách đi chơi', '', 0, 100000, 91000, 0, 9),
-(16, 'Túi xách đi làm', '', 0, 100000, 91000, 0, 9),
-(17, 'Áo nam', '', 0, 150000, 121000, 0, 10),
-(18, 'Áo nữ', '', 0, 150000, 121000, 0, 10);
+(1, 'Giầy nam', 'giay-nam.jpg', 0, 100000, 90000, 0, 5),
+(2, 'Giầy nữ', 'giay-nu.jpg', 0, 150000, 120000, 0, 5),
+(3, 'Đồng hồ nam', 'dong-ho-nam.jpg', 0, 2000000, 1800000, 0, 6),
+(4, 'Đồng hồ nữ', 'dong-ho-nu.jpg', 0, 2000000, 1800000, 0, 6),
+(5, 'Túi xách đi chợ', 'tui-xach-cho.jpg', 0, 100000, 90000, 0, 3),
+(6, 'Túi xách đi chơi', 'tui-xach-choi.jpg', 0, 100000, 90000, 0, 3),
+(7, 'Túi xách đi làm', 'tui-xach-lam.jpg', 0, 100000, 90000, 0, 3),
+(8, 'Áo nam', 'ao-nam.jpg', 0, 150000, 120000, 0, 4),
+(9, 'Áo nữ', 'ao-nu.jpg', 0, 150000, 120000, 0, 4),
+(10, 'Giầy nam', 'giay-nam.jpg', 0, 100000, 91000, 0, 9),
+(11, 'Giầy nữ', 'giay-nu.jpg', 0, 150000, 121000, 0, 9),
+(12, 'Đồng hồ nam', 'dong-ho-nam.jpg', 0, 2000000, 1810000, 0, 10),
+(13, 'Đồng hồ nữ', 'dong-ho-nu.jpg', 0, 2000000, 1810000, 0, 10),
+(14, 'Túi xách đi chợ', 'tui-xach-cho.jpg', 0, 100000, 91000, 0, 7),
+(15, 'Túi xách đi chơi', 'tui-xach-choi.jpg', 0, 100000, 91000, 0, 7),
+(16, 'Túi xách đi làm', 'tui-xach-lam.jpg', 0, 100000, 91000, 0, 7),
+(17, 'Áo nam', 'ao-nam.jpg', 0, 150000, 121000, 0, 8),
+(18, 'Áo nữ', 'ao-nu.jpg', 0, 150000, 121000, 0, 8);
 
 --
 -- Chỉ mục cho các bảng đã đổ
@@ -121,7 +121,7 @@ ALTER TABLE `categories`
 -- AUTO_INCREMENT cho bảng `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

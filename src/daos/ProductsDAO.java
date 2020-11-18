@@ -51,4 +51,88 @@ public class ProductsDAO extends AbstractDAO {
 		}
 		return listItems;
 	}
+
+	public List<Products> getProductsByIdCat(int catId) {
+		con = DBConnectionUtil.getConnection();
+		List<Products> listItems = new ArrayList<>();
+		String sql = "SELECT * FROM products p JOIN categories c ON p.cat_id = c.id WHERE p.cat_id = ? ORDER BY p.id";
+		try {
+			pst = con.prepareStatement(sql);
+			pst.setInt(1, catId);
+			rs = pst.executeQuery();
+			while (rs.next()) {
+				Products item = new Products(rs.getInt("id"), rs.getString("name"), rs.getString("picture"),
+						rs.getInt("rating"), rs.getFloat("old_price"), rs.getFloat("price"), rs.getInt("preview"),
+						new Categories(rs.getInt("cat_id"), rs.getInt("parent_id"), rs.getString("c.name")));
+				listItems.add(item);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			DBConnectionUtil.close(rs, pst, con);
+		}
+		return listItems;
+	}
+
+	public Products getProduct(int id) {
+		Products itemPro = null;
+		con = DBConnectionUtil.getConnection();
+		String sql = "SELECT * FROM products p JOIN categories c ON p.cat_id = c.id WHERE p.id = ?";
+		try {
+			pst = con.prepareStatement(sql);
+			pst.setInt(1, id);
+			rs = pst.executeQuery();
+			if (rs.next()) {
+				itemPro = new Products(rs.getInt("id"), rs.getString("name"), rs.getString("picture"),
+						rs.getInt("rating"), rs.getFloat("old_price"), rs.getFloat("price"), rs.getInt("preview"),
+						new Categories(rs.getInt("cat_id"), rs.getInt("parent_id"), rs.getString("c.name")));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			DBConnectionUtil.close(rs, pst, con);
+		}
+		return itemPro;
+	}
+
+	public List<Products> findAll() {
+		con = DBConnectionUtil.getConnection();
+		List<Products> listItems = new ArrayList<>();
+		String sql = "SELECT * FROM products p JOIN categories c ON p.cat_id = c.id ORDER BY p.id";
+		try {
+			st = con.createStatement();
+			rs = st.executeQuery(sql);
+			while (rs.next()) {
+				Products item = new Products(rs.getInt("id"), rs.getString("name"), rs.getString("picture"),
+						rs.getInt("rating"), rs.getFloat("old_price"), rs.getFloat("price"), rs.getInt("preview"),
+						new Categories(rs.getInt("cat_id"), rs.getInt("parent_id"), rs.getString("c.name")));
+				listItems.add(item);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			DBConnectionUtil.close(rs, st, con);
+		}
+		return listItems;
+	}
+
+	public int addPro(Products product) {
+		int result = 0;
+		con = DBConnectionUtil.getConnection();
+		String sql = "INSERT INTO products (name, picture, old_price, price, cat_id) VALUES (?, ?, ?, ?, ?)";
+		try {
+			pst = con.prepareStatement(sql);
+			pst.setString(1, product.getName());
+			pst.setString(2, product.getPicture());
+			pst.setFloat(3, product.getOldPrice());
+			pst.setFloat(4, product.getPrice());
+			pst.setInt(5, product.getCat().getId());
+			result = pst.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			DBConnectionUtil.close(pst, con);
+		}
+		return result;
+	}
 }

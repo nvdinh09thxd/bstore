@@ -1,13 +1,8 @@
+<%@page import="models.Products"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="/templates/public/inc/header.jsp" %>
     <body>
-        <!--[if lt IE 8]>
-            <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
-        <![endif]-->
-
-        <!-- Add your site or application content here -->
-		
 		<!-- HEADER-TOP START -->
 		<div class="header-top">
 			<div class="container">
@@ -191,7 +186,7 @@
 					</div>	
 					<!-- SHOPPING-CART END -->
 					<!-- MAINMENU START -->
-					
+					<%@ include file="/templates/public/inc/site-bar.jsp" %>
 					<!-- MAINMENU END -->
 				</div>
 				<div class="row">
@@ -664,11 +659,19 @@
 							<div class="row">
 								<ul class="gategory-product">
 									<!-- SINGLE ITEM START -->
+									<%
+									if(request.getAttribute("listProductsByIdCat")!=null){
+									List<Products> listPro = (List<Products>) request.getAttribute("listProductsByIdCat");
+									if(listPro.size()>0){
+										for(Products pro: listPro){
+									%>
 									<li class="gategory-product-list col-lg-3 col-md-4 col-sm-6 col-xs-12">
 										<div class="single-product-item">
 											<div class="product-image">
-												<a href="single-product.html"><img src="<%=request.getContextPath() %>/templates/public/img/product/sale/3.jpg" alt="product-image" /></a>
-												<a href="single-product.html" class="new-mark-box">new</a>
+												<a href="<%=request.getContextPath() %>/detail?id=<%=pro.getId()%>">
+													<img src="<%=request.getContextPath() %>/uploads/images/<%=pro.getPicture() %>" alt="product-image" />
+												</a>
+												<a href="single-product.html" class="new-mark-box"><%=pro.getCat().getName() %></a>
 												<div class="overlay-content">
 													<ul>
 														<li><a href="#" title="Quick view"><i class="fa fa-search"></i></a></li>
@@ -688,16 +691,19 @@
 														<i class="fa fa-star-half-empty"></i>
 													</div>
 													<div class="review-box">
-														<span>1 Review(s)</span>
+														<span><%=pro.getPreview() %> Review(s)</span>
 													</div>
 												</div>
-												<a href="single-product.html">Faded Short Sleeves T-shirt</a>
+												<a href="single-product.html"><%=pro.getName() %></a>
 												<div class="price-box">
-													<span class="price">$16.51</span>
+													<span class="price"><%=pro.getPrice() %></span>
 												</div>
 											</div>
 										</div>									
 									</li>
+									<%
+									}}}
+									%>
 									<!-- SINGLE ITEM END -->								
 								</ul>
 							</div>
@@ -964,5 +970,4 @@
 		<%@ include file="/templates/public/inc/footer.jsp" %>
     </body>
 
-<!-- Nulled by http://www.baobinh.net by tieulonglanh -->
 </html>

@@ -1,13 +1,8 @@
+<%@page import="models.Products"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="/templates/public/inc/header.jsp" %>
-    <body>
-        <!--[if lt IE 8]>
-            <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
-        <![endif]-->
-
-        <!-- Add your site or application content here -->
-		
+    <body>		
 		<!-- HEADER-TOP START -->
 		<div class="header-top">
 			<div class="container">
@@ -282,6 +277,10 @@
 				<div class="row">
 					<div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
 						<!-- SINGLE-PRODUCT-DESCRIPTION START -->
+						<%
+							Products itemPro = (Products) request.getAttribute("itemPro");
+							if(itemPro!=null){
+						%>
 						<div class="row">
 							<div class="col-lg-5 col-md-5 col-sm-4 col-xs-12">
 								<div class="single-product-view">
@@ -289,9 +288,9 @@
 									<div class="tab-content">
 										<div class="tab-pane active" id="thumbnail_1">
 											<div class="single-product-image">
-												<img src="<%=request.getContextPath() %>/templates/public/img/product/sale/1.jpg" alt="single-product-image" />
+												<img src="<%=request.getContextPath() %>/uploads/images/<%=itemPro.getPicture() %>" alt="single-product-image" />
 												<a class="new-mark-box" href="#">new</a>
-												<a class="fancybox" href="<%=request.getContextPath() %>/templates/public/img/product/sale/1.jpg" data-fancybox-group="gallery"><span class="btn large-btn">View larger <i class="fa fa-search-plus"></i></span></a>
+												<a class="fancybox" href="<%=request.getContextPath() %>/uploads/images/<%=itemPro.getPicture() %>" data-fancybox-group="gallery"><span class="btn large-btn">View larger <i class="fa fa-search-plus"></i></span></a>
 											</div>	
 										</div>
 										<div class="tab-pane" id="thumbnail_2">
@@ -355,9 +354,10 @@
 									</ul>										
 								</div>
 							</div>
+							
 							<div class="col-lg-7 col-md-7 col-sm-8 col-xs-12">
 								<div class="single-product-descirption">
-									<h2>Faded Short Sleeves T-shirt</h2>
+									<h2><%=itemPro.getName() %></h2>
 									<div class="single-product-social-share">
 										<ul>
 											<li><a href="#" class="twi-link"><i class="fa fa-twitter"></i>Tweet</a></li>
@@ -375,7 +375,7 @@
 											<i class="fa fa-star-half-empty"></i>
 										</div>
 										<div class="read-reviews">
-											<a href="#">Read reviews (1)</a>
+											<a href="#">Read reviews (<%=itemPro.getPreview() %>)</a>
 										</div>
 										<div class="write-review">
 											<a href="#">Write a review</a>
@@ -386,7 +386,7 @@
 										<p>Condition: <span>New product</span></p>
 									</div>
 									<div class="single-product-price">
-										<h2>$16.51</h2>
+										<h2><%=itemPro.getPrice() %></h2>
 									</div>
 									<div class="single-product-desc">
 										<p>Faded short sleeves t-shirt with high neckline. Soft and stretchy material for a comfortable fit. Accessorize with a straw hat and you're ready for summer!</p>
@@ -425,6 +425,9 @@
 									</div>
 								</div>
 							</div>
+						<%
+						}
+						%>
 						</div>
 						<!-- SINGLE-PRODUCT-DESCRIPTION END -->
 						<!-- SINGLE-PRODUCT INFO TAB START -->
@@ -1166,5 +1169,4 @@
 		<%@ include file="/templates/public/inc/footer.jsp" %>
     </body>
 
-<!-- Nulled by http://www.baobinh.net by tieulonglanh -->
 </html>

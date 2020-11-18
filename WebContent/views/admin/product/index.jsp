@@ -1,3 +1,5 @@
+<%@page import="models.Products"%>
+<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="/templates/admin/inc/header.jsp" %>
@@ -9,7 +11,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0">Dashboard123</h1>
+            <h1 class="m-0">Quản lý sản phẩm</h1>
           </div><!-- /.col -->
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
@@ -31,7 +33,7 @@
                         <div class="table-responsive">
                             <div class="row">
                                 <div class="col-sm-6">
-                                    <a href="" class="btn btn-success btn-md">Thêm</a>
+                                    <a href="<%=request.getContextPath() %>/admin/product/add" class="btn btn-success btn-md">Thêm</a>
                                 </div>
                                 <div class="col-sm-6" style="text-align: right;">
                                     <form method="post" action="">
@@ -41,58 +43,57 @@
                                     </form><br />
                                 </div>
                             </div>
-
+<%
+								if(request.getParameter("msg")!=null){
+									int msg = Integer.parseInt(request.getParameter("msg"));
+									switch(msg){
+										case 1: out.print("<p style='color: green; background: yellow'>Thêm thành công!</p>");
+										break;
+										case 2: out.print("<p style='color: green; background: yellow'>Sửa thành công!</p>");
+										break;
+										case 3: out.print("<p style='color: green; background: yellow'>Xóa thành công!</p>");
+										break;
+										case 4: out.print("<p style='color: red; background: yellow'>Xóa không thành công!</p>");
+										break;
+										case 0: out.print("<p style='color: red; background: yellow'>ID không tồn tại!</p>");
+										break;
+									}
+								}
+							%>
                             <table class="table table-striped table-bordered table-hover" id="dataTables-example">
                                 <thead>
                                     <tr>
                                         <th>ID</th>
-                                        <th>Tên bài hát</th>
+                                        <th>Tên sản phẩm</th>
                                         <th>Danh mục</th>
-                                        <th>Lượt đọc</th>
+                                        <th>Đánh giá</th>
                                         <th>Hình ảnh</th>
                                         <th width="160px">Chức năng</th>
                                     </tr>
                                 </thead>
                                 <tbody>
+                                <%
+                                if(request.getAttribute("listProducts")!=null){
+                                List<Products> listProducts = (List<Products>) request.getAttribute("listProducts");
+                                if(listProducts.size()>0){
+                                	for(Products pro: listProducts){
+                                %>
                                     <tr>
-                                        <td>1</td>
-                                        <td class="center">Đổi thay</td>
-                                        <td class="center">Nhạc Pop</td>
-                                        <td class="center">2</td>
+                                        <td><%=pro.getId() %></td>
+                                        <td class="center"><%=pro.getName() %></td>
+                                        <td class="center"><%=pro.getCat().getName() %></td>
+                                        <td class="center"><%=pro.getRating() %></td>
                                         <td class="center">
-											<img width="200px" height="200px" src="assets/img/doi-thay.jpg" alt="Đổi thay"/>
+											<img width="200px" height="200px" src="<%=request.getContextPath() %>/uploads/images/<%=pro.getPicture() %>" alt="Đổi thay"/>
                                         </td>
                                         <td class="center">
                                             <a href="" title="" class="btn btn-primary"><i class="fa fa-edit "></i> Sửa</a>
                                             <a href="" title="" class="btn btn-danger"><i class="fa fa-pencil"></i> Xóa</a>
                                         </td>
                                     </tr>
-									<tr>
-                                        <td>2</td>
-                                        <td class="center">Only Love</td>
-                                        <td class="center">Nhạc Ngoại</td>
-                                        <td class="center">5</td>
-                                        <td class="center">
-											<img width="200px" height="200px" src="assets/img/only-love.jpg" alt="Only Love"/>
-                                        </td>
-                                        <td class="center">
-                                            <a href="" title="" class="btn btn-primary"><i class="fa fa-edit "></i> Sửa</a>
-                                            <a href="" title="" class="btn btn-danger"><i class="fa fa-pencil"></i> Xóa</a>
-                                        </td>
-                                    </tr>
-									<tr>
-                                        <td>3</td>
-                                        <td class="center">Nơi ấy con tìm về</td>
-                                        <td class="center">Nhạc Pop</td>
-                                        <td class="center">3</td>
-                                        <td class="center">
-											<img width="200px" height="200px" src="assets/img/noi-ay-con-tim-ve.jpg" alt="Nơi ấy con tìm về"/>
-                                        </td>
-                                        <td class="center">
-                                            <a href="" title="" class="btn btn-primary"><i class="fa fa-edit "></i> Sửa</a>
-                                            <a href="" title="" class="btn btn-danger"><i class="fa fa-pencil"></i> Xóa</a>
-                                        </td>
-                                    </tr>
+								<%
+                                }}}
+								%>
                                 </tbody>
                             </table>
                             <div class="row">
