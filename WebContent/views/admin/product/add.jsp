@@ -48,7 +48,7 @@
                                         %>
 	                                        <option value="<%=cat.getId()%>"><%=cat.getName()%></option>
 										<%
-                                       }}}
+                                       		}}}
 										%>
                                         </select>
                                     </div>

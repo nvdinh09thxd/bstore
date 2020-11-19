@@ -16,4 +16,18 @@ public class Products {
 	private float price;
 	private int preview;
 	private Categories cat;
+
+	public Products(int id, String name, String picture, float price) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.picture = picture;
+		this.price = price;
+	}
+
+	public Products(int id) {
+		super();
+		this.id = id;
+	}
+
 }

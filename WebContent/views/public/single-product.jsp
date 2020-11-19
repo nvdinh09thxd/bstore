@@ -57,7 +57,7 @@
 									<li><a href="wishlist.html">Wishlist</a></li>
 									<li><a href="my-account.html">My Account</a></li>
 									<li><a href="cart.html">My Cart</a></li>
-									<li><a href="registration.html">Sign in</a></li>
+									<li><a href="<%=request.getContextPath() %>/admin/index">Sign in</a></li>
 								</ul>									
 							</nav>
 						</div>

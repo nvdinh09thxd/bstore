@@ -65,4 +65,24 @@ public class CatDao extends AbstractDAO {
 		}
 		return listItems;
 	}
+
+	public List<Categories> findParent() {
+		con = DBConnectionUtil.getConnection();
+		List<Categories> listItems = new ArrayList<>();
+		String sql = "SELECT * FROM categories WHERE parent_id is NULL ORDER BY id";
+		try {
+			st = con.createStatement();
+			rs = st.executeQuery(sql);
+			while (rs.next()) {
+				Categories item = new Categories(rs.getInt("id"), rs.getInt("parent_id"), rs.getString("name"));
+				listItems.add(item);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			DBConnectionUtil.close(rs, st, con);
+		}
+		return listItems;
+	}
+
 }

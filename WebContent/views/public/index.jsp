@@ -1,3 +1,5 @@
+<%@page import="models.Cart"%>
+<%@page import="models.User"%>
 <%@page import="models.Products"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -58,7 +60,11 @@
 									<li><a href="wishlist.html">Wishlist</a></li>
 									<li><a href="my-account.html">My Account</a></li>
 									<li><a href="cart.html">My Cart</a></li>
-									<li><a href="registration.html">Sign in</a></li>
+									<%
+									User userLogin = (User) session.getAttribute("userLogin");
+									%>
+									<li style="<%if(userLogin!=null) out.print("display: none"); %>"><a href="<%=request.getContextPath() %>/login">Sign in</a></li>
+									<li style="<%if(userLogin==null) out.print("display: none"); %>"><a href="<%=request.getContextPath() %>/logout">Sign out</a></li>
 								</ul>									
 							</nav>
 						</div>
@@ -139,35 +145,33 @@
 					<!-- SHOPPING-CART START -->
 					<div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 pull-right shopingcartarea">
 						<div class="shopping-cart-out pull-right">
+									<%
+									if(request.getAttribute("listCarts")!=null){
+										List<Cart> listCarts = (List<Cart>) request.getAttribute("listCarts");
+										if(listCarts.size()>0){											
+									%>
 							<div class="shopping-cart">
-								<a class="shop-link" href="cart.html" title="View my shopping cart">
+								<a class="shop-link" href="<%=request.getContextPath() %>/cart" title="View my shopping cart">
 									<i class="fa fa-shopping-cart cart-icon"></i>
 									<b>My Cart</b>
 									<span class="ajax-cart-quantity">2</span>
 								</a>
 								<div class="shipping-cart-overly">
+									<%
+									for(Cart objCart: listCarts){
+									%>
 									<div class="shipping-item">
 										<span class="cross-icon"><i class="fa fa-times-circle"></i></span>
 										<div class="shipping-item-image">
-											<a href="#"><img src="<%=request.getContextPath() %>/templates/public/img/shopping-image.jpg" alt="shopping image" /></a>
+											<a href="#"><img src="<%=request.getContextPath() %>/uploads/images/<%=objCart.getPro().getPicture() %>" alt="shopping image" /></a>
 										</div>
 										<div class="shipping-item-text">
-											<span>2 <span class="pro-quan-x">x</span> <a href="#" class="pro-cat">Watch</a></span>
+											<span>2 <span class="pro-quan-x">x</span> <a href="#" class="pro-cat"><%=objCart.getPro().getName() %></a></span>
 											<span class="pro-quality"><a href="#">S,Black</a></span>
 											<p>$22.95</p>
 										</div>
 									</div>
-									<div class="shipping-item">
-										<span class="cross-icon"><i class="fa fa-times-circle"></i></span>
-										<div class="shipping-item-image">
-											<a href="#"><img src="<%=request.getContextPath() %>/templates/public/img/shopping-image2.jpg" alt="shopping image" /></a>
-										</div>
-										<div class="shipping-item-text">
-											<span>2 <span class="pro-quan-x">x</span> <a href="#" class="pro-cat">Women Bag</a></span>
-											<span class="pro-quality"><a href="#">S,Gary</a></span>
-											<p>$19.95</p>
-										</div>
-									</div>
+									<%} %>
 									<div class="shipping-total-bill">
 										<div class="cart-prices">
 											<span class="shipping-cost">$2.00</span>
@@ -183,6 +187,7 @@
 									</div>
 								</div>
 							</div>
+							<%}} %>
 						</div>
 					</div>	
 					<!-- SHOPPING-CART END -->
@@ -325,22 +330,23 @@
 										<div class="new-pro-carousel">
 											<!-- NEW-PRODUCT-SINGLE-ITEM START -->
 											<%
+												if(request.getAttribute("listNewProducts")!=null){
 												List<Products> listNewProducts = (List<Products>) request.getAttribute("listNewProducts");
-												if(listNewProducts!=null && listNewProducts.size()>0){
-													for(Products objNewProduct: listNewProducts){
+												if(listNewProducts.size()>0){
+													for(Products objNewPro: listNewProducts){
 											%>
 											<div class="item">
 												<div class="new-product">
 													<div class="single-product-item">
 														<div class="product-image">
-															<a href="<%=request.getContextPath() %>/detail?id=<%=objNewProduct.getId()%>">
-																<img src="<%=request.getContextPath() %>/uploads/images/<%=objNewProduct.getPicture() %>" alt="product-image" />
+															<a href="<%=request.getContextPath() %>/detail?id=<%=objNewPro.getId()%>">
+																<img src="<%=request.getContextPath() %>/uploads/images/<%=objNewPro.getPicture() %>" alt="product-image" />
 															</a>
 															<a href="#" class="new-mark-box">New</a>
 															<div class="overlay-content">
 																<ul>
 																	<li><a href="#" title="Quick view"><i class="fa fa-search"></i></a></li>
-																	<li><a href="#" title="Quick view"><i class="fa fa-shopping-cart"></i></a></li>
+																	<li><a href="javascript:void(0)" title="Add to cart" onclick="addToCard(<%=objNewPro.getId()%>)"><i class="fa fa-shopping-cart"></i></a></li>
 																	<li><a href="#" title="Quick view"><i class="fa fa-retweet"></i></a></li>
 																	<li><a href="#" title="Quick view"><i class="fa fa-heart-o"></i></a></li>
 																</ul>
@@ -356,19 +362,19 @@
 																	<i class="fa fa-star-half-empty"></i>
 																</div>
 																<div class="review-box">
-																	<span><%=objNewProduct.getPreview() %> Review (s)</span>
+																	<span><%=objNewPro.getPreview() %> Review (s)</span>
 																</div>
 															</div>
-															<a href="#"><%=objNewProduct.getName() %></a>
+															<a href="#"><%=objNewPro.getName() %></a>
 															<div class="price-box">
-																<span class="price"><%=objNewProduct.getPrice() %></span>
+																<span class="price"><%=objNewPro.getPrice() %></span>
 															</div>
 														</div>
 													</div>
 												</div>
 											</div>
 											<%
-												}}
+												}}}
 											%>
 											<!-- NEW-PRODUCT-SINGLE-ITEM START -->										
 										</div>
@@ -392,22 +398,23 @@
 										<div class="sale-carousel">
 											<!-- SALE-PRODUCTS-SINGLE-ITEM START -->
 											<%
+												if(request.getAttribute("listSaleProducts")!=null){
 												List<Products> listSaleProducts = (List<Products>) request.getAttribute("listSaleProducts");
-												if(listSaleProducts!=null && listSaleProducts.size()>0){
-													for(Products objSaleProduct: listSaleProducts){
+												if(listSaleProducts.size()>0){
+													for(Products objSalePro: listSaleProducts){
 											%>
 											<div class="item">
 												<div class="new-product">
 													<div class="single-product-item">
 														<div class="product-image">
-															<a href="<%=request.getContextPath() %>/detail?id=<%=objSaleProduct.getId()%>">
-																<img src="<%=request.getContextPath() %>/uploads/images/<%=objSaleProduct.getPicture() %>" alt="product-image" />
+															<a href="<%=request.getContextPath() %>/detail?id=<%=objSalePro.getId()%>">
+																<img src="<%=request.getContextPath() %>/uploads/images/<%=objSalePro.getPicture() %>" alt="product-image" />
 															</a>
 															<a href="#" class="new-mark-box">Sale</a>
 															<div class="overlay-content">
 																<ul>
 																	<li><a href="#" title="Quick view"><i class="fa fa-search"></i></a></li>
-																	<li><a href="#" title="Quick view"><i class="fa fa-shopping-cart"></i></a></li>
+																	<li><a href="javascript:void(0)" title="Add to cart" onclick="addToCard(<%=objSalePro.getId()%>)"><i class="fa fa-shopping-cart"></i></a></li>
 																	<li><a href="#" title="Quick view"><i class="fa fa-retweet"></i></a></li>
 																	<li><a href="#" title="Quick view"><i class="fa fa-heart-o"></i></a></li>
 																</ul>
@@ -423,20 +430,20 @@
 																	<i class="fa fa-star-half-empty"></i>
 																</div>
 																<div class="review-box">
-																	<span><%=objSaleProduct.getPreview() %> Review (s)</span>
+																	<span><%=objSalePro.getPreview() %> Review (s)</span>
 																</div>
 															</div>
-															<a href="single-product.html"><%=objSaleProduct.getName() %></a>
+															<a href="single-product.html"><%=objSalePro.getName() %></a>
 															<div class="price-box">
-																<span class="price"><%=objSaleProduct.getPrice() %></span>
-																<span class="old-price"><%=objSaleProduct.getOldPrice() %></span>
+																<span class="price"><%=objSalePro.getPrice() %></span>
+																<span class="old-price"><%=objSalePro.getOldPrice() %></span>
 															</div>
 														</div>
 													</div>
 												</div>
 											</div>
 											<%
-													}}
+													}}}
 											%>
 											<!-- SALE-PRODUCTS-SINGLE-ITEM END -->
 										</div>
@@ -3052,5 +3059,20 @@
 		<!-- COMPANY-FACALITY END -->
 		<!-- FOOTER-TOP-AREA START -->
 <%@ include file="/templates/public/inc/footer.jsp" %>
+<script type="text/javascript">
+function addToCard(id){
+	$.ajax({
+		url: '<%=request.getContextPath()%>/index',
+		type: 'POST',
+		data: {aid: id},
+		success: function(data){
+			alert(data);
+		},
+		error: function (){
+			alert('Có lỗi xảy ra');
+		}
+	})
+}
+</script>
     </body>
 </html>
