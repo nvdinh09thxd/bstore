@@ -2,3 +2,6 @@ eclipse.preferences.version=1
 encoding//WebContent/templates/public/css/style.css=UTF-8
 encoding//WebContent/views/admin/product/index.jsp=UTF-8
 encoding//src/controllers/auth/LoginController.java=UTF-8
+encoding//src/controllers/publics/PublicCartController.java=UTF-8
+encoding//src/controllers/publics/PublicDetailController.java=UTF-8
+encoding//src/controllers/publics/PublicIndexController.java=UTF-8

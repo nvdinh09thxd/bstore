@@ -139,7 +139,7 @@
 					<div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 pull-right shopingcartarea">
 						<div class="shopping-cart-out pull-right">
 							<div class="shopping-cart">
-								<a class="shop-link" href="cart.html" title="View my shopping cart">
+								<a class="shop-link" href="<%=request.getContextPath() %>/cart" title="View my shopping cart">
 									<i class="fa fa-shopping-cart cart-icon"></i>
 									<b>My Cart</b>
 									<span class="ajax-cart-quantity">2</span>
@@ -421,13 +421,10 @@
 										<a class="color-blue" href="#"><span></span></a>
 									</div>
 									<div class="single-product-add-cart">
-										<a class="add-cart-text" title="Add to cart" href="#">Add to cart</a>
+										<a class="add-cart-text" title="Add to cart" href="javascript:void(0)" onclick="addToCard(<%=itemPro.getId()%>)">Add to cart</a>
 									</div>
 								</div>
 							</div>
-						<%
-						}
-						%>
 						</div>
 						<!-- SINGLE-PRODUCT-DESCRIPTION END -->
 						<!-- SINGLE-PRODUCT INFO TAB START -->
@@ -493,13 +490,18 @@
 														<a href="#">Report abuse </a>
 													</div>
 												</div>
-												<a href="#" class="write-review-btn">Write your review!</a>
+												<a href="javascript:void(0)" class="write-review-btn">Write your review!</a>
+												<input type="text" id="review_content">
+												<input type="submit" value="OK" onclick="onReview(<%=itemPro.getId()%>)">
 											</div>
 										</div>
 									</div>									
 								</div>
 							</div>
 						</div>
+						<%
+						}
+						%>
 						<!-- SINGLE-PRODUCT INFO TAB END -->
 						<!-- RELATED-PRODUCTS-AREA START -->
 						<div class="row">
@@ -1167,6 +1169,36 @@
 		<!-- COMPANY-FACALITY END -->
 		<!-- FOOTER-TOP-AREA START -->
 		<%@ include file="/templates/public/inc/footer.jsp" %>
+		<script type="text/javascript">
+			function addToCard(id){
+				$.ajax({
+					url: '<%=request.getContextPath()%>/index',
+					type: 'POST',
+					data: {aid: id},
+					success: function(data){
+						alert(data);
+					},
+					error: function (){
+						alert('Có lỗi xảy ra');
+					}
+				})
+			}
+			function onReview(id){
+				var review = $("#review_content").val();
+				$.ajax({
+					url: '<%=request.getContextPath()%>/detail',
+					type: 'POST',
+					data: {aid: id, areview: review},
+					success: function(data){
+						alert(data);
+						$("#review_content").val("");
+					},
+					error: function (){
+						alert('Có lỗi xảy ra');
+					}
+				})
+			}
+		</script>
     </body>
 
 </html>

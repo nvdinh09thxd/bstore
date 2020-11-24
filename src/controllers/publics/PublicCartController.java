@@ -1,6 +1,7 @@
 package controllers.publics;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -23,6 +24,10 @@ public class PublicCartController extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		try {
+			int id = Integer.parseInt(request.getParameter("aid"));
+			cartDao.delete(id);
+		} catch (Exception e) {}
 		List<Cart> listCarts = cartDao.findAll();
 		request.setAttribute("listCarts", listCarts);
 		RequestDispatcher rd = request.getRequestDispatcher("/views/public/cart.jsp");
@@ -31,6 +36,21 @@ public class PublicCartController extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		PrintWriter out = response.getWriter();
+		int id = Integer.parseInt(request.getParameter("aid"));
+		int num = Integer.parseInt(request.getParameter("anum"));
+		Cart cart = new Cart(id, null, 0);
+		if (num == 1) {
+			cartDao.increase(cart);
+			int counter = cartDao.getCounter(id);
+			out.print(counter);
+		} else if (cartDao.getCounter(id) > 0) {
+			cartDao.reduce(cart);
+			int counter = cartDao.getCounter(id);
+			out.print(counter);
+		} else {
+			out.print(0);
+		}
 	}
 
 }

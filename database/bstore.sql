@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th10 19, 2020 lúc 09:28 AM
+-- Thời gian đã tạo: Th10 24, 2020 lúc 11:06 AM
 -- Phiên bản máy phục vụ: 10.1.32-MariaDB
 -- Phiên bản PHP: 7.1.17
 
@@ -39,13 +39,8 @@ CREATE TABLE `cart` (
 --
 
 INSERT INTO `cart` (`id`, `id_pro`, `counter`) VALUES
-(1, 4, 1),
-(2, 2, 10),
-(5, 10, 4),
-(10, 11, 2),
-(12, 1, 1),
-(13, 5, 1),
-(15, 7, 1);
+(33, 10, 10),
+(35, 11, 8);
 
 -- --------------------------------------------------------
 
@@ -120,6 +115,29 @@ INSERT INTO `products` (`id`, `name`, `picture`, `rating`, `old_price`, `price`,
 -- --------------------------------------------------------
 
 --
+-- Cấu trúc bảng cho bảng `product_detail`
+--
+
+CREATE TABLE `product_detail` (
+  `id` int(11) NOT NULL,
+  `id_pro` int(11) NOT NULL,
+  `more_info` text COLLATE utf8_unicode_ci,
+  `review` text COLLATE utf8_unicode_ci
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `product_detail`
+--
+
+INSERT INTO `product_detail` (`id`, `id_pro`, `more_info`, `review`) VALUES
+(1, 11, NULL, '123'),
+(4, 10, NULL, '111'),
+(5, 10, NULL, '222'),
+(6, 10, NULL, '333');
+
+-- --------------------------------------------------------
+
+--
 -- Cấu trúc bảng cho bảng `users`
 --
 
@@ -167,6 +185,12 @@ ALTER TABLE `products`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Chỉ mục cho bảng `product_detail`
+--
+ALTER TABLE `product_detail`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Chỉ mục cho bảng `users`
 --
 ALTER TABLE `users`
@@ -180,7 +204,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT cho bảng `cart`
 --
 ALTER TABLE `cart`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
 
 --
 -- AUTO_INCREMENT cho bảng `categories`
@@ -193,6 +217,12 @@ ALTER TABLE `categories`
 --
 ALTER TABLE `products`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+
+--
+-- AUTO_INCREMENT cho bảng `product_detail`
+--
+ALTER TABLE `product_detail`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT cho bảng `users`

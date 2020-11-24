@@ -139,7 +139,7 @@
 					<div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 pull-right shopingcartarea">
 						<div class="shopping-cart-out pull-right">
 							<div class="shopping-cart">
-								<a class="shop-link" href="cart.html" title="View my shopping cart">
+								<a class="shop-link" href="<%=request.getContextPath() %>/cart" title="View my shopping cart">
 									<i class="fa fa-shopping-cart cart-icon"></i>
 									<b>My Cart</b>
 									<span class="ajax-cart-quantity">2</span>
@@ -675,7 +675,7 @@
 												<div class="overlay-content">
 													<ul>
 														<li><a href="#" title="Quick view"><i class="fa fa-search"></i></a></li>
-														<li><a href="#" title="Quick view"><i class="fa fa-shopping-cart"></i></a></li>
+														<li><a href="javascript:void(0)" title="Add to cart" onclick="addToCard(<%=pro.getId()%>)"><i class="fa fa-shopping-cart"></i></a></li>
 														<li><a href="#" title="Quick view"><i class="fa fa-retweet"></i></a></li>
 														<li><a href="#" title="Quick view"><i class="fa fa-heart-o"></i></a></li>
 													</ul>
@@ -968,6 +968,21 @@
 		<!-- COMPANY-FACALITY END -->
 		<!-- FOOTER-TOP-AREA START -->
 		<%@ include file="/templates/public/inc/footer.jsp" %>
+		<script type="text/javascript">
+			function addToCard(id){
+				$.ajax({
+					url: '<%=request.getContextPath()%>/index',
+					type: 'POST',
+					data: {aid: id},
+					success: function(data){
+						alert(data);
+					},
+					error: function (){
+						alert('Có lỗi xảy ra');
+					}
+				})
+			}
+		</script>
     </body>
 
 </html>

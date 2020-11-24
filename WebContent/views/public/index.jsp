@@ -154,7 +154,7 @@
 								<a class="shop-link" href="<%=request.getContextPath() %>/cart" title="View my shopping cart">
 									<i class="fa fa-shopping-cart cart-icon"></i>
 									<b>My Cart</b>
-									<span class="ajax-cart-quantity">2</span>
+									<span class="ajax-cart-quantity"><%=listCarts.size() %></span>
 								</a>
 								<div class="shipping-cart-overly">
 									<%

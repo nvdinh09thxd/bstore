@@ -40,19 +40,18 @@ public class PublicIndexController extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		response.setCharacterEncoding("utf-8");
+		response.setContentType("text/html");
 		PrintWriter out = response.getWriter();
 		int id = Integer.parseInt(request.getParameter("aid"));
 		Cart card = new Cart(0, new Products(id), 1);
 		if (cartDao.add(card) > 0) {
-			out.print("ok");
-
+			out.print("Đã thêm vào giỏ hàng!");
 		} else {
 			if (cartDao.edit(card) > 0) {
-				out.print("ok2");
-
+				out.print("Đã thêm vào giỏ hàng!");
 			} else {
-				out.print("nok");
-
+				out.print("Xảy ra lỗi!");
 			}
 		}
 	}

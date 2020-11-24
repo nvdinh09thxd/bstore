@@ -18,9 +18,8 @@ public class CartDao extends AbstractDAO {
 			st = con.createStatement();
 			rs = st.executeQuery(sql);
 			while (rs.next()) {
-				Cart item = new Cart(rs.getInt("id"),
-						new Products(rs.getInt("id"), rs.getString("name"), rs.getString("picture"), rs.getFloat("price")),
-						rs.getInt("counter"));
+				Cart item = new Cart(rs.getInt("id"), new Products(rs.getInt("p.id"), rs.getString("name"),
+						rs.getString("picture"), rs.getFloat("price")), rs.getInt("counter"));
 				listItems.add(item);
 			}
 		} catch (SQLException e) {
@@ -61,6 +60,66 @@ public class CartDao extends AbstractDAO {
 			DBConnectionUtil.close(pst, con);
 		}
 		return result;
+	}
+
+	public void increase(Cart cart) {
+		con = DBConnectionUtil.getConnection();
+		String sql = "UPDATE cart SET counter = counter + 1 WHERE id = ?";
+		try {
+			pst = con.prepareStatement(sql);
+			pst.setInt(1, cart.getId());
+			pst.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			DBConnectionUtil.close(pst, con);
+		}
+	}
+	
+	public void reduce(Cart cart) {
+		con = DBConnectionUtil.getConnection();
+		String sql = "UPDATE cart SET counter = counter - 1 WHERE id = ?";
+		try {
+			pst = con.prepareStatement(sql);
+			pst.setInt(1, cart.getId());
+			pst.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			DBConnectionUtil.close(pst, con);
+		}
+	}
+
+	public int getCounter(int id) {
+		con = DBConnectionUtil.getConnection();
+		String sql = "SELECT counter FROM cart WHERE id = ?";
+		try {
+			pst = con.prepareStatement(sql);
+			pst.setInt(1, id);
+			rs = pst.executeQuery();
+			while (rs.next()) {
+				return rs.getInt("counter");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			DBConnectionUtil.close(rs, pst, con);
+		}
+		return 0;
+	}
+
+	public void delete(int id) {
+		con = DBConnectionUtil.getConnection();
+		String sql = "DELETE FROM cart WHERE id = ?";
+		try {
+			pst = con.prepareStatement(sql);
+			pst.setInt(1, id);
+			pst.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			DBConnectionUtil.close(rs, pst, con);
+		}
 	}
 
 }

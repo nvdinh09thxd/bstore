@@ -330,7 +330,7 @@
 									%>
 									<tr>
 										<td class="cart-product">
-											<a href="#"><img alt="Blouse" src="<%=request.getContextPath() %>/uploads/images/<%=objCart.getPro().getPicture()%>"></a>
+											<a href="<%=request.getContextPath() %>/detail?id=<%=objCart.getPro().getId()%>"><img alt="Blouse" src="<%=request.getContextPath() %>/uploads/images/<%=objCart.getPro().getPicture()%>"></a>
 										</td>
 										<td class="cart-description">
 											<p class="product-name"><a href="#"><%=objCart.getPro().getName() %></a></p>
@@ -344,20 +344,22 @@
 											</ul>
 										</td>
 										<td class="cart_quantity text-center">
-											<div class="cart-plus-minus-button">
-												<input class="cart-plus-minus" type="text" name="qtybutton" value="<%=objCart.getCounter()%>">
+											<div class="cart1-plus-minus-button">
+												<button onclick="changeNumber(<%=objCart.getPro().getPrice() %>, <%=objCart.getId()%>, 1)">+</button>
+												<input class="cart-plus-minus" type="text" name="qtybutton" id="counter_<%=objCart.getId()%>" value="<%=objCart.getCounter()%>">
+												<button onclick="changeNumber(<%=objCart.getPro().getPrice() %>, <%=objCart.getId()%>, 0)">-</button>
 											</div>
 										</td>
 										<td class="cart-delete text-center">
 											<span>
-												<a href="#" class="cart_quantity_delete" title="Delete"><i class="fa fa-trash-o"></i></a>
+												<a href="javascript:void(0)" class="cart_quantity_delete" title="Delete" onclick="deleteCart(<%=objCart.getId()%>)"><i class="fa fa-trash-o"></i></a>
 											</span>
 										</td>
 										<%
 										float price = objCart.getPro().getPrice()*objCart.getCounter();
 										%>
 										<td class="cart-total">
-											<span class="price"><%=price %></span>
+											<span class="price" id="price_<%=objCart.getId()%>"><%=String.format("%.0f", price) %></span>
 										</td>
 									</tr>
 									<%
@@ -671,8 +673,38 @@
 		</section>
 		<!-- COMPANY-FACALITY END -->
 		<!-- FOOTER-TOP-AREA START -->
+		<script type="text/javascript">
+			function changeNumber(price, id, num){
+				$.ajax({
+					url: '<%=request.getContextPath()%>/cart',
+					type: 'POST',
+					data: {aid: id, anum: num},
+					success: function(data){
+						$("#counter_"+id).val(data);
+						$("#price_"+id).text(price*data);
+					},
+					error: function (){
+						alert('Có lỗi xảy ra');
+					}
+				})
+			}
+			function deleteCart(id){
+				var check = confirm("Bạn có chắc chắn muốn xóa không?");
+				if(check){
+					$.ajax({
+						url: '<%=request.getContextPath()%>/cart',
+						type: 'GET',
+						data: {aid: id},
+						success: function(data){
+							$('body').html(data);
+						},
+						error: function (){
+							alert('Có lỗi xảy ra');
+						}
+					})
+				}
+			}
+		</script>
 <%@ include file="/templates/public/inc/footer.jsp" %>
     </body>
-
-<!-- Nulled by http://www.baobinh.net by tieulonglanh -->
 </html>
