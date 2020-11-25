@@ -28,14 +28,14 @@ public class PublicOrderController extends HttpServlet {
 			throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		User userLogin = (User) session.getAttribute("userLogin");
-		if (userLogin != null) {
-			int totalPrice = cartDao.getTotalPrice(userLogin.getId());
-			Orders order = new Orders(0, userLogin.getId(), totalPrice, null);
-			ordersDao.add(order);
-//			System.out.println(totalPrice);
-		} else {
+		if (userLogin == null) {
 			response.sendRedirect(request.getContextPath() + "/login");
 			return;
+		} else {
+			int totalPrice = cartDao.getTotalPrice(userLogin.getId());
+			Orders order = new Orders(0, userLogin.getId(), totalPrice, null);
+			if (ordersDao.add(order) == 0)
+				ordersDao.edit(order);
 		}
 	}
 

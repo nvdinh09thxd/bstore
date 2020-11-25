@@ -3,7 +3,6 @@ package daos;
 import java.sql.SQLException;
 
 import models.Orders;
-import models.ProDetail;
 import util.DBConnectionUtil;
 
 public class OrdersDao extends AbstractDAO {
@@ -25,13 +24,14 @@ public class OrdersDao extends AbstractDAO {
 		return result;
 	}
 
-	public int edit(ProDetail pro) {
+	public int edit(Orders order) {
 		int result = 0;
 		con = DBConnectionUtil.getConnection();
-		String sql = "UPDATE cart SET counter = counter + 1 WHERE id_pro = ?";
+		String sql = "UPDATE orders SET total = ? WHERE id_user = ?";
 		try {
 			pst = con.prepareStatement(sql);
-			pst.setInt(1, pro.getPro().getId());
+			pst.setFloat(1, order.getTotal());
+			pst.setInt(2, order.getIdUser());
 			result = pst.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
