@@ -14,6 +14,7 @@ import daos.CartDao;
 import daos.ProductsDAO;
 import models.Cart;
 import models.Products;
+import models.User;
 
 public class PublicIndexController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -30,10 +31,8 @@ public class PublicIndexController extends HttpServlet {
 			throws ServletException, IOException {
 		List<Products> listNewProducts = productDao.getNewProducts();
 		List<Products> listSaleProducts = productDao.getSaleProducts();
-		List<Cart> listCarts = cartDao.findAll();
 		request.setAttribute("listNewProducts", listNewProducts);
 		request.setAttribute("listSaleProducts", listSaleProducts);
-		request.setAttribute("listCarts", listCarts);
 		RequestDispatcher rd = request.getRequestDispatcher("/views/public/index.jsp");
 		rd.forward(request, response);
 	}
@@ -43,13 +42,16 @@ public class PublicIndexController extends HttpServlet {
 		response.setCharacterEncoding("utf-8");
 		response.setContentType("text/html");
 		PrintWriter out = response.getWriter();
-		int id = Integer.parseInt(request.getParameter("aid"));
-		Cart card = new Cart(0, new Products(id), 1);
+		int idPro = Integer.parseInt(request.getParameter("aidPro"));
+		int idUser = Integer.parseInt(request.getParameter("aidUser"));
+		Cart card = new Cart(0, new Products(idPro), 1, new User(idUser), null);
 		if (cartDao.add(card) > 0) {
-			out.print("Đã thêm vào giỏ hàng!");
+			List<Cart> listCarts = cartDao.findCartByUser(idUser);
+			out.print(listCarts.size());
 		} else {
 			if (cartDao.edit(card) > 0) {
-				out.print("Đã thêm vào giỏ hàng!");
+				List<Cart> listCarts = cartDao.findCartByUser(idUser);
+				out.print(listCarts.size());
 			} else {
 				out.print("Xảy ra lỗi!");
 			}

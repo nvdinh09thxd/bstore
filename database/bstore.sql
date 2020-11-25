@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th10 24, 2020 lúc 11:06 AM
+-- Thời gian đã tạo: Th10 25, 2020 lúc 11:08 AM
 -- Phiên bản máy phục vụ: 10.1.32-MariaDB
 -- Phiên bản PHP: 7.1.17
 
@@ -31,16 +31,22 @@ SET time_zone = "+00:00";
 CREATE TABLE `cart` (
   `id` int(11) NOT NULL,
   `id_pro` int(11) NOT NULL,
-  `counter` int(11) NOT NULL DEFAULT '1'
+  `counter` int(11) NOT NULL DEFAULT '1',
+  `id_user` int(11) NOT NULL,
+  `date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Đang đổ dữ liệu cho bảng `cart`
 --
 
-INSERT INTO `cart` (`id`, `id_pro`, `counter`) VALUES
-(33, 10, 10),
-(35, 11, 8);
+INSERT INTO `cart` (`id`, `id_pro`, `counter`, `id_user`, `date`) VALUES
+(19, 10, 0, 2, '2020-11-25 08:44:23'),
+(20, 11, 0, 2, '2020-11-25 08:44:25'),
+(21, 2, 0, 2, '2020-11-25 08:44:27'),
+(22, 1, 2, 2, '2020-11-25 08:45:45'),
+(23, 10, 10, 1, '2020-11-25 10:07:02'),
+(24, 12, 10, 1, '2020-11-25 10:07:06');
 
 -- --------------------------------------------------------
 
@@ -69,6 +75,28 @@ INSERT INTO `categories` (`id`, `parent_id`, `name`) VALUES
 (8, 1, 'Áo mới'),
 (9, 1, 'Giày mới'),
 (10, 1, 'Đồng hồ mới');
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `orders`
+--
+
+CREATE TABLE `orders` (
+  `id` int(11) NOT NULL,
+  `id_user` int(11) NOT NULL,
+  `total` float NOT NULL,
+  `date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `orders`
+--
+
+INSERT INTO `orders` (`id`, `id_user`, `total`, `date`) VALUES
+(2, 2, 422000, '2020-11-25 09:59:34'),
+(4, 1, 3802000, '2020-11-25 10:06:33'),
+(5, 1, 19010000, '2020-11-25 10:07:12');
 
 -- --------------------------------------------------------
 
@@ -170,12 +198,18 @@ INSERT INTO `users` (`id`, `username`, `password`, `fullname`) VALUES
 --
 ALTER TABLE `cart`
   ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `id_pro` (`id_pro`);
+  ADD UNIQUE KEY `id_pro` (`id_pro`,`id_user`);
 
 --
 -- Chỉ mục cho bảng `categories`
 --
 ALTER TABLE `categories`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Chỉ mục cho bảng `orders`
+--
+ALTER TABLE `orders`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -204,13 +238,19 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT cho bảng `cart`
 --
 ALTER TABLE `cart`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT cho bảng `categories`
 --
 ALTER TABLE `categories`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
+--
+-- AUTO_INCREMENT cho bảng `orders`
+--
+ALTER TABLE `orders`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT cho bảng `products`

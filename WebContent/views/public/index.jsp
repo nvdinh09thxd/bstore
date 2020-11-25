@@ -61,7 +61,7 @@
 									<li><a href="my-account.html">My Account</a></li>
 									<li><a href="cart.html">My Cart</a></li>
 									<%
-									User userLogin = (User) session.getAttribute("userLogin");
+										User userLogin = (User) session.getAttribute("userLogin");
 									%>
 									<li style="<%if(userLogin!=null) out.print("display: none"); %>"><a href="<%=request.getContextPath() %>/login">Sign in</a></li>
 									<li style="<%if(userLogin==null) out.print("display: none"); %>"><a href="<%=request.getContextPath() %>/logout">Sign out</a></li>
@@ -143,53 +143,11 @@
 			<div class="container">
 				<div class="row">
 					<!-- SHOPPING-CART START -->
-					<div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 pull-right shopingcartarea">
-						<div class="shopping-cart-out pull-right">
-									<%
-									if(request.getAttribute("listCarts")!=null){
-										List<Cart> listCarts = (List<Cart>) request.getAttribute("listCarts");
-										if(listCarts.size()>0){											
-									%>
-							<div class="shopping-cart">
-								<a class="shop-link" href="<%=request.getContextPath() %>/cart" title="View my shopping cart">
-									<i class="fa fa-shopping-cart cart-icon"></i>
-									<b>My Cart</b>
-									<span class="ajax-cart-quantity"><%=listCarts.size() %></span>
-								</a>
-								<div class="shipping-cart-overly">
-									<%
-									for(Cart objCart: listCarts){
-									%>
-									<div class="shipping-item">
-										<span class="cross-icon"><i class="fa fa-times-circle"></i></span>
-										<div class="shipping-item-image">
-											<a href="#"><img src="<%=request.getContextPath() %>/uploads/images/<%=objCart.getPro().getPicture() %>" alt="shopping image" /></a>
-										</div>
-										<div class="shipping-item-text">
-											<span>2 <span class="pro-quan-x">x</span> <a href="#" class="pro-cat"><%=objCart.getPro().getName() %></a></span>
-											<span class="pro-quality"><a href="#">S,Black</a></span>
-											<p>$22.95</p>
-										</div>
-									</div>
-									<%} %>
-									<div class="shipping-total-bill">
-										<div class="cart-prices">
-											<span class="shipping-cost">$2.00</span>
-											<span>Shipping</span>
-										</div>
-										<div class="total-shipping-prices">
-											<span class="shipping-total">$24.95</span>
-											<span>Total</span>
-										</div>										
-									</div>
-									<div class="shipping-checkout-btn">
-										<a href="checkout.html">Check out <i class="fa fa-chevron-right"></i></a>
-									</div>
-								</div>
-							</div>
-							<%}} %>
-						</div>
-					</div>	
+					<%
+						if(userLogin!=null){
+					%>
+					<%@ include file="/templates/public/inc/shopping-cart.jsp" %>
+					<%} %>
 					<!-- SHOPPING-CART END -->
 					<!-- MAINMENU START -->
 					<%@ include file="/templates/public/inc/site-bar.jsp" %>
@@ -346,7 +304,11 @@
 															<div class="overlay-content">
 																<ul>
 																	<li><a href="#" title="Quick view"><i class="fa fa-search"></i></a></li>
-																	<li><a href="javascript:void(0)" title="Add to cart" onclick="addToCard(<%=objNewPro.getId()%>)"><i class="fa fa-shopping-cart"></i></a></li>
+																	<%
+																	if(userLogin!=null){
+																	%>
+																	<li><a href="javascript:void(0)" title="Add to cart" onclick="addToCard(<%=objNewPro.getId()%>, <%=userLogin.getId()%>)"><i class="fa fa-shopping-cart"></i></a></li>
+																	<%} %>
 																	<li><a href="#" title="Quick view"><i class="fa fa-retweet"></i></a></li>
 																	<li><a href="#" title="Quick view"><i class="fa fa-heart-o"></i></a></li>
 																</ul>
@@ -414,7 +376,11 @@
 															<div class="overlay-content">
 																<ul>
 																	<li><a href="#" title="Quick view"><i class="fa fa-search"></i></a></li>
-																	<li><a href="javascript:void(0)" title="Add to cart" onclick="addToCard(<%=objSalePro.getId()%>)"><i class="fa fa-shopping-cart"></i></a></li>
+																	<%
+																	if(userLogin!=null){
+																	%>
+																	<li><a href="javascript:void(0)" title="Add to cart" onclick="addToCard(<%=objSalePro.getId()%>, <%=userLogin.getId()%>)"><i class="fa fa-shopping-cart"></i></a></li>
+																	<%} %>
 																	<li><a href="#" title="Quick view"><i class="fa fa-retweet"></i></a></li>
 																	<li><a href="#" title="Quick view"><i class="fa fa-heart-o"></i></a></li>
 																</ul>
@@ -3058,21 +3024,22 @@
 		</section>
 		<!-- COMPANY-FACALITY END -->
 		<!-- FOOTER-TOP-AREA START -->
-<%@ include file="/templates/public/inc/footer.jsp" %>
-<script type="text/javascript">
-function addToCard(id){
-	$.ajax({
-		url: '<%=request.getContextPath()%>/index',
-		type: 'POST',
-		data: {aid: id},
-		success: function(data){
-			alert(data);
-		},
-		error: function (){
-			alert('Có lỗi xảy ra');
-		}
-	})
-}
-</script>
+		<%@ include file="/templates/public/inc/footer.jsp" %>
+		<script type="text/javascript">
+			function addToCard(idPro, idUser){
+				$.ajax({
+					url: '<%=request.getContextPath()%>/index',
+					type: 'POST',
+					data: {aidPro: idPro, aidUser: idUser},
+					success: function(data){
+						alert("Đã thêm vào giỏ hàng!");
+						$("#size-cart").text(data);
+					},
+					error: function (){
+						alert('Có lỗi xảy ra');
+					}
+				})
+			}
+		</script>
     </body>
 </html>

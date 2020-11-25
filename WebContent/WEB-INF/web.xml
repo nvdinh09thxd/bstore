@@ -53,6 +53,14 @@
     <url-pattern>/cart</url-pattern>
   </servlet-mapping>
   <servlet>
+    <servlet-name>PublicOrderController</servlet-name>
+    <servlet-class>controllers.publics.PublicOrderController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>PublicOrderController</servlet-name>
+    <url-pattern>/orders</url-pattern>
+  </servlet-mapping>
+  <servlet>
     <servlet-name>LoginController</servlet-name>
     <servlet-class>controllers.auth.LoginController</servlet-class>
   </servlet>

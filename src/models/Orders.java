@@ -1,5 +1,7 @@
 package models;
 
+import java.sql.Timestamp;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -7,15 +9,9 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class User {
+public class Orders {
 	private int id;
-	private String username;
-	private String password;
-	private String fullname;
-
-	public User(int id) {
-		super();
-		this.id = id;
-	}
-
+	private int idUser;
+	private float total;
+	private Timestamp date;
 }
