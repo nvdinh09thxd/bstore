@@ -66,6 +66,26 @@ public class CatDao extends AbstractDAO {
 		return listItems;
 	}
 
+	public ArrayList<Categories> getCatParent(int id) {
+		ArrayList<Categories> listCat = new ArrayList<>();
+		con = DBConnectionUtil.getConnection();
+		String sql = "SELECT * FROM categories WHERE parent_id = ? ORDER BY id DESC";
+		try {
+			pst = con.prepareStatement(sql);
+			pst.setInt(1, id);
+			rs = pst.executeQuery();
+			while (rs.next()) {
+				Categories objCat = new Categories(rs.getInt("id"), rs.getInt("parent_id"), rs.getString("name"));
+				listCat.add(objCat);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			DBConnectionUtil.close(rs, pst, con);
+		}
+		return listCat;
+	}
+
 	public List<Categories> findParent() {
 		con = DBConnectionUtil.getConnection();
 		List<Categories> listItems = new ArrayList<>();

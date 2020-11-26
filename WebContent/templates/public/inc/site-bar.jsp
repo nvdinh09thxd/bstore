@@ -1,3 +1,4 @@
+<%@page import="util.CategoryUtil"%>
 <%@page import="daos.CatDao"%>
 <%@page import="models.Categories"%>
 <%@page import="java.util.List"%>
@@ -46,43 +47,18 @@
 					<!-- DRODOWN-MEGA-MENU START -->
 					<div class="drodown-mega-menu">
 						<div class="mega-menu-list">
-							<a class="mega-menu-title" href="shop-gird.html">Sản phẩm mới</a>
-							<%
+						<%
 							CatDao catDao = new CatDao();
-							List<Categories> listCatNew = catDao.findNew();
-							if(listCatNew!=null && listCatNew.size()>0){
-							%>
-							<ul>
+							List<Categories> listCat = catDao.findAll();
+							if (listCat.size() > 0) {
+								for (Categories objCat : listCat) {
+									if (objCat.getParentId() == 0) {
+						%>
+							<a class="mega-menu-title" href="javascript:void(0)"><%=objCat.getName()%></a>
 							<%
-							for(Categories cat : listCatNew){
-							%>
-								<li>
-									<a href="<%=request.getContextPath() %>/cat?cid=<%=cat.getId()%>"><%=cat.getName() %></a>
-								</li>
-							<%
-							}%>
-							</ul>
-							<%
-							}
-							%>
-						</div>
-						<div class="mega-menu-list">
-							<a class="mega-menu-title" href="shop-gird.html">Sản phẩm bán chạy</a>
-							<%
-							List<Categories> listCatSale = catDao.findSale();
-							if(listCatSale!=null && listCatSale.size()>0){
-							%>
-							<ul>
-							<%
-							for(Categories cat : listCatSale){
-							%>
-								<li>
-									<a href="<%=request.getContextPath() %>/cat?cid=<%=cat.getId()%>"><%=cat.getName() %></a>
-								</li>
-							<%
-							}%>
-							</ul>
-							<%
+								CategoryUtil.showCat(request, out, objCat.getId(), "|---");
+									}
+								}
 							}
 							%>
 						</div>

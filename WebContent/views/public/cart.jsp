@@ -242,27 +242,6 @@
 					</div>	
 					
 					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-						<!-- SHOPING-CART-MENU START -->
-						<div class="shoping-cart-menu">
-							<ul class="step">
-								<li class="step-current first">
-									<span>01. Summary</span>
-								</li>
-								<li class="step-todo second">
-									<span>02. Sign in</span>
-								</li>
-								<li class="step-todo third">
-									<span>03. Address</span>
-								</li>
-								<li class="step-todo four">
-									<span>04. Shipping</span>
-								</li>
-								<li class="step-todo last" id="step_end">
-									<span>05. Payment</span>
-								</li>
-							</ul>									
-						</div>
-						<!-- SHOPING-CART-MENU END -->
 						<!-- CART TABLE_BLOCK START -->
 						<div class="table-responsive">
 							<!-- TABLE START -->
@@ -284,7 +263,7 @@
 								<tbody>	
 									<!-- SINGLE CART_ITEM START -->
 									<%
-									float totalProduct = 0.0f;
+									float totalProduct = 0;
 									if(request.getAttribute("listCarts")!=null){
 										List<Cart> listCarts = (List<Cart>) request.getAttribute("listCarts");
 										if(listCarts.size()>0){
@@ -333,25 +312,12 @@
 								<!-- TABLE BODY END -->
 								<!-- TABLE FOOTER START -->
 								<tfoot>										
-									<tr class="cart-total-price">
-										<td class="cart_voucher" colspan="3" rowspan="4"></td>
-										<td class="text-right" colspan="3">Total products (tax excl.)</td>
-										<td id="total_product" class="price" colspan="1"><%=totalProduct %></td>
-									</tr>
-									<tr>
-										<td class="text-right" colspan="3">Total shipping</td>
-										<td id="total_shipping" class="price" colspan="1">$5.00</td>
-									</tr>
-									<tr>
-										<td class="text-right" colspan="3">Total vouchers (tax excl.)</td>
-										<td class="price" colspan="1">$0.00</td>
-									</tr>
 									<tr>
 										<td class="total-price-container text-right" colspan="3">
 											<span>Total</span>
 										</td>
 										<td id="total-price-container" class="price" colspan="1">
-											<span id="total-price">$76.46</span>
+											<span id="total_product"><%=totalProduct %></span>
 										</td>
 									</tr>
 								</tfoot>		
@@ -647,8 +613,12 @@
 						anum: num
 					},
 					success: function(data){
-						$("#counter_"+idPro).val(data);
-						$("#price_"+idPro).text(price*data);
+						let array = JSON.parse(data);
+						if(array.length > 0){
+							$("#counter_"+idPro).val(array[0]);
+							$("#price_"+idPro).text(price*array[0]);
+							$("#total_product").text(array[1]);
+						}
 					},
 					error: function (){
 						alert('Có lỗi xảy ra');

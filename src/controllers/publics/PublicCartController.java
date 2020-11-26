@@ -2,6 +2,7 @@ package controllers.publics;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -47,21 +48,35 @@ public class PublicCartController extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		PrintWriter out = response.getWriter();
-		int idPro = Integer.parseInt(request.getParameter("aidPro"));
-		int idUser = Integer.parseInt(request.getParameter("aidUser"));
-		int num = Integer.parseInt(request.getParameter("anum"));
-		Cart cart = new Cart(0, new Products(idPro), 0, new User(idUser), null);
-		if (num == 1) {
-			cartDao.increase(cart);
-			int counter = cartDao.getCounter(idPro, idUser);
-			out.print(counter);
-		} else if (cartDao.getCounter(idPro, idUser) > 0) {
-			cartDao.reduce(cart);
-			int counter = cartDao.getCounter(idPro, idUser);
-			out.print(counter);
+		HttpSession session = request.getSession();
+		User userLogin = (User) session.getAttribute("userLogin");
+		if (userLogin == null) {
+			response.sendRedirect(request.getContextPath() + "/login");
+			return;
 		} else {
-			out.print(0);
+			PrintWriter out = response.getWriter();
+			int idPro = Integer.parseInt(request.getParameter("aidPro"));
+			int idUser = Integer.parseInt(request.getParameter("aidUser"));
+			int num = Integer.parseInt(request.getParameter("anum"));
+			Cart cart = new Cart(0, new Products(idPro), 0, new User(idUser), null);
+			List<Integer> listNum = new ArrayList<>();
+			if (num == 1) {
+				cartDao.increase(cart);
+				int counter = cartDao.getCounter(idPro, idUser);
+				int totalPrice = cartDao.getTotalPrice(userLogin.getId());
+				listNum.add(counter);
+				listNum.add(totalPrice);
+				out.print(listNum);
+			} else if (cartDao.getCounter(idPro, idUser) > 0) {
+				cartDao.reduce(cart);
+				int counter = cartDao.getCounter(idPro, idUser);
+				int totalPrice = cartDao.getTotalPrice(userLogin.getId());
+				listNum.add(counter);
+				listNum.add(totalPrice);
+				out.print(listNum);
+			} else {
+				out.print(listNum);
+			}
 		}
 	}
 
