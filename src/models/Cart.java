@@ -13,6 +13,6 @@ public class Cart {
 	private int id;
 	private Products pro;
 	private int counter;
-	private User user;
+	private Member user;
 	private Timestamp date;
 }

@@ -1,10 +1,8 @@
-<%@page import="models.Cart"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="/templates/public/inc/header.jsp" %>
     <body>
-        <!-- HEADER-TOP START -->
-		<div class="header-top">
+        <div class="header-top">
 			<div class="container">
 				<div class="row">
 					<!-- HEADER-LEFT-MENU START -->
@@ -58,7 +56,7 @@
 									<li><a href="<%=request.getContextPath()%>/auth/login">My Account</a></li>
 									<li><a href="cart.html">My Cart</a></li>
 									<%
-										Member userLogin = (Member) session.getAttribute("userLogin");
+										User userLogin = (User) session.getAttribute("userLogin");
 									%>
 									<li style="<%if(userLogin!=null) out.print("display: none"); %>"><a href="<%=request.getContextPath() %>/login">Sign in</a></li>
 									<li style="<%if(userLogin==null) out.print("display: none"); %>"><a href="<%=request.getContextPath() %>/logout">Sign out</a></li>
@@ -216,7 +214,7 @@
 						</div>						
 					</div>
 					<!-- MOBILE MENU END -->
-				</div>				
+				</div>			
 			</div>
 		</header>
 		<!-- MAIN-MENU-AREA END -->
@@ -229,154 +227,103 @@
 						<div class="bstore-breadcrumb">
 							<a href="index.html">HOMe</a>
 							<span><i class="fa fa-caret-right	"></i></span>
-							<span>Your shopping cart</span>
+							<span>Sign in / Register</span>
 						</div>
 						<!-- BSTORE-BREADCRUMB END -->
 					</div>
 				</div>
 				<div class="row">
 					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-						<!-- SHOPPING-CART SUMMARY START -->
-						<h2 class="page-title">Shopping-cart summary <span class="shop-pro-item">Your shopping cart contains: 2 products</span></h2>
-						<!-- SHOPPING-CART SUMMARY END -->
+						<h2 class="page-title">Sign in / Register</h2>
 					</div>	
-					
 					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-						<!-- CART TABLE_BLOCK START -->
-						<div class="table-responsive">
-							<!-- TABLE START -->
-							<table class="table table-bordered" id="cart-summary">
-								<!-- TABLE HEADER START -->
-								<thead>
-									<tr>
-										<th class="cart-product">Picture</th>
-										<th class="cart-description">Name</th>
-										<th class="cart-avail text-center">Availability</th>
-										<th class="cart-unit text-right">Unit price</th>
-										<th class="cart_quantity text-center">Qty</th>
-										<th class="cart-delete">&nbsp;</th>
-										<th class="cart-total text-right">Total</th>
-									</tr>
-								</thead>
-								<!-- TABLE HEADER END -->
-								<!-- TABLE BODY START -->
-								<tbody>	
-									<!-- SINGLE CART_ITEM START -->
-									<%
-									float totalProduct = 0;
-									if(request.getAttribute("listCarts")!=null){
-										List<Cart> listCarts = (List<Cart>) request.getAttribute("listCarts");
-										if(listCarts.size()>0){
-											for(Cart objCart: listCarts){
-									%>
-									<tr>
-										<td class="cart-product">
-											<a href="<%=request.getContextPath() %>/detail?id=<%=objCart.getPro().getId()%>"><img alt="Blouse" src="<%=request.getContextPath() %>/uploads/images/<%=objCart.getPro().getPicture()%>"></a>
-										</td>
-										<td class="cart-description">
-											<p class="product-name"><a href="#"><%=objCart.getPro().getName() %></a></p>
-											<small>SKU : demo_1</small>
-											<small><a href="#">Size : S, Color : Orange</a></small>
-										</td>
-										<td class="cart-avail"><span class="label label-success">In stock</span></td>
-										<td class="cart-unit">
-											<ul class="price text-right">
-												<li class="price"><%=objCart.getPro().getPrice() %></li>
-											</ul>
-										</td>
-										<td class="cart_quantity text-center">
-											<div class="cart1-plus-minus-button">
-												<button onclick="changeNumber(<%=objCart.getPro().getPrice() %>, <%=objCart.getPro().getId()%>, <%=userLogin.getId()%>, 1)">+</button>
-												<input class="cart-plus-minus" type="text" name="qtybutton" id="counter_<%=objCart.getPro().getId()%>" value="<%=objCart.getCounter()%>">
-												<button onclick="changeNumber(<%=objCart.getPro().getPrice() %>, <%=objCart.getPro().getId()%>, <%=userLogin.getId()%>, 0)">-</button>
-											</div>
-										</td>
-										<td class="cart-delete text-center">
+						<!-- SHOPING-CART-MENU START -->
+						<div class="shoping-cart-menu">
+							<ul class="step">
+								<li class="step-todo first step-done">
+									<span><a href="cart.html">01. Summary</a></span>
+								</li>
+								<li class="step-current second">
+									<span>02. Sign in</span>
+								</li>
+								<li class="step-todo third">
+									<span>03. Address</span>
+								</li>
+								<li class="step-todo four">
+									<span>04. Shipping</span>
+								</li>
+								<li class="step-todo last" id="step_end">
+									<span><em>05.</em> Payment</span>
+								</li>
+							</ul>									
+						</div>
+						<!-- SHOPING-CART-MENU END -->
+					</div>
+					<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+						<!-- CREATE-NEW-ACCOUNT START -->
+						<div class="create-new-account">
+							<form class="new-account-box primari-box" id="create-new-account" method="post" action="#">
+								<h3 class="box-subheading">Create an account</h3>
+								<div class="form-content">
+									<p>Please enter your email address to create an account.</p>
+									<div class="form-group primary-form-group">
+										<label for="email">Email address</label>
+										<input type="text" value="" name="email" id="email" class="form-control input-feild" required>
+									</div>
+									<div class="submit-button">
+										<a href="<%=request.getContextPath() %>/register" id="SubmitCreate" class="btn main-btn">
 											<span>
-												<a href="javascript:void(0)" class="cart_quantity_delete" title="Delete" onclick="deleteCart(<%=objCart.getId()%>)"><i class="fa fa-trash-o"></i></a>
-											</span>
-										</td>
-										<%
-										float price = objCart.getPro().getPrice()*objCart.getCounter();
-										totalProduct+=price;
-										%>
-										<td class="cart-total">
-											<span class="price" id="price_<%=objCart.getPro().getId()%>"><%=String.format("%.0f", price) %></span>
-										</td>
-									</tr>
-									<%
-											}}}
-									%>
-									<!-- SINGLE CART_ITEM END -->
-								</tbody>
-								<!-- TABLE BODY END -->
-								<!-- TABLE FOOTER START -->
-								<tfoot>										
-									<tr>
-										<td class="total-price-container text-right" colspan="3">
-											<span>Total</span>
-										</td>
-										<td id="total-price-container" class="price" colspan="1">
-											<span id="total_product"><%=totalProduct %></span>
-										</td>
-									</tr>
-								</tfoot>		
-								<!-- TABLE FOOTER END -->									
-							</table>
-							<!-- TABLE END -->
+												<i class="fa fa-user submit-icon"></i>
+												Create an account
+											</span>											
+										</a>
+									</div>
+								</div>
+							</form>							
 						</div>
-						<!-- CART TABLE_BLOCK END -->
+						<!-- CREATE-NEW-ACCOUNT END -->
 					</div>
 					<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-						<div class="first_item primari-box mycartaddress-info">
-							<!-- SINGLE ADDRESS START -->
-							<ul class="address">
-								<li>
-									<h3 class="page-subheading box-subheading">
-										Delivery address (BootExperts Office)
-									</h3>
-								</li>
-								<li><span class="address_name">BootExperts</span></li>
-								<li><span class="address_company">Web development Company</span></li>
-								<li><span class="address_address1">Bonossri</span></li>
-								<li><span class="address_address2">D-Block</span></li>
-								<li><span class="">Rampura</span></li>
-								<li><span class="">Dhaka</span></li>
-								<li><span class="address_phone">+880 1735161598</span></li>
-								<li><span class="address_phone_mobile">+880 1975161598</span></li>
-							</ul>	
-							<!-- SINGLE ADDRESS END -->
-						</div>						
-					</div>
-					<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-						<div class="second_item primari-box mycartaddress-info">
-							<!-- SINGLE ADDRESS START -->
-							<ul class="address">
-								<li>
-									<h3 class="page-subheading box-subheading">
-										Invoice address (BootExperts Home)
-									</h3>
-								</li>
-								<li><span class="address_name">BootExperts</span></li>
-								<li><span class="address_company">Web development Company</span></li>
-								<li><span class="address_address1">Dhaka</span></li>
-								<li><span class="address_address2">Bonossri</span></li>
-								<li><span class="">Dhaka-1205</span></li>
-								<li><span class="">Rampura</span></li>
-								<li><span class="address_phone">+880 1735161598</span></li>
-								<li><span class="address_phone_mobile">+880 1975161598</span></li>
-							</ul>	
-							<!-- SINGLE ADDRESS END -->
+						<!-- REGISTERED-ACCOUNT START -->
+						<div class="primari-box registered-account">
+							<%
+								String username = request.getParameter("username");
+								if (request.getParameter("err") != null) {
+									int err = Integer.parseInt(request.getParameter("err"));
+									switch (err) {
+										case 0 :
+											out.print("<h3 style='background: #67FF67; color: red'>Sai tài khoản!</h3>");
+											break;
+									}
+								}
+							%>
+							<form class="new-account-box" id="accountLogin" method="post">
+								<h3 class="box-subheading">Already registered?</h3>
+								<div class="form-content">
+									<div class="form-group primary-form-group">
+										<label for="loginemail">Email address</label>
+										<input type="text" value="" name="email" id="loginemail" class="form-control input-feild">
+									</div>
+									<div class="form-group primary-form-group">
+										<label for="password">Password</label>
+										<input type="password" value="" name="password" id="password" class="form-control input-feild">
+									</div>
+									<div class="forget-password">
+										<p><a href="#">Forgot your password?</a></p>
+									</div>
+									<div class="submit-button">
+										<a href="javascript:void(0)" id="signinCreate" class="btn main-btn">
+										<span>
+											<i class="fa fa-lock submit-icon"></i>
+											<button>Sign in</button>
+										</span>
+										</a>
+									</div>
+								</div>
+							</form>							
 						</div>
-					</div>
-					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-						<!-- RETURNE-CONTINUE-SHOP START -->
-						<div class="returne-continue-shop">
-							<a href="index.html" class="continueshoping"><i class="fa fa-chevron-left"></i>Continue shopping</a>
-							<a href="checkout-signin.html" class="procedtocheckout">Proceed to checkout<i class="fa fa-chevron-right"></i></a>
-						</div>	
-						<!-- RETURNE-CONTINUE-SHOP END -->						
-					</div>
+						<!-- REGISTERED-ACCOUNT END -->
+					</div>				
 				</div>
 			</div>
 		</section>
@@ -398,7 +345,7 @@
 									<div class="item">
 										<div class="single-client">
 											<a href="#">
-												<img src="<%=request.getContextPath() %>/templates/public/img/brand/1.png" alt="brand-client" />
+												<img src="img/brand/1.png" alt="brand-client" />
 											</a>
 										</div>									
 									</div>
@@ -407,7 +354,7 @@
 									<div class="item">
 										<div class="single-client">
 											<a href="#">
-												<img src="<%=request.getContextPath() %>/templates/public/img/brand/2.png" alt="brand-client" />
+												<img src="img/brand/2.png" alt="brand-client" />
 											</a>
 										</div>									
 									</div>
@@ -416,7 +363,7 @@
 									<div class="item">
 										<div class="single-client">
 											<a href="#">
-												<img src="<%=request.getContextPath() %>/templates/public/img/brand/3.png" alt="brand-client" />
+												<img src="img/brand/3.png" alt="brand-client" />
 											</a>
 										</div>									
 									</div>
@@ -425,7 +372,7 @@
 									<div class="item">
 										<div class="single-client">
 											<a href="#">
-												<img src="<%=request.getContextPath() %>/templates/public/img/brand/4.png" alt="brand-client" />
+												<img src="img/brand/4.png" alt="brand-client" />
 											</a>
 										</div>									
 									</div>
@@ -434,7 +381,7 @@
 									<div class="item">
 										<div class="single-client">
 											<a href="#">
-												<img src="<%=request.getContextPath() %>/templates/public/img/brand/5.png" alt="brand-client" />
+												<img src="img/brand/5.png" alt="brand-client" />
 											</a>
 										</div>									
 									</div>
@@ -443,7 +390,7 @@
 									<div class="item">
 										<div class="single-client">
 											<a href="#">
-												<img src="<%=request.getContextPath() %>/templates/public/img/brand/1.png" alt="brand-client" />
+												<img src="img/brand/1.png" alt="brand-client" />
 											</a>
 										</div>									
 									</div>
@@ -452,7 +399,7 @@
 									<div class="item">
 										<div class="single-client">
 											<a href="#">
-												<img src="<%=request.getContextPath() %>/templates/public/img/brand/3.png" alt="brand-client" />
+												<img src="img/brand/3.png" alt="brand-client" />
 											</a>
 										</div>									
 									</div>
@@ -461,7 +408,7 @@
 									<div class="item">
 										<div class="single-client">
 											<a href="#">
-												<img src="<%=request.getContextPath() %>/templates/public/img/brand/2.png" alt="brand-client" />
+												<img src="img/brand/2.png" alt="brand-client" />
 											</a>
 										</div>									
 									</div>
@@ -470,7 +417,7 @@
 									<div class="item">
 										<div class="single-client">
 											<a href="#">
-												<img src="<%=request.getContextPath() %>/templates/public/img/brand/3.png" alt="brand-client" />
+												<img src="img/brand/3.png" alt="brand-client" />
 											</a>
 										</div>									
 									</div>
@@ -479,7 +426,7 @@
 									<div class="item">
 										<div class="single-client">
 											<a href="#">
-												<img src="<%=request.getContextPath() %>/templates/public/img/brand/4.png" alt="brand-client" />
+												<img src="img/brand/4.png" alt="brand-client" />
 											</a>
 										</div>									
 									</div>
@@ -488,7 +435,7 @@
 									<div class="item">
 										<div class="single-client">
 											<a href="#">
-												<img src="<%=request.getContextPath() %>/templates/public/img/brand/5.png" alt="brand-client" />
+												<img src="img/brand/5.png" alt="brand-client" />
 											</a>
 										</div>									
 									</div>
@@ -497,7 +444,7 @@
 									<div class="item">
 										<div class="single-client">
 											<a href="#">
-												<img src="<%=request.getContextPath() %>/templates/public/img/brand/1.png" alt="brand-client" />
+												<img src="img/brand/1.png" alt="brand-client" />
 											</a>
 										</div>									
 									</div>
@@ -506,7 +453,7 @@
 									<div class="item">
 										<div class="single-client">
 											<a href="#">
-												<img src="<%=request.getContextPath() %>/templates/public/img/brand/3.png" alt="brand-client" />
+												<img src="img/brand/3.png" alt="brand-client" />
 											</a>
 										</div>									
 									</div>
@@ -515,7 +462,7 @@
 									<div class="item">
 										<div class="single-client">
 											<a href="#">
-												<img src="<%=request.getContextPath() %>/templates/public/img/brand/4.png" alt="brand-client" />
+												<img src="img/brand/4.png" alt="brand-client" />
 											</a>
 										</div>									
 									</div>
@@ -524,7 +471,7 @@
 									<div class="item">
 										<div class="single-client">
 											<a href="#">
-												<img src="<%=request.getContextPath() %>/templates/public/img/brand/5.png" alt="brand-client" />
+												<img src="img/brand/5.png" alt="brand-client" />
 											</a>
 										</div>									
 									</div>
@@ -602,46 +549,6 @@
 		</section>
 		<!-- COMPANY-FACALITY END -->
 		<!-- FOOTER-TOP-AREA START -->
-		<script type="text/javascript">
-			function changeNumber(price, idPro, idMember, num){
-				$.ajax({
-					url: '<%=request.getContextPath()%>/cart',
-					type: 'POST',
-					data: {
-						aidPro: idPro, 
-						aidMember: idMember, 
-						anum: num
-					},
-					success: function(data){
-						let array = JSON.parse(data);
-						if(array.length > 0){
-							$("#counter_"+idPro).val(array[0]);
-							$("#price_"+idPro).text(price*array[0]);
-							$("#total_product").text(array[1]);
-						}
-					},
-					error: function (){
-						alert('Có lỗi xảy ra');
-					}
-				})
-			}
-			function deleteCart(id){
-				var check = confirm("Bạn có chắc chắn muốn xóa không?");
-				if(check){
-					$.ajax({
-						url: '<%=request.getContextPath()%>/cart',
-						type: 'GET',
-						data: {aid: id},
-						success: function(data){
-							$('body').html(data);
-						},
-						error: function (){
-							alert('Có lỗi xảy ra');
-						}
-					})
-				}
-			}
-		</script>
 <%@ include file="/templates/public/inc/footer.jsp" %>
     </body>
 </html>

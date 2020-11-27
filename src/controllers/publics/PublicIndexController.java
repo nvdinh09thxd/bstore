@@ -13,8 +13,8 @@ import javax.servlet.http.HttpServletResponse;
 import daos.CartDao;
 import daos.ProductsDAO;
 import models.Cart;
+import models.Member;
 import models.Products;
-import models.User;
 
 public class PublicIndexController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -43,14 +43,14 @@ public class PublicIndexController extends HttpServlet {
 		response.setContentType("text/html");
 		PrintWriter out = response.getWriter();
 		int idPro = Integer.parseInt(request.getParameter("aidPro"));
-		int idUser = Integer.parseInt(request.getParameter("aidUser"));
-		Cart card = new Cart(0, new Products(idPro), 1, new User(idUser), null);
+		int idMember = Integer.parseInt(request.getParameter("aidMember"));
+		Cart card = new Cart(0, new Products(idPro), 1, new Member(idMember), null);
 		if (cartDao.add(card) > 0) {
-			List<Cart> listCarts = cartDao.findCartByUser(idUser);
+			List<Cart> listCarts = cartDao.findCartByMember(idMember);
 			out.print(listCarts.size());
 		} else {
 			if (cartDao.edit(card) > 0) {
-				List<Cart> listCarts = cartDao.findCartByUser(idUser);
+				List<Cart> listCarts = cartDao.findCartByMember(idMember);
 				out.print(listCarts.size());
 			} else {
 				out.print("Xảy ra lỗi!");

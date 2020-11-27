@@ -1,4 +1,4 @@
-package controllers.auth;
+package controllers.publics;
 
 import java.io.IOException;
 
@@ -9,49 +9,49 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import daos.UserDao;
-import models.User;
+import daos.MemberDao;
+import models.Member;
 import util.AuthUtil;
 import util.StringUtil;
 
-public class LoginController extends HttpServlet {
+public class PublicLoginController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private UserDao userDao;
+	private MemberDao memberDao;
 
-	public LoginController() {
+	public PublicLoginController() {
 		super();
-		userDao = new UserDao();
+		memberDao = new MemberDao();
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// Nếu đã đăng nhập rồi thì chuyển hướng sang trang admin luôn
-		 if (AuthUtil.checkLogin(request, response)) {
-		 response.sendRedirect(request.getContextPath() + "/admin/index");
-		 return; // thoát luôn, không xử lý tiếp theo
-		 }
+		if (AuthUtil.checkLogin(request, response)) {
+			response.sendRedirect(request.getContextPath() + "/index");
+			return; // thoát luôn, không xử lý tiếp theo
+		}
 		// Chuyển tiếp sang trang login
-		RequestDispatcher rd = request.getRequestDispatcher("/views/auth/login.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("/views/public/checkout-signin.jsp");
 		rd.forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// get dữ liệu từ form
-		String username = request.getParameter("username");
+		String email = request.getParameter("email");
 		String password = request.getParameter("password");
 		// mã hóa password bằng phương thức md5
 		password = StringUtil.md5(password);
 		// Nếu tồn tại username và password trong csdl thì chuyển hướng đến trang admin
-		if (userDao.getItem(username, password) != null) {
+		if (memberDao.getItem(email, password) != null) {
 			HttpSession session = request.getSession();
-			User userInfo = userDao.getItem(username, password);
-			session.setAttribute("userInfo", userInfo);
-			response.sendRedirect(request.getContextPath() + "/admin/index");
+			Member userLogin = memberDao.getItem(email, password);
+			session.setAttribute("userLogin", userLogin);
+			response.sendRedirect(request.getContextPath() + "/index");
 		} else {
 			// Nếu không tồn tại username và password trong csdl thì chuyển tiếp đến trang
 			// login và thông báo lỗi
-			RequestDispatcher rd = request.getRequestDispatcher("/views/auth/login.jsp?err=0");
+			RequestDispatcher rd = request.getRequestDispatcher("/views/public/checkout-signin.jsp?err=0");
 			rd.forward(request, response);
 		}
 	}

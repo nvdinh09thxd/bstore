@@ -1,5 +1,5 @@
 <%@page import="models.Cart"%>
-<%@page import="models.User"%>
+<%@page import="models.Member"%>
 <%@page import="models.Products"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -58,10 +58,10 @@
 								<ul class="list-inline">
 									<li><a href="checkout.html">Check Out</a></li>
 									<li><a href="wishlist.html">Wishlist</a></li>
-									<li><a href="my-account.html">My Account</a></li>
+									<li><a href="<%=request.getContextPath()%>/auth/login">My Account</a></li>
 									<li><a href="cart.html">My Cart</a></li>
 									<%
-										User userLogin = (User) session.getAttribute("userLogin");
+										Member userLogin = (Member) session.getAttribute("userLogin");
 									%>
 									<li style="<%if(userLogin!=null) out.print("display: none"); %>"><a href="<%=request.getContextPath() %>/login">Sign in</a></li>
 									<li style="<%if(userLogin==null) out.print("display: none"); %>"><a href="<%=request.getContextPath() %>/logout">Sign out</a></li>
@@ -74,6 +74,15 @@
 			</div>
 		</div>
 		<!-- HEADER-TOP END -->
+		<%
+			if(request.getParameter("msg")!=null){
+				int msg = Integer.parseInt(request.getParameter("msg"));
+				switch(msg){
+					case 1: out.print("<p style='background: yellow; color: green'>Đăng ký thành công!</p>");
+					break;
+				}
+			}
+		%>
 		<!-- HEADER-MIDDLE START -->
 		<section class="header-middle">
 			<div class="container">
@@ -3026,11 +3035,11 @@
 		<!-- FOOTER-TOP-AREA START -->
 		<%@ include file="/templates/public/inc/footer.jsp" %>
 		<script type="text/javascript">
-			function addToCard(idPro, idUser){
+			function addToCard(idPro, idMember){
 				$.ajax({
 					url: '<%=request.getContextPath()%>/index',
 					type: 'POST',
-					data: {aidPro: idPro, aidUser: idUser},
+					data: {aidPro: idPro, aidMember: idMember},
 					success: function(data){
 						alert("Đã thêm vào giỏ hàng!");
 						$("#size-cart").text(data);

@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
-    <a href="<%=request.getContextPath() %>/index" class="brand-link">
+    <a href="<%=request.getContextPath() %>/auth/logout" class="brand-link">
       <img src="<%=request.getContextPath() %>/templates/admin/dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
       <span class="brand-text font-weight-light">AdminLTE 3</span>
     </a>
@@ -46,7 +46,7 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="./index.html" class="nav-link active">
+                <a href="<%=request.getContextPath() %>/admin/index" class="nav-link active">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Quản lý danh mục</p>
                 </a>

@@ -1,4 +1,4 @@
-<%@page import="models.User"%>
+<%@page import="models.Member"%>
 <%@page import="daos.CartDao"%>
 <%@page import="models.Cart"%>
 <%@page import="java.util.List"%>
@@ -8,8 +8,8 @@
 						<div class="shopping-cart-out pull-right">
 									<%
 										CartDao cartDao = new CartDao();
-										User userLogin1 = (User) session.getAttribute("userLogin");
-										List<Cart> listCarts = cartDao.findCartByUser(userLogin1.getId());
+										Member userLogin1 = (Member) session.getAttribute("userLogin");
+										List<Cart> listCarts = cartDao.findCartByMember(userLogin1.getId());
 										if(listCarts.size()>0){											
 									%>
 							<div class="shopping-cart">
