@@ -84,7 +84,7 @@
                                         <td class="center"><%=pro.getCat().getName() %></td>
                                         <td class="center"><%=pro.getRating() %></td>
                                         <td class="center">
-											<img width="200px" height="200px" src="<%=request.getContextPath() %>/uploads/images/<%=pro.getPicture() %>" alt="Đổi thay"/>
+											<img width="200px" height="200px" src="<%=request.getContextPath() %>/uploads/images/<%=pro.getArPicture().get(0) %>" alt="Đổi thay"/>
                                         </td>
                                         <td class="center">
                                             <a href="" title="" class="btn btn-primary"><i class="fa fa-edit "></i> Sửa</a>

@@ -46,7 +46,7 @@
                                         if(listCats.size()>0){
                                         	for(Categories cat: listCats){
                                         %>
-	                                        <option value="<%=cat.getId()%>"><%=cat.getName()%></option>
+	                                        <option value="3"><%=cat.getName()%></option>
 										<%
                                        		}}}
 										%>
@@ -54,19 +54,11 @@
                                     </div>
                                     <div class="form-group">
                                         <label for="picture">Hình ảnh</label>
-                                        <input type="file" name="picture" />
+                                        <input type="file" multiple />
                                     </div>
                                     <div class="form-group">
                                         <label for="price">Giá bán</label>
                                         <input type="text" name="price" />
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="preview">Mô tả</label>
-                                        <textarea id="preview" class="form-control" rows="3" name="preview"></textarea>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="detail">Chi tiết</label>
-                                        <textarea id="detail" class="form-control" id="detail" rows="5" name="detail"></textarea>
                                     </div>
                                     <button type="submit" name="submit" class="btn btn-success btn-md">Thêm</button>
                                 </form>

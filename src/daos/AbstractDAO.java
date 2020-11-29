@@ -8,6 +8,9 @@ import java.sql.Statement;
 public abstract class AbstractDAO {
 	protected Connection con;
 	protected Statement st;
+	protected Statement st2;
 	protected PreparedStatement pst;
+	protected PreparedStatement pst2;
 	protected ResultSet rs;
+	protected ResultSet rs2;
 }

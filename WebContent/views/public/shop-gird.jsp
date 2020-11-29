@@ -630,7 +630,7 @@
 										<div class="single-product-item">
 											<div class="product-image">
 												<a href="<%=request.getContextPath() %>/detail?id=<%=pro.getId()%>">
-													<img src="<%=request.getContextPath() %>/uploads/images/<%=pro.getPicture() %>" alt="product-image" />
+													<img src="<%=request.getContextPath() %>/uploads/images/<%=pro.getArPicture().get(0) %>" alt="product-image" />
 												</a>
 												<a href="single-product.html" class="new-mark-box"><%=pro.getCat().getName() %></a>
 												<div class="overlay-content">

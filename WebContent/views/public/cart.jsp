@@ -271,7 +271,7 @@
 									%>
 									<tr>
 										<td class="cart-product">
-											<a href="<%=request.getContextPath() %>/detail?id=<%=objCart.getPro().getId()%>"><img alt="Blouse" src="<%=request.getContextPath() %>/uploads/images/<%=objCart.getPro().getPicture()%>"></a>
+											<a href="<%=request.getContextPath() %>/detail?id=<%=objCart.getPro().getId()%>"><img alt="Blouse" src="<%=request.getContextPath() %>/uploads/images/<%=objCart.getPro().getArPicture().get(0)%>"></a>
 										</td>
 										<td class="cart-description">
 											<p class="product-name"><a href="#"><%=objCart.getPro().getName() %></a></p>

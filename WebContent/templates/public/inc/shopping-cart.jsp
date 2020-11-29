@@ -25,7 +25,7 @@
 									<div class="shipping-item">
 										<span class="cross-icon"><i class="fa fa-times-circle"></i></span>
 										<div class="shipping-item-image">
-											<a href="#"><img src="<%=request.getContextPath() %>/uploads/images/<%=objCart.getPro().getPicture() %>" alt="shopping image" /></a>
+											<a href="#"><img src="<%=request.getContextPath() %>/uploads/images/<%=objCart.getPro().getArPicture().get(0) %>" alt="shopping image" /></a>
 										</div>
 										<div class="shipping-item-text">
 											<span>2 <span class="pro-quan-x">x</span> <a href="#" class="pro-cat"><%=objCart.getPro().getName() %></a></span>

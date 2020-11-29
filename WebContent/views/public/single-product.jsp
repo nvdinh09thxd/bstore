@@ -249,46 +249,23 @@
 									<div class="tab-content">
 										<div class="tab-pane active" id="thumbnail_1">
 											<div class="single-product-image">
-												<img src="<%=request.getContextPath() %>/uploads/images/<%=itemPro.getPicture() %>" alt="single-product-image" />
+												<img src="<%=request.getContextPath() %>/uploads/images/<%=itemPro.getArPicture().get(0) %>" alt="single-product-image" />
 												<a class="new-mark-box" href="#">new</a>
-												<a class="fancybox" href="<%=request.getContextPath() %>/uploads/images/<%=itemPro.getPicture() %>" data-fancybox-group="gallery"><span class="btn large-btn">View larger <i class="fa fa-search-plus"></i></span></a>
+												<a class="fancybox" href="<%=request.getContextPath() %>/uploads/images/<%=itemPro.getArPicture().get(0) %>" data-fancybox-group="gallery"><span class="btn large-btn">View larger <i class="fa fa-search-plus"></i></span></a>
 											</div>	
 										</div>
+										<%
+										if(itemPro.getArPicture().size()>1){
+											for(String picture: itemPro.getArPicture()){
+										%>
 										<div class="tab-pane" id="thumbnail_2">
 											<div class="single-product-image">
-												<img src="<%=request.getContextPath() %>/templates/public/img/product/sale/3.jpg" alt="single-product-image" />
+												<img src="<%=request.getContextPath() %>/uploads/images/<%=picture %>" alt="single-product-image" />
 												<a class="new-mark-box" href="#">new</a>
-												<a class="fancybox" href="<%=request.getContextPath() %>/templates/public/img/product/sale/3.jpg" data-fancybox-group="gallery"><span class="btn large-btn">View larger <i class="fa fa-search-plus"></i></span></a>
+												<a class="fancybox" href="<%=request.getContextPath() %>/uploads/images/<%=picture %>" data-fancybox-group="gallery"><span class="btn large-btn">View larger <i class="fa fa-search-plus"></i></span></a>
 											</div>	
 										</div>
-										<div class="tab-pane" id="thumbnail_3">
-											<div class="single-product-image">
-												<img src="<%=request.getContextPath() %>/templates/public/img/product/sale/9.jpg" alt="single-product-image" />
-												<a class="new-mark-box" href="#">new</a>
-												<a class="fancybox" href="<%=request.getContextPath() %>/templates/public/img/product/sale/9.jpg" data-fancybox-group="gallery"><span class="btn large-btn">View larger <i class="fa fa-search-plus"></i></span></a>
-											</div>	
-										</div>
-										<div class="tab-pane" id="thumbnail_4">
-											<div class="single-product-image">
-												<img src="<%=request.getContextPath() %>/templates/public/img/product/sale/13.jpg" alt="single-product-image" />
-												<a class="new-mark-box" href="#">new</a>
-												<a class="fancybox" href="<%=request.getContextPath() %>/templates/public/img/product/sale/13.jpg" data-fancybox-group="gallery"><span class="btn large-btn">View larger <i class="fa fa-search-plus"></i></span></a>
-											</div>	
-										</div>
-										<div class="tab-pane" id="thumbnail_5">
-											<div class="single-product-image">
-												<img src="<%=request.getContextPath() %>/templates/public/img/product/sale/7.jpg" alt="single-product-image" />
-												<a class="new-mark-box" href="#">new</a>
-												<a class="fancybox" href="<%=request.getContextPath() %>/templates/public/img/product/sale/7.jpg" data-fancybox-group="gallery"><span class="btn large-btn">View larger <i class="fa fa-search-plus"></i></span></a>
-											</div>	
-										</div>
-										<div class="tab-pane" id="thumbnail_6">
-											<div class="single-product-image">
-												<img src="<%=request.getContextPath() %>/templates/public/img/product/sale/12.jpg" alt="single-product-image" />
-												<a class="new-mark-box" href="#">new</a>
-												<a class="fancybox" href="<%=request.getContextPath() %>/templates/public/img/product/sale/12.jpg" data-fancybox-group="gallery"><span class="btn large-btn">View larger <i class="fa fa-search-plus"></i></span></a>
-											</div>	
-										</div>
+										<%}} %>
 									</div>										
 								</div>
 								<div class="select-product">

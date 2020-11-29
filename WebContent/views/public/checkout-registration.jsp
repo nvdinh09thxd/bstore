@@ -252,13 +252,13 @@
 								<h3 class="box-subheading">Your personal information</h3>
 								<div class="personal-info-content">
 									<div class="form-group primary-form-group p-info-group">
-										<label>Title</label>
+										<label>Gender</label>
 										<span class="radio-box">
-											<input id="radio1" type="radio" name="gender" value="1" checked="checked">
+											<input id="radio1" type="radio" name="gender" value="true" checked="checked">
 											<label for="radio1">Mr.</label>
 										</span>
 										<span class="radio-box">
-											<input id="radio2" type="radio" name="gender" value="0">
+											<input id="radio2" type="radio" name="gender" value="false">
 											
 											<label for="radio2">Mrs.</label>
 										</span>
