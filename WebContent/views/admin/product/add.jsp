@@ -46,7 +46,7 @@
                                         if(listCats.size()>0){
                                         	for(Categories cat: listCats){
                                         %>
-	                                        <option value="3"><%=cat.getName()%></option>
+	                                        <option value="<%=cat.getId()%>"><%=cat.getName()%></option>
 										<%
                                        		}}}
 										%>
@@ -54,7 +54,7 @@
                                     </div>
                                     <div class="form-group">
                                         <label for="picture">Hình ảnh</label>
-                                        <input type="file" multiple />
+                                        <input name="file" type="file" multiple />
                                     </div>
                                     <div class="form-group">
                                         <label for="price">Giá bán</label>

@@ -8,7 +8,6 @@ import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -26,7 +25,6 @@ import models.Categories;
 import models.Products;
 import util.FileUtil;
 
-@MultipartConfig
 public class AdminAddProductController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	ProductsDAO proDao;
@@ -51,9 +49,9 @@ public class AdminAddProductController extends HttpServlet {
 		request.setCharacterEncoding("utf-8");
 		response.setCharacterEncoding("utf-8");
 		response.setContentType("text/html");
-		// String name = request.getParameter("name");
-		// int idCat = Integer.parseInt(request.getParameter("category"));
-		// float price = Float.parseFloat(request.getParameter("price"));
+		String name = "";
+		int idCat = 0;
+		float price = 0;
 
 		ArrayList<String> arPictures = new ArrayList<>();
 		boolean isMultipart = ServletFileUpload.isMultipartContent(request);
@@ -75,17 +73,20 @@ public class AdminAddProductController extends HttpServlet {
 						File uploadedFile = new File(path + File.separator + fileName);
 						if (fileName != "") {
 							item.write(uploadedFile);
+							arPictures.add(fileName);
 						} else {
 							System.out.println("file not found");
 						}
-						System.out.println(
-								"<h6>File Uploaded Successfully....:" + uploadedFile.getAbsolutePath() + "</h6>");
 					} else {
-						if(item.getFieldName().equals("name")) {
-							String name = item.getString();
+						if (item.getFieldName().equals("name")) {
+							name = item.getString();
 						}
-						String abc = item.getString();
-						System.out.println("<h2>" + abc + "</h2><br>");
+						if (item.getFieldName().equals("category")) {
+							idCat = Integer.parseInt(item.getString());
+						}
+						if (item.getFieldName().equals("price")) {
+							price = Float.parseFloat(item.getString());
+						}
 					}
 				}
 			} catch (FileUploadException e) {
@@ -97,17 +98,13 @@ public class AdminAddProductController extends HttpServlet {
 			System.out.println("Not Multipart");
 		}
 
-		// String fileName = FileUtil.uploadFile(request, "picture",
-		// GlobalConstant.DIR_UPLOAD);
-		// arPictures.add(fileName);
+		Products product = new Products(0, name, arPictures, 0, (float) 0.0, price, 0, new Categories(idCat, 0, ""));
 
-//		Products product = new Products(0, name, arPictures, 0, (float) 0.0, price, 0, new Categories(idCat, 0, ""));
-//
-//		if (proDao.addPro(product) > 0) {
-//			response.sendRedirect(request.getContextPath() + "/admin/product/index?msg=1");
-//		} else {
-//			System.out.println("no");
-//		}
+		if (proDao.addPro(product) > 0) {
+			response.sendRedirect(request.getContextPath() + "/admin/product/index?msg=1");
+		} else {
+			System.out.println("no");
+		}
 
 	}
 
