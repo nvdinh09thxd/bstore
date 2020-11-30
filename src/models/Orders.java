@@ -13,5 +13,7 @@ public class Orders {
 	private int id;
 	private int idUser;
 	private float total;
+	private String note;
 	private Timestamp date;
+	private boolean status;
 }

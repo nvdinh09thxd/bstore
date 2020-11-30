@@ -12,14 +12,7 @@
     <servlet-name>PublicIndexController</servlet-name>
     <url-pattern>/index</url-pattern>
   </servlet-mapping>
-  <servlet>
-    <servlet-name>PublicIndex2Controller</servlet-name>
-    <servlet-class>controllers.publics.PublicIndex2Controller</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>PublicIndex2Controller</servlet-name>
-    <url-pattern>/index2</url-pattern>
-  </servlet-mapping>
+  
   <servlet>
     <servlet-name>PublicCatController</servlet-name>
     <servlet-class>controllers.publics.PublicCatController</servlet-class>
@@ -53,12 +46,12 @@
     <url-pattern>/cart</url-pattern>
   </servlet-mapping>
   <servlet>
-    <servlet-name>PublicOrderController</servlet-name>
-    <servlet-class>controllers.publics.PublicOrderController</servlet-class>
+    <servlet-name>PublicCheckoutController</servlet-name>
+    <servlet-class>controllers.publics.PublicCheckoutController</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>PublicOrderController</servlet-name>
-    <url-pattern>/orders</url-pattern>
+    <servlet-name>PublicCheckoutController</servlet-name>
+    <url-pattern>/checkout</url-pattern>
   </servlet-mapping>
   <servlet>
     <servlet-name>PublicLoginController</servlet-name>

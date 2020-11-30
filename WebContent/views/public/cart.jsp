@@ -301,7 +301,7 @@
 										totalProduct+=price;
 										%>
 										<td class="cart-total">
-											<span class="price" id="price_<%=objCart.getPro().getId()%>"><%=String.format("%.0f", price) %></span>
+											<span class="price" id="price_<%=objCart.getPro().getId()%>"><%=String.format("%.3f", price) %></span>
 										</td>
 									</tr>
 									<%
@@ -373,7 +373,7 @@
 						<!-- RETURNE-CONTINUE-SHOP START -->
 						<div class="returne-continue-shop">
 							<a href="index.html" class="continueshoping"><i class="fa fa-chevron-left"></i>Continue shopping</a>
-							<a href="checkout-signin.html" class="procedtocheckout">Proceed to checkout<i class="fa fa-chevron-right"></i></a>
+							<a href="<%=request.getContextPath() %>/checkout" class="procedtocheckout">Proceed to checkout<i class="fa fa-chevron-right"></i></a>
 						</div>	
 						<!-- RETURNE-CONTINUE-SHOP END -->						
 					</div>

@@ -12,6 +12,7 @@ public class Member {
 	private String firstName;
 	private String lastName;
 	private boolean gender;
+	private String address;
 	private String email;
 	private String password;
 

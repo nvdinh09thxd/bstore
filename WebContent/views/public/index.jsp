@@ -80,6 +80,8 @@
 				switch(msg){
 					case 1: out.print("<p style='background: yellow; color: green'>Đăng ký thành công!</p>");
 					break;
+					case 2: out.print("<p style='background: yellow; color: green'>Đặt hàng thành công!</p>");
+					break;
 				}
 			}
 		%>

@@ -10,14 +10,15 @@ public class MemberDao extends AbstractDAO {
 	public int addItem(Member item) {
 		int result = 0;
 		con = DBConnectionUtil.getConnection();
-		String sql = "INSERT INTO members (firstname, lastname, gender, email, password) VALUES (?, ?, ?, ?, ?)";
+		String sql = "INSERT INTO members (firstname, lastname, gender, address, email, password) VALUES (?, ?, ?, ?, ?, ?)";
 		try {
 			pst = con.prepareStatement(sql);
 			pst.setString(1, item.getFirstName());
 			pst.setString(2, item.getLastName());
 			pst.setBoolean(3, item.isGender());
-			pst.setString(4, item.getEmail());
-			pst.setString(5, item.getPassword());
+			pst.setString(4, item.getAddress());
+			pst.setString(5, item.getEmail());
+			pst.setString(6, item.getPassword());
 			result = pst.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -38,7 +39,8 @@ public class MemberDao extends AbstractDAO {
 			rs = pst.executeQuery();
 			if (rs.next()) {
 				item = new Member(rs.getInt("id"), rs.getString("firstname"), rs.getString("lastname"),
-						rs.getBoolean("gender"), rs.getString("email"), rs.getString("password"));
+						rs.getBoolean("gender"), rs.getString("address"), rs.getString("email"),
+						rs.getString("password"));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();

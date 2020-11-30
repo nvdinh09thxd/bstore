@@ -272,6 +272,10 @@
 										<input type="text" value="" name="lastname" id="lastname" class="form-control input-feild">
 									</div>
 									<div class="form-group primary-form-group p-info-group">
+										<label for="lastname">Address <sup>*</sup></label>
+										<input type="text" value="" name="address" id="address" class="form-control input-feild">
+									</div>
+									<div class="form-group primary-form-group p-info-group">
 										<label for="email">Email<sup>*</sup></label>
 										<input type="email" value="" name="email" id="email" class="form-control input-feild">
 									</div>

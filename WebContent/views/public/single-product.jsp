@@ -256,13 +256,14 @@
 										</div>
 										<%
 										if(itemPro.getArPicture().size()>1){
-											for(String picture: itemPro.getArPicture()){
+											for(int i=1; i<itemPro.getArPicture().size(); i++){
+												String picture = itemPro.getArPicture().get(i);
 										%>
 										<div class="tab-pane" id="thumbnail_2">
 											<div class="single-product-image">
 												<img src="<%=request.getContextPath() %>/uploads/images/<%=picture %>" alt="single-product-image" />
 												<a class="new-mark-box" href="#">new</a>
-												<a class="fancybox" href="<%=request.getContextPath() %>/uploads/images/<%=picture %>" data-fancybox-group="gallery"><span class="btn large-btn">View larger <i class="fa fa-search-plus"></i></span></a>
+												<a class="fancybox" href="<%=request.getContextPath() %>/uploads/images/<%=picture %>" data-fancybox-group="gallery"><span class="btn large-btn"><i class="fa fa-search-plus"></i></span></a>
 											</div>	
 										</div>
 										<%}} %>

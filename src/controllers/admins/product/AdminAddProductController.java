@@ -98,6 +98,8 @@ public class AdminAddProductController extends HttpServlet {
 			System.out.println("Not Multipart");
 		}
 
+		// System.out.println(name);
+
 		Products product = new Products(0, name, arPictures, 0, (float) 0.0, price, 0, new Categories(idCat, 0, ""));
 
 		if (proDao.addPro(product) > 0) {

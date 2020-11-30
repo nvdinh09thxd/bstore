@@ -35,10 +35,11 @@ public class PublicRegisterController extends HttpServlet {
 		boolean gender = Boolean.parseBoolean(request.getParameter("gender"));
 		String firstname = request.getParameter("firstname");
 		String lastname = request.getParameter("lastname");
+		String address = request.getParameter("address");
 		String email = request.getParameter("email");
 		String password = request.getParameter("password");
 		password = util.StringUtil.md5(password);
-		Member member = new Member(0, firstname, lastname, gender, email, password);
+		Member member = new Member(0, firstname, lastname, gender, address, email, password);
 		if (memberDao.addItem(member) > 0) {
 			response.sendRedirect(request.getContextPath() + "/index?msg=1");
 			return;
