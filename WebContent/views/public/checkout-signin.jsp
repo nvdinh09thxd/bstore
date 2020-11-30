@@ -56,10 +56,11 @@
 									<li><a href="<%=request.getContextPath()%>/auth/login">My Account</a></li>
 									<li><a href="cart.html">My Cart</a></li>
 									<%
-										User userLogin = (User) session.getAttribute("userLogin");
+										Member userLogin = (Member) session.getAttribute("userLogin");
 									%>
 									<li style="<%if(userLogin!=null) out.print("display: none"); %>"><a href="<%=request.getContextPath() %>/login">Sign in</a></li>
 									<li style="<%if(userLogin==null) out.print("display: none"); %>"><a href="<%=request.getContextPath() %>/logout">Sign out</a></li>
+									<li>Xin chào <%if(userLogin!=null) out.print(userLogin.getLastName()); else out.print("Khách"); %></li>
 								</ul>									
 							</nav>
 						</div>

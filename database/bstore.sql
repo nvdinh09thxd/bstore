@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th10 30, 2020 lúc 04:55 AM
+-- Thời gian đã tạo: Th10 30, 2020 lúc 09:31 AM
 -- Phiên bản máy phục vụ: 10.1.32-MariaDB
 -- Phiên bản PHP: 7.1.17
 
@@ -43,9 +43,9 @@ CREATE TABLE `cart` (
 INSERT INTO `cart` (`id`, `id_pro`, `counter`, `id_member`, `date`) VALUES
 (1, 1, 3, 2, '2020-11-30 03:27:05'),
 (2, 2, 3, 2, '2020-11-29 12:05:26'),
-(4, 1, 1, 1, '2020-11-30 03:20:04'),
-(5, 2, 1, 1, '2020-11-30 03:20:02'),
-(6, 4, 3, 2, '2020-11-30 03:27:21');
+(3, 4, 3, 2, '2020-11-30 06:46:25'),
+(4, 1, 2, 1, '2020-11-30 07:37:07'),
+(5, 2, 3, 1, '2020-11-30 08:27:05');
 
 -- --------------------------------------------------------
 
@@ -96,8 +96,8 @@ CREATE TABLE `members` (
 --
 
 INSERT INTO `members` (`id`, `firstname`, `lastname`, `gender`, `address`, `email`, `password`) VALUES
-(1, 'Định', 'Nguyễn', 1, '154 Phạm Như Xương, Hoà Khánh Nam, Liên Chiểu, Đà Nẵng', 'nvdinh0766777123@gmail.com', '202cb962ac59075b964b07152d234b70'),
-(2, 'Hoa', 'Lê', 0, 'Kiệt 119 Phạm Như Xương, Phường Hòa Khánh Nam, Quận Liên Chiểu, Đà Nẵng.', 'admin@gmail.com', '202cb962ac59075b964b07152d234b70'),
+(1, 'Nguyễn', 'Định', 1, '154 Phạm Như Xương, Hoà Khánh Nam, Liên Chiểu, Đà Nẵng', 'nvdinh0766777123@gmail.com', '202cb962ac59075b964b07152d234b70'),
+(2, 'Lê', 'Hoa', 0, 'Kiệt 119 Phạm Như Xương, Phường Hòa Khánh Nam, Quận Liên Chiểu, Đà Nẵng.', 'admin@gmail.com', '202cb962ac59075b964b07152d234b70'),
 (3, 'Tố', 'Quyên', 0, 'Huyện Thăng Bình, Quảng Nam', 'toquyen123@gmail.com', '202cb962ac59075b964b07152d234b70');
 
 -- --------------------------------------------------------
@@ -120,7 +120,7 @@ CREATE TABLE `orders` (
 --
 
 INSERT INTO `orders` (`id`, `id_user`, `total`, `note`, `date`, `status`) VALUES
-(1, 1, 180000, 'mới đặt hàng', '2020-11-30 03:25:19', 1),
+(1, 1, 450000, '', '2020-11-30 08:27:13', 1),
 (2, 2, 810000, 'hoa đặt', '2020-11-30 03:54:06', 1);
 
 -- --------------------------------------------------------
@@ -261,7 +261,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT cho bảng `cart`
 --
 ALTER TABLE `cart`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT cho bảng `categories`
@@ -279,7 +279,7 @@ ALTER TABLE `members`
 -- AUTO_INCREMENT cho bảng `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT cho bảng `products`

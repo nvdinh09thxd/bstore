@@ -62,6 +62,7 @@
 									%>
 									<li style="<%if(userLogin!=null) out.print("display: none"); %>"><a href="<%=request.getContextPath() %>/login">Sign in</a></li>
 									<li style="<%if(userLogin==null) out.print("display: none"); %>"><a href="<%=request.getContextPath() %>/logout">Sign out</a></li>
+									<li>Xin chào <%if(userLogin!=null) out.print(userLogin.getLastName()); else out.print("Khách"); %></li>
 								</ul>									
 							</nav>
 						</div>
