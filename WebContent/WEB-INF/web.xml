@@ -117,4 +117,12 @@
     <servlet-name>AdminAddProductController</servlet-name>
     <url-pattern>/admin/product/add</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <servlet-name>AdminIndexOrderController</servlet-name>
+    <servlet-class>controllers.admins.order.AdminIndexOrderController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AdminIndexOrderController</servlet-name>
+    <url-pattern>/admin/order/index</url-pattern>
+  </servlet-mapping>
 </web-app>

@@ -58,9 +58,9 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="./index3.html" class="nav-link">
+                <a href="<%=request.getContextPath() %>/admin/order/index" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Quản lý người dùng</p>
+                  <p>Quản lý đơn hàng</p>
                 </a>
               </li>
             </ul>

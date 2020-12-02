@@ -20,4 +20,14 @@ public class Member {
 		super();
 		this.id = id;
 	}
+
+	public Member(String firstName, String lastName) {
+		super();
+		this.firstName = firstName;
+		this.lastName = lastName;
+	}
+
+	public String getFullName() {
+		return this.getFirstName() + " " + this.getLastName();
+	}
 }

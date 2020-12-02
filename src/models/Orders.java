@@ -11,9 +11,16 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class Orders {
 	private int id;
-	private int idUser;
+	private Member member;
 	private float total;
 	private String note;
 	private Timestamp date;
 	private boolean status;
+
+	public Orders(int id, boolean status) {
+		super();
+		this.id = id;
+		this.status = status;
+	}
+
 }

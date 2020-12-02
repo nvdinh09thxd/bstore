@@ -45,10 +45,10 @@ public class PublicCheckoutController extends HttpServlet {
 		request.setCharacterEncoding("utf-8");
 		response.setCharacterEncoding("utf-8");
 		response.setContentType("text/html");
-		int idUser = Integer.parseInt(request.getParameter("id"));
+		int idMember = Integer.parseInt(request.getParameter("id"));
 		String note = request.getParameter("note");
 		float total = Float.parseFloat(request.getParameter("total"));
-		Orders order = new Orders(0, idUser, total, note, null, true);
+		Orders order = new Orders(0, new Member(idMember), total, note, null, true);
 		if (ordersDao.add(order) == 0)
 			ordersDao.edit(order);
 		response.sendRedirect(request.getContextPath() + "/index?msg=2");
