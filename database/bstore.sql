@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th10 30, 2020 lúc 09:31 AM
+-- Thời gian đã tạo: Th12 02, 2020 lúc 08:30 AM
 -- Phiên bản máy phục vụ: 10.1.32-MariaDB
 -- Phiên bản PHP: 7.1.17
 
@@ -41,11 +41,8 @@ CREATE TABLE `cart` (
 --
 
 INSERT INTO `cart` (`id`, `id_pro`, `counter`, `id_member`, `date`) VALUES
-(1, 1, 3, 2, '2020-11-30 03:27:05'),
-(2, 2, 3, 2, '2020-11-29 12:05:26'),
-(3, 4, 3, 2, '2020-11-30 06:46:25'),
-(4, 1, 2, 1, '2020-11-30 07:37:07'),
-(5, 2, 3, 1, '2020-11-30 08:27:05');
+(1, 1, 4, 1, '2020-12-02 05:05:12'),
+(2, 2, 2, 1, '2020-12-02 05:05:16');
 
 -- --------------------------------------------------------
 
@@ -97,8 +94,7 @@ CREATE TABLE `members` (
 
 INSERT INTO `members` (`id`, `firstname`, `lastname`, `gender`, `address`, `email`, `password`) VALUES
 (1, 'Nguyễn', 'Định', 1, '154 Phạm Như Xương, Hoà Khánh Nam, Liên Chiểu, Đà Nẵng', 'nvdinh0766777123@gmail.com', '202cb962ac59075b964b07152d234b70'),
-(2, 'Lê', 'Hoa', 0, 'Kiệt 119 Phạm Như Xương, Phường Hòa Khánh Nam, Quận Liên Chiểu, Đà Nẵng.', 'admin@gmail.com', '202cb962ac59075b964b07152d234b70'),
-(3, 'Tố', 'Quyên', 0, 'Huyện Thăng Bình, Quảng Nam', 'toquyen123@gmail.com', '202cb962ac59075b964b07152d234b70');
+(2, 'Lê', 'Hoa', 0, 'Kiệt 119 Phạm Như Xương, Phường Hòa Khánh Nam, Quận Liên Chiểu, Đà Nẵng.', 'admin@gmail.com', '202cb962ac59075b964b07152d234b70');
 
 -- --------------------------------------------------------
 
@@ -108,7 +104,7 @@ INSERT INTO `members` (`id`, `firstname`, `lastname`, `gender`, `address`, `emai
 
 CREATE TABLE `orders` (
   `id` int(11) NOT NULL,
-  `id_user` int(11) NOT NULL,
+  `id_member` int(11) NOT NULL,
   `total` float NOT NULL,
   `note` text COLLATE utf8_unicode_ci NOT NULL,
   `date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
@@ -119,9 +115,8 @@ CREATE TABLE `orders` (
 -- Đang đổ dữ liệu cho bảng `orders`
 --
 
-INSERT INTO `orders` (`id`, `id_user`, `total`, `note`, `date`, `status`) VALUES
-(1, 1, 450000, '', '2020-11-30 08:27:13', 1),
-(2, 2, 810000, 'hoa đặt', '2020-11-30 03:54:06', 1);
+INSERT INTO `orders` (`id`, `id_member`, `total`, `note`, `date`, `status`) VALUES
+(1, 1, 540000, 'Vui lòng ship đến vào buổi sáng', '2020-12-02 07:16:26', 1);
 
 -- --------------------------------------------------------
 
@@ -148,7 +143,21 @@ INSERT INTO `products` (`id`, `name`, `picture`, `rating`, `old_price`, `price`,
 (1, 'Giầy nam mới', '(1,2,3,4)', 0, 100000, 90000, 0, 5),
 (2, 'Giầy nữ mới', '(5,6,7,8)', 0, 100000, 90000, 0, 5),
 (3, 'Giầy nam', '(9,10,11)', 0, 100000, 90000, 0, 9),
-(4, 'Giầy nữ', '(12)', 0, 100000, 90000, 0, 9);
+(4, 'Giầy nữ', '(12)', 0, 100000, 90000, 0, 9),
+(5, 'Túi xách đi chợ mới', '(13)', 0, 100000, 90000, 0, 3),
+(6, 'Túi xách đi chơi mới', '(14)', 0, 100000, 90000, 0, 3),
+(7, 'Túi xách đi làm mới', '(15)', 0, 100000, 90000, 0, 3),
+(8, 'Áo nam mới', '(16)', 0, 150000, 120000, 0, 4),
+(9, 'Áo nữ mới', '(17)', 0, 150000, 120000, 0, 4),
+(10, 'Đồng hồ nam mới', '(18)', 0, 2000000, 1800000, 0, 6),
+(11, 'Đồng hồ nữ mới', '(19)', 0, 2000000, 1800000, 0, 6),
+(12, 'Đồng hồ nam', '(20)', 0, 2000000, 1810000, 0, 10),
+(13, 'Đồng hồ nữ', '(21)', 0, 2000000, 1810000, 0, 10),
+(14, 'Túi xách đi chợ', '(22)', 0, 100000, 91000, 0, 7),
+(15, 'Túi xách đi chơi', '(23)', 0, 100000, 91000, 0, 7),
+(16, 'Túi xách đi làm', '(24)', 0, 100000, 91000, 0, 7),
+(17, 'Áo nam', '(25)', 0, 150000, 121000, 0, 8),
+(18, 'Áo nữ', '(26)', 0, 150000, 121000, 0, 8);
 
 -- --------------------------------------------------------
 
@@ -177,7 +186,21 @@ INSERT INTO `product_detail` (`id`, `name`) VALUES
 (9, 'giay-nam1.jpg'),
 (10, 'giay-nam2.jpg'),
 (11, 'giay-nam3.jpg'),
-(12, 'giay-nu.jpg');
+(12, 'giay-nu.jpg'),
+(13, 'tui-xach-di-cho-moi.jpg'),
+(14, 'tui-xach-di-choi-moi.jpg'),
+(15, 'tui-xach-di-lam-moi.jpg'),
+(16, 'ao-nam-moi.jpg'),
+(17, 'ao-nu-moi.jpg'),
+(18, 'dong-ho-nam-moi.jpg'),
+(19, 'dong-ho-nu-moi.jpg'),
+(20, 'dong-ho-nam.jpg'),
+(21, 'dong-ho-nu.jpg'),
+(22, 'tui-xach-di-cho.jpg'),
+(23, 'tui-xach-di-choi.jpg'),
+(24, 'tui-xach-di-lam.jpg'),
+(25, 'ao-nam.jpg'),
+(26, 'ao-nu.jpg');
 
 -- --------------------------------------------------------
 
@@ -233,7 +256,7 @@ ALTER TABLE `members`
 --
 ALTER TABLE `orders`
   ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `id_user` (`id_user`);
+  ADD UNIQUE KEY `id_user` (`id_member`);
 
 --
 -- Chỉ mục cho bảng `products`
@@ -261,7 +284,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT cho bảng `cart`
 --
 ALTER TABLE `cart`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT cho bảng `categories`
@@ -273,25 +296,25 @@ ALTER TABLE `categories`
 -- AUTO_INCREMENT cho bảng `members`
 --
 ALTER TABLE `members`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT cho bảng `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT cho bảng `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT cho bảng `product_detail`
 --
 ALTER TABLE `product_detail`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
 -- AUTO_INCREMENT cho bảng `users`
