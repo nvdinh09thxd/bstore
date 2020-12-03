@@ -1,6 +1,8 @@
 package controllers.publics;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -9,31 +11,35 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import daos.CartDao;
 import daos.OrdersDao;
+import models.Cart;
 import models.Member;
 import models.Orders;
 
 public class PublicCheckoutController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	CartDao cartDao;
 	OrdersDao ordersDao;
 
 	public PublicCheckoutController() {
 		super();
-		cartDao = new CartDao();
 		ordersDao = new OrdersDao();
 	}
 
+	@SuppressWarnings("unchecked")
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		HttpSession session = request.getSession();
+		List<Cart> listCarts = new ArrayList<>();
+		float totalPrice = 0;
 		Member userLogin = (Member) session.getAttribute("userLogin");
 		if (userLogin == null) {
 			response.sendRedirect(request.getContextPath() + "/login");
 			return;
 		} else {
-			float totalPrice = cartDao.getTotalPrice(userLogin.getId());
+			listCarts = (List<Cart>) session.getAttribute("listCarts");
+			for (Cart objCart : listCarts) {
+				totalPrice += objCart.getPro().getPrice() * objCart.getCounter();
+			}
 			request.setAttribute("totalPrice", totalPrice);
 		}
 		RequestDispatcher rd = request.getRequestDispatcher("/views/public/checkout-shipping.jsp");

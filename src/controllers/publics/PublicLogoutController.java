@@ -20,6 +20,7 @@ public class PublicLogoutController extends HttpServlet {
 		HttpSession session = request.getSession();
 		if (session.getAttribute("userLogin") != null) {
 			session.removeAttribute("userLogin");
+			session.removeAttribute("listCarts");
 		}
 		response.sendRedirect(request.getContextPath() + "/index");
 		return;

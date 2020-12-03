@@ -1126,21 +1126,6 @@
 					}
 				})
 			}
-			function onReview(id){
-				var review = $("#review_content").val();
-				$.ajax({
-					url: '<%=request.getContextPath()%>/detail',
-					type: 'POST',
-					data: {aid: id, areview: review},
-					success: function(data){
-						alert(data);
-						$("#review_content").val("");
-					},
-					error: function (){
-						alert('Có lỗi xảy ra');
-					}
-				})
-			}
 		</script>
     </body>
 

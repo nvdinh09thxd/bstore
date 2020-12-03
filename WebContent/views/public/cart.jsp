@@ -265,8 +265,8 @@
 									<!-- SINGLE CART_ITEM START -->
 									<%
 									float totalProduct = 0;
-									if(request.getAttribute("listCarts")!=null){
-										List<Cart> listCarts = (List<Cart>) request.getAttribute("listCarts");
+									if(session.getAttribute("listCarts")!=null){
+										List<Cart> listCarts = (List<Cart>) session.getAttribute("listCarts");
 										if(listCarts.size()>0){
 											for(Cart objCart: listCarts){
 									%>

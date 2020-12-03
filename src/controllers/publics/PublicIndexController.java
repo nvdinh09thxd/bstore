@@ -2,6 +2,7 @@ package controllers.publics;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -9,8 +10,8 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
-import daos.CartDao;
 import daos.ProductsDAO;
 import models.Cart;
 import models.Member;
@@ -19,12 +20,11 @@ import models.Products;
 public class PublicIndexController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	ProductsDAO productDao;
-	CartDao cartDao;
+	List<Cart> listCarts = new ArrayList<>();
 
 	public PublicIndexController() {
 		super();
 		productDao = new ProductsDAO();
-		cartDao = new CartDao();
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -37,25 +37,35 @@ public class PublicIndexController extends HttpServlet {
 		rd.forward(request, response);
 	}
 
+	@SuppressWarnings("unchecked")
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		HttpSession session = request.getSession();
 		response.setCharacterEncoding("utf-8");
 		response.setContentType("text/html");
 		PrintWriter out = response.getWriter();
+		int idx = 0;
+
+		if (session.getAttribute("listCarts") != null) {
+			listCarts = (List<Cart>) session.getAttribute("listCarts");
+			idx = listCarts.size();
+		}
 		int idPro = Integer.parseInt(request.getParameter("aidPro"));
 		int idMember = Integer.parseInt(request.getParameter("aidMember"));
-		Cart card = new Cart(0, new Products(idPro), 1, new Member(idMember), null);
-		if (cartDao.add(card) > 0) {
-			List<Cart> listCarts = cartDao.findCartByMember(idMember);
-			out.print(listCarts.size());
-		} else {
-			if (cartDao.edit(card) > 0) {
-				List<Cart> listCarts = cartDao.findCartByMember(idMember);
-				out.print(listCarts.size());
-			} else {
-				out.print("Xảy ra lỗi!");
+		Products pro = productDao.getProduct(idPro);
+		Cart cart = new Cart(idx++, pro, 1, new Member(idMember), null);
+		boolean check = false;
+		for (Cart objCart : listCarts) {
+			if (objCart.getPro().getId() == idPro) {
+				objCart.setCounter(1 + objCart.getCounter());
+				check = true;
 			}
 		}
-	}
+		if (!check) {
+			listCarts.add(cart);
+		}
 
+		session.setAttribute("listCarts", listCarts);
+		out.print(listCarts.size());
+	}
 }

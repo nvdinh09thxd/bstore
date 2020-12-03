@@ -7,10 +7,8 @@
 <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 pull-right shopingcartarea">
 						<div class="shopping-cart-out pull-right">
 									<%
-										CartDao cartDao = new CartDao();
-										Member userLogin1 = (Member) session.getAttribute("userLogin");
-										List<Cart> listCarts = cartDao.findCartByMember(userLogin1.getId());
-										if(listCarts.size()>0){											
+										List<Cart> listCarts = (List<Cart>) session.getAttribute("listCarts");
+										if(listCarts!=null && listCarts.size()>0){
 									%>
 							<div class="shopping-cart">
 								<a class="shop-link" href="<%=request.getContextPath() %>/cart" title="View my shopping cart">
