@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th12 03, 2020 lúc 10:10 AM
+-- Thời gian đã tạo: Th12 05, 2020 lúc 10:35 AM
 -- Phiên bản máy phục vụ: 10.1.32-MariaDB
--- Phiên bản PHP: 7.1.17
+-- Phiên bản PHP: 7.2.5
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -21,6 +21,20 @@ SET time_zone = "+00:00";
 --
 -- Cơ sở dữ liệu: `bstore`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `cart`
+--
+
+CREATE TABLE `cart` (
+  `id` int(11) NOT NULL,
+  `id_pro` int(11) NOT NULL,
+  `counter` int(11) NOT NULL,
+  `id_member` int(11) NOT NULL,
+  `id_order` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -90,14 +104,6 @@ CREATE TABLE `orders` (
   `status` tinyint(1) NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
---
--- Đang đổ dữ liệu cho bảng `orders`
---
-
-INSERT INTO `orders` (`id`, `id_member`, `total`, `note`, `date`, `status`) VALUES
-(1, 1, 270000, '999', '2020-12-03 08:39:36', 0),
-(3, 3, 450000, '999', '2020-12-03 09:06:32', 1);
-
 -- --------------------------------------------------------
 
 --
@@ -138,7 +144,7 @@ INSERT INTO `products` (`id`, `name`, `picture`, `rating`, `old_price`, `price`,
 (16, 'Túi xách đi làm', '(24)', 0, 100000, 91000, 0, 7),
 (17, 'Áo nam', '(25)', 0, 150000, 121000, 0, 8),
 (18, 'Áo nữ', '(26)', 0, 150000, 121000, 0, 8),
-(19, 'Em gaÌi mÆ°a', '(27,28,29,30)', 0, 0, 123.457, 0, 3);
+(19, 'Ão má»i  cÃ  mau', '(27,28,29,30)', 0, 0, 200000, 0, 4);
 
 -- --------------------------------------------------------
 
@@ -181,11 +187,7 @@ INSERT INTO `product_detail` (`id`, `name`) VALUES
 (23, 'tui-xach-di-choi.jpg'),
 (24, 'tui-xach-di-lam.jpg'),
 (25, 'ao-nam.jpg'),
-(26, 'ao-nu.jpg'),
-(27, 'background-207498510211000.jpg'),
-(28, 'doi-thay-207498533169800.jpg'),
-(29, 'icon-207498549665500.jpg'),
-(30, 'picture4-207498564557300.png');
+(26, 'ao-nu.jpg');
 
 -- --------------------------------------------------------
 
@@ -218,6 +220,12 @@ INSERT INTO `users` (`id`, `username`, `password`, `fullname`) VALUES
 --
 
 --
+-- Chỉ mục cho bảng `cart`
+--
+ALTER TABLE `cart`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Chỉ mục cho bảng `categories`
 --
 ALTER TABLE `categories`
@@ -233,8 +241,7 @@ ALTER TABLE `members`
 -- Chỉ mục cho bảng `orders`
 --
 ALTER TABLE `orders`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `id_user` (`id_member`);
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Chỉ mục cho bảng `products`
@@ -259,6 +266,12 @@ ALTER TABLE `users`
 --
 
 --
+-- AUTO_INCREMENT cho bảng `cart`
+--
+ALTER TABLE `cart`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT cho bảng `categories`
 --
 ALTER TABLE `categories`
@@ -274,7 +287,7 @@ ALTER TABLE `members`
 -- AUTO_INCREMENT cho bảng `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT cho bảng `products`
@@ -286,7 +299,7 @@ ALTER TABLE `products`
 -- AUTO_INCREMENT cho bảng `product_detail`
 --
 ALTER TABLE `product_detail`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
 -- AUTO_INCREMENT cho bảng `users`

@@ -19,7 +19,13 @@ public class OrdersDao extends AbstractDAO {
 			pst.setInt(1, order.getMember().getId());
 			pst.setFloat(2, order.getTotal());
 			pst.setString(3, order.getNote());
-			result = pst.executeUpdate();
+			pst.executeUpdate();
+			String sqlSelect = "SELECT id FROM orders ORDER BY id DESC LIMIT 1";
+			st = con.createStatement();
+			rs = st.executeQuery(sqlSelect);
+			if(rs.next()) {
+				return rs.getInt("id");
+			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {

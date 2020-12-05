@@ -1,5 +1,4 @@
 <%@page import="models.Member"%>
-<%@page import="daos.CartDao"%>
 <%@page import="models.Cart"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"

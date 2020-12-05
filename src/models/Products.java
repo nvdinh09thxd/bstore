@@ -17,7 +17,7 @@ public class Products {
 	private float oldPrice;
 	private float price;
 	private int preview;
-	private Categories cat;	
+	private Categories cat;
 
 	public Products(int id) {
 		super();
@@ -31,7 +31,12 @@ public class Products {
 		this.arPicture = arPicture;
 		this.price = price;
 	}
-	
-	
+
+	public Products(String name, ArrayList<String> arPicture, float price) {
+		super();
+		this.name = name;
+		this.arPicture = arPicture;
+		this.price = price;
+	}
 
 }

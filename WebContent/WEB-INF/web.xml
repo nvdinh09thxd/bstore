@@ -12,7 +12,6 @@
     <servlet-name>PublicIndexController</servlet-name>
     <url-pattern>/index</url-pattern>
   </servlet-mapping>
-  
   <servlet>
     <servlet-name>PublicCatController</servlet-name>
     <servlet-class>controllers.publics.PublicCatController</servlet-class>
@@ -124,5 +123,13 @@
   <servlet-mapping>
     <servlet-name>AdminIndexOrderController</servlet-name>
     <url-pattern>/admin/order/index</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>AdminDetailOrderController</servlet-name>
+    <servlet-class>controllers.admins.order.AdminDetailOrderController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AdminDetailOrderController</servlet-name>
+    <url-pattern>/admin/order/detail</url-pattern>
   </servlet-mapping>
 </web-app>

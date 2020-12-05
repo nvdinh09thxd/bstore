@@ -29,6 +29,10 @@ public class PublicIndexController extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		HttpSession session = request.getSession();
+		if(session.getAttribute("listCarts") == null) {
+			listCarts = new ArrayList<>();
+		}
 		List<Products> listNewProducts = productDao.getNewProducts();
 		List<Products> listSaleProducts = productDao.getSaleProducts();
 		request.setAttribute("listNewProducts", listNewProducts);
@@ -53,7 +57,7 @@ public class PublicIndexController extends HttpServlet {
 		int idPro = Integer.parseInt(request.getParameter("aidPro"));
 		int idMember = Integer.parseInt(request.getParameter("aidMember"));
 		Products pro = productDao.getProduct(idPro);
-		Cart cart = new Cart(idx++, pro, 1, new Member(idMember), null);
+		Cart cart = new Cart(idx++, pro, 1, new Member(idMember), 0);
 		boolean check = false;
 		for (Cart objCart : listCarts) {
 			if (objCart.getPro().getId() == idPro) {

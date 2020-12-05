@@ -1,3 +1,4 @@
+<%@page import="models.Cart"%>
 <%@page import="models.Orders"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -13,7 +14,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0">Quản lý đơn hàng</h1>
+            <h1 class="m-0">Chi tiết đơn hàng</h1>
           </div><!-- /.col -->
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
@@ -37,33 +38,31 @@
                                 <thead>
                                     <tr>
                                         <th>ID</th>
-                                        <th>Tên KH</th>
-                                        <th>Tổng tiền</th>
-                                        <th>Ghi chú của khách</th>
-                                        <th>Ngày mua</th>
-                                        <th>Trạng thái</th>
+                                        <th>Tên sản phẩm</th>
+                                        <th>Hình ảnh</th>
+                                        <th>Đơn giá</th>
+                                        <th>Số lượng</th>
+                                        <th>Thành tiền</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                 <%
-                                if(request.getAttribute("listOrders")!=null){
+                                if(request.getAttribute("listCart")!=null){
                                 	@SuppressWarnings("unchecked")
-                                	List<Orders> listOrders = (List<Orders>) request.getAttribute("listOrders");
-                                	if(listOrders.size()>0){
-                                		for(Orders order: listOrders){
+                                	List<Cart> listCart = (List<Cart>) request.getAttribute("listCart");
+                                	if(listCart.size()>0){
+                                		for(Cart cart: listCart){
                                 %>
                                     <tr>
-                                        <td><%=order.getId() %></td>
-                                        <td class="center" onclick="sendRedirect(<%=order.getId() %>)"><%=order.getMember().getFullName() %></td>
-                                        <td class="center"><%=order.getTotal() %></td>
-                                        <td class="center"><%=order.getNote() %></td>
-                                        <td class="center"><%=order.getDate() %></td>
+                                        <td><%=cart.getId() %></td>
+                                        <td class="center"><%=cart.getPro().getName() %></td>
                                         <td class="center">
-                                        	<a href="javascript:void(0)" title="">
-                                            	<img width="50px" height="50px" alt="<%=order.getId() %>"
-                                            	src="<%=request.getContextPath() %>/uploads/images/<%if(order.isStatus()) out.print("tick.png"); else out.print("cancel.png"); %>" />
-                                            </a>
+                                        	<img width="100px" height="100px"
+                                            	src="<%=request.getContextPath() %>/uploads/images/<%=cart.getPro().getArPicture().get(0)%>" />
                                         </td>
+                                        <td class="center"><%=cart.getPro().getPrice() %></td>
+                                        <td class="center"><%=cart.getCounter() %></td>
+                                        <td class="center"><%=cart.getPro().getPrice()*cart.getCounter() %></td>
                                     </tr>
 								<%
                                 }}}
@@ -76,29 +75,5 @@
                 </div>
             </div>
         </div>
-    <script>
-		$("img").click(function(){
-		    var image = $(this);
-		    $.ajax({
-				url: '<%=request.getContextPath()%>/admin/order/index',
-				type : 'POST',
-				cache : false,
-				data : {
-					aid: image.attr("alt"),
-					asrc : image.attr("src"),
-				},
-				success : function(data) {
-					image.attr("src", data)
-				},
-				error : function() {
-					alert("Có lỗi xảy ra")
-				}
-			});
-		});
-		
-		function sendRedirect(id){
-			window.location.href="<%=request.getContextPath()%>/admin/order/detail?id="+id;
-		}
-	</script>
   </div>
  <%@ include file="/templates/admin/inc/footer.jsp" %>
