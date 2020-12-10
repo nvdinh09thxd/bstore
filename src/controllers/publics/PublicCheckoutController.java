@@ -54,6 +54,7 @@ public class PublicCheckoutController extends HttpServlet {
 		request.setCharacterEncoding("utf-8");
 		response.setCharacterEncoding("utf-8");
 		response.setContentType("text/html");
+		HttpSession session = request.getSession();
 		int idMember = Integer.parseInt(request.getParameter("id"));
 		String note = request.getParameter("note");
 		float total = Float.parseFloat(request.getParameter("total"));
@@ -63,6 +64,7 @@ public class PublicCheckoutController extends HttpServlet {
 			objCart.setOrderId(idOrder);
 			cartDao.add(objCart);
 		}
+		session.removeAttribute("listCarts");
 		response.sendRedirect(request.getContextPath() + "/index?msg=2");
 	}
 

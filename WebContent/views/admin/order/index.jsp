@@ -54,7 +54,7 @@
                                 %>
                                     <tr>
                                         <td><%=order.getId() %></td>
-                                        <td class="center" onclick="sendRedirect(<%=order.getId() %>)"><%=order.getMember().getFullName() %></td>
+                                        <td class="center" onclick="detailOrder(<%=order.getId() %>)"><%=order.getMember().getFullName() %></td>
                                         <td class="center"><%=order.getTotal() %></td>
                                         <td class="center"><%=order.getNote() %></td>
                                         <td class="center"><%=order.getDate() %></td>
@@ -96,7 +96,7 @@
 			});
 		});
 		
-		function sendRedirect(id){
+		function detailOrder(id){
 			window.location.href="<%=request.getContextPath()%>/admin/order/detail?id="+id;
 		}
 	</script>

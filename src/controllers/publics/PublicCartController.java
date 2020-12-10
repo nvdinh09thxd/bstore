@@ -54,30 +54,29 @@ public class PublicCartController extends HttpServlet {
 		if (userLogin == null) {
 			response.sendRedirect(request.getContextPath() + "/login");
 			return;
-		} else {
-			PrintWriter out = response.getWriter();
-			int idPro = Integer.parseInt(request.getParameter("aidPro"));
-			int num = Integer.parseInt(request.getParameter("anum"));
+		}
+		PrintWriter out = response.getWriter();
+		int idPro = Integer.parseInt(request.getParameter("aidPro"));
+		int number = Integer.parseInt(request.getParameter("anumber"));
 
-			List<Integer> listNum = new ArrayList<>();
-			for (Cart objCart : listCarts) {
-				if (objCart.getPro().getId() == idPro) {
-					if (num == 1) {
-						objCart.setCounter(objCart.getCounter() + 1);
-						totalPrice += objCart.getPro().getPrice();
-						listNum.add(objCart.getCounter());
-					} else if (objCart.getCounter() > 0) {
-						objCart.setCounter(objCart.getCounter() - 1);
-						totalPrice -= objCart.getPro().getPrice();
-						listNum.add(objCart.getCounter());
-					} else {
-						out.print(listNum);
-					}
+		List<Integer> listNumber = new ArrayList<>();
+		for (Cart objCart : listCarts) {
+			if (objCart.getPro().getId() == idPro) {
+				if (number == 1) {
+					objCart.setCounter(objCart.getCounter() + 1);
+					totalPrice += objCart.getPro().getPrice();
+					listNumber.add(objCart.getCounter());
+				} else if (objCart.getCounter() > 0) {
+					objCart.setCounter(objCart.getCounter() - 1);
+					totalPrice -= objCart.getPro().getPrice();
+					listNumber.add(objCart.getCounter());
+				} else {
+					out.print(listNumber);
 				}
 			}
-			int totalPriceInt = (int) totalPrice;
-			listNum.add(totalPriceInt);
-			out.print(listNum);
 		}
+		int totalPriceInt = (int) totalPrice;
+		listNumber.add(totalPriceInt);
+		out.print(listNumber);
 	}
 }

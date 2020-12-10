@@ -57,7 +57,7 @@ public class PublicIndexController extends HttpServlet {
 		int idPro = Integer.parseInt(request.getParameter("aidPro"));
 		int idMember = Integer.parseInt(request.getParameter("aidMember"));
 		Products pro = productDao.getProduct(idPro);
-		Cart cart = new Cart(idx++, pro, 1, new Member(idMember), 0);
+		Cart cart = new Cart(idx++, pro, 1, new Member(idMember));
 		boolean check = false;
 		for (Cart objCart : listCarts) {
 			if (objCart.getPro().getId() == idPro) {

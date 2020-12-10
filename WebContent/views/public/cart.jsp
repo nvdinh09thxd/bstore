@@ -287,9 +287,9 @@
 										</td>
 										<td class="cart_quantity text-center">
 											<div class="cart1-plus-minus-button">
-												<button onclick="changeNumber(<%=objCart.getPro().getPrice() %>, <%=objCart.getPro().getId()%>, <%=userLogin.getId()%>, 1)">+</button>
+												<button onclick="changeNumber(<%=objCart.getPro().getPrice() %>, <%=objCart.getPro().getId()%>, 1)">+</button>
 												<input class="cart-plus-minus" type="text" name="qtybutton" id="counter_<%=objCart.getPro().getId()%>" value="<%=objCart.getCounter()%>">
-												<button onclick="changeNumber(<%=objCart.getPro().getPrice() %>, <%=objCart.getPro().getId()%>, <%=userLogin.getId()%>, 0)">-</button>
+												<button onclick="changeNumber(<%=objCart.getPro().getPrice() %>, <%=objCart.getPro().getId()%>, 0)">-</button>
 											</div>
 										</td>
 										<td class="cart-delete text-center">
@@ -604,21 +604,20 @@
 		<!-- COMPANY-FACALITY END -->
 		<!-- FOOTER-TOP-AREA START -->
 		<script type="text/javascript">
-			function changeNumber(price, idPro, idMember, num){
+			function changeNumber(price, idPro, number){
 				$.ajax({
 					url: '<%=request.getContextPath()%>/cart',
 					type: 'POST',
 					data: {
 						aidPro: idPro, 
-						aidMember: idMember, 
-						anum: num
+						anumber: number
 					},
 					success: function(data){
-						let array = JSON.parse(data);
-						if(array.length > 0){
-							$("#counter_"+idPro).val(array[0]);
-							$("#price_"+idPro).text(price*array[0]);
-							$("#total_product").text(array[1]);
+						let listNumber = JSON.parse(data);
+						if(listNumber.length > 0){
+							$("#counter_"+idPro).val(listNumber[0]);
+							$("#price_"+idPro).text(price*listNumber[0]);
+							$("#total_product").text(listNumber[1]);
 						}
 					},
 					error: function (){
@@ -627,7 +626,7 @@
 				})
 			}
 			function deleteCart(id){
-				var check = confirm("Bạn có chắc chắn muốn xóa không?");
+				let check = confirm("Bạn có chắc chắn muốn xóa không?");
 				if(check){
 					$.ajax({
 						url: '<%=request.getContextPath()%>/cart',

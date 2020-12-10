@@ -34,28 +34,10 @@ public class OrdersDao extends AbstractDAO {
 		return result;
 	}
 
-	public int edit(Orders order) {
-		int result = 0;
-		con = DBConnectionUtil.getConnection();
-		String sql = "UPDATE orders SET total = ?, note = ? WHERE id_member = ?";
-		try {
-			pst = con.prepareStatement(sql);
-			pst.setFloat(1, order.getTotal());
-			pst.setString(2, order.getNote());
-			pst.setInt(3, order.getMember().getId());
-			result = pst.executeUpdate();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			DBConnectionUtil.close(pst, con);
-		}
-		return result;
-	}
-
 	public List<Orders> findAll() {
 		con = DBConnectionUtil.getConnection();
 		List<Orders> listItems = new ArrayList<>();
-		String sql = "SELECT * FROM orders o JOIN members m ON o.id_member = m.id ORDER BY o.id";
+		String sql = "SELECT * FROM orders o JOIN members m ON o.id_member = m.id WHERE o.status != 0 ORDER BY o.id";
 		try {
 			st = con.createStatement();
 			rs = st.executeQuery(sql);
