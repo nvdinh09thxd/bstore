@@ -41,5 +41,12 @@ public class StringUtil {
 		slug = slug.replaceAll("-+$", "");
 		return slug;
 	}
+	
+	public static float usd(float vnd) {
+		float kq = 0;
+		kq = vnd / 22000;
+		kq = (float) Math.round(kq * 100) / 100;
+		return kq;
+	}
 
 }

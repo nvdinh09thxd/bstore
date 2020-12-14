@@ -1,3 +1,4 @@
+<%@page import="util.StringUtil"%>
 <%@page import="models.Member"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -245,12 +246,15 @@
 									%>
 									<div class="form-group primary-form-group p-info-group">
 										<label for="email">Total<sup>*</sup></label>
-										<input type="text" value="<%=totalPrice %>" name="total" id="email" class="form-control input-feild" readonly>
+										<input type="text" value="<%=totalPrice %>" name="total" id="totals" class="form-control input-feild" readonly>
+										<input type="hidden" value="<%=StringUtil.usd(totalPrice) %>" name="total" id="total">
 									</div>
 									<div class="form-group primary-form-group p-info-group">
 										<label for="password">Note <sup>*</sup></label>
 										<textarea rows="50" cols="50" name="note"></textarea>
 									</div>
+									
+									<div id="paypal-button-container"></div>
 									
 									<div class="submit-button p-info-submit-button">
 										<a href="javascript:void(0)" id="SubmitCreate" class="btn main-btn">
@@ -488,6 +492,39 @@
 		</section>
 		<!-- COMPANY-FACALITY END -->
 		<!-- FOOTER-TOP-AREA START -->
+<script src="https://www.paypalobjects.com/api/checkout.js"></script>
+<script type="text/javascript">
+	var x = $("#total").val();
+	paypal.Button.render({
+		
+		env: 'sandbox',
+		
+		client: {
+			sandbox: 'ATxaCDKF1esNTBDKLl3HJ1bPLiCNwq0kzFAjVPz_YsMXXp-WvWw2F0JYbqEaBjuAuFqBKoRj-Z52V7xE',
+			production: '<insert production client id>'
+		},
+		
+		commit: true,
+		
+		payment: function(data, actions) {
+			return actions.payment.create({
+				payment: {
+					transactions: [
+						{
+							amount: {total: x, currency: 'USD'}
+						}
+					]
+				}
+			});
+		},
+		
+		onAuthorize: function(data, actions) {
+			return actions.payment.execute().then(function() {
+				window.alert('Payment Complete!');
+			});
+		}
+    }, '#paypal-button-container');
+</script>
 <%@ include file="/templates/public/inc/footer.jsp" %>
     </body>
 </html>

@@ -82,4 +82,5 @@
 		<!-- MODERNIZR JS 
 		============================================ -->
         <script src="<%=request.getContextPath() %>/templates/public/js/vendor/modernizr-2.6.2.min.js"></script>
+        <script src="<%=request.getContextPath() %>/templates/public/js/vendor/jquery-1.11.3.min.js"></script>
     </head>
