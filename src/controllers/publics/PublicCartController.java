@@ -40,8 +40,10 @@ public class PublicCartController extends HttpServlet {
 			return;
 		}
 		listCarts = (List<Cart>) session.getAttribute("listCarts");
-		for (Cart objCart : listCarts) {
-			totalPrice += objCart.getPro().getPrice() * objCart.getCounter();
+		if (listCarts != null) {
+			for (Cart objCart : listCarts) {
+				totalPrice += objCart.getPro().getPrice() * objCart.getCounter();
+			}
 		}
 		RequestDispatcher rd = request.getRequestDispatcher("/views/public/cart.jsp");
 		rd.forward(request, response);

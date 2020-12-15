@@ -250,9 +250,9 @@
 									<div class="tab-content">
 										<div class="tab-pane active" id="thumbnail_1">
 											<div class="single-product-image">
-												<img src="<%=request.getContextPath() %>/uploads/images/<%=itemPro.getArPicture().get(0) %>" alt="single-product-image" />
+												<img src="<%=request.getContextPath() %>/uploads/images/<%if(itemPro.getArPicture().size()>0) out.print(itemPro.getArPicture().get(0)); else out.print("nopicture.jpg"); %>" alt="single-product-image" />
 												<a class="new-mark-box" href="#">new</a>
-												<a class="fancybox" href="<%=request.getContextPath() %>/uploads/images/<%=itemPro.getArPicture().get(0) %>" data-fancybox-group="gallery"><span class="btn large-btn">View larger <i class="fa fa-search-plus"></i></span></a>
+												<a class="fancybox" href="<%=request.getContextPath() %>/uploads/images/<%if(itemPro.getArPicture().size()>0) out.print(itemPro.getArPicture().get(0)); else out.print("nopicture.jpg"); %>" data-fancybox-group="gallery"><span class="btn large-btn">View larger <i class="fa fa-search-plus"></i></span></a>
 											</div>	
 										</div>
 										<%

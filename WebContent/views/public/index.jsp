@@ -310,7 +310,7 @@
 													<div class="single-product-item">
 														<div class="product-image">
 															<a href="<%=request.getContextPath() %>/detail?id=<%=objNewPro.getId()%>">
-																<img src="<%=request.getContextPath() %>/uploads/images/<%=objNewPro.getArPicture().get(0) %>" alt="product-image" />
+																<img src="<%=request.getContextPath() %>/uploads/images/<%if(objNewPro.getArPicture().size()>0) out.print(objNewPro.getArPicture().get(0)); else out.print("nopicture.jpg"); %>" alt="product-image" />
 															</a>
 															<a href="#" class="new-mark-box">New</a>
 															<div class="overlay-content">
@@ -382,7 +382,7 @@
 													<div class="single-product-item">
 														<div class="product-image">
 															<a href="<%=request.getContextPath() %>/detail?id=<%=objSalePro.getId()%>">
-																<img src="<%=request.getContextPath() %>/uploads/images/<%=objSalePro.getArPicture().get(0) %>" alt="product-image" />
+																<img src="<%=request.getContextPath() %>/uploads/images/<%if(objSalePro.getArPicture().size()>0) out.print(objSalePro.getArPicture().get(0)); else out.print("nopicture.jpg"); %>" alt="product-image" />
 															</a>
 															<a href="#" class="new-mark-box">Sale</a>
 															<div class="overlay-content">
