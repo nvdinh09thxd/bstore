@@ -75,6 +75,7 @@ public class PublicCartController extends HttpServlet {
 				} else {
 					out.print(listNumber);
 				}
+				break;
 			}
 		}
 		int totalPriceInt = (int) totalPrice;
