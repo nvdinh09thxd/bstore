@@ -360,11 +360,9 @@
 										<a href="#"><span></span></a>
 										<a class="color-blue" href="#"><span></span></a>
 									</div>
-									<%if(userLogin!=null){ %>
 									<div class="single-product-add-cart" style="<%if(userLogin==null) out.print("display: none");%>">
-										<a class="add-cart-text" title="Add to cart" href="javascript:void(0)" onclick="addToCard(<%=itemPro.getId()%>, <%=userLogin.getId()%>)">Add to cart</a>
+										<a class="add-cart-text" title="Add to cart" href="javascript:void(0)" onclick="addToCard(<%=itemPro.getId()%>)">Add to cart</a>
 									</div>
-									<%} %>
 								</div>
 							</div>
 						</div>
@@ -1112,11 +1110,11 @@
 		<!-- FOOTER-TOP-AREA START -->
 		<%@ include file="/templates/public/inc/footer.jsp" %>
 		<script type="text/javascript">
-			function addToCard(idPro, idMember){
+			function addToCard(idPro){
 				$.ajax({
 					url: '<%=request.getContextPath()%>/index',
 					type: 'POST',
-					data: {aidPro: idPro, aidMember: idMember},
+					data: {aidPro: idPro},
 					success: function(data){
 						alert("Đã thêm vào giỏ hàng!");
 						$("#size-cart").text(data);

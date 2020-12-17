@@ -11,15 +11,13 @@ public class Cart {
 	private int id;
 	private Products pro;
 	private int counter;
-	private Member member;
-	private int orderId;
+	private Orders order;
 
-	public Cart(int id, Products pro, int counter, Member member) {
+	public Cart(int id, Products pro, int counter) {
 		super();
 		this.id = id;
 		this.pro = pro;
 		this.counter = counter;
-		this.member = member;
 	}
 
 }

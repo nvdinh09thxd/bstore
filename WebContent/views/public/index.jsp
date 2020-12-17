@@ -319,7 +319,7 @@
 																	<%
 																	if(userLogin!=null){
 																	%>
-																	<li><a href="javascript:void(0)" title="Add to cart" onclick="addToCard(<%=objNewPro.getId()%>, <%=userLogin.getId()%>)"><i class="fa fa-shopping-cart"></i></a></li>
+																	<li><a href="javascript:void(0)" title="Add to cart" onclick="addToCard(<%=objNewPro.getId()%>)"><i class="fa fa-shopping-cart"></i></a></li>
 																	<%} %>
 																	<li><a href="#" title="Quick view"><i class="fa fa-retweet"></i></a></li>
 																	<li><a href="#" title="Quick view"><i class="fa fa-heart-o"></i></a></li>
@@ -391,7 +391,7 @@
 																	<%
 																	if(userLogin!=null){
 																	%>
-																	<li><a href="javascript:void(0)" title="Add to cart" onclick="addToCard(<%=objSalePro.getId()%>, <%=userLogin.getId()%>)"><i class="fa fa-shopping-cart"></i></a></li>
+																	<li><a href="javascript:void(0)" title="Add to cart" onclick="addToCard(<%=objSalePro.getId()%>)"><i class="fa fa-shopping-cart"></i></a></li>
 																	<%} %>
 																	<li><a href="#" title="Quick view"><i class="fa fa-retweet"></i></a></li>
 																	<li><a href="#" title="Quick view"><i class="fa fa-heart-o"></i></a></li>
@@ -3038,11 +3038,11 @@
 		<!-- FOOTER-TOP-AREA START -->
 		<%@ include file="/templates/public/inc/footer.jsp" %>
 		<script type="text/javascript">
-			function addToCard(idPro, idMember){
+			function addToCard(idPro){
 				$.ajax({
 					url: '<%=request.getContextPath()%>/index',
 					type: 'POST',
-					data: {aidPro: idPro, aidMember: idMember},
+					data: {aidPro: idPro},
 					success: function(data){
 						alert("Đã thêm vào giỏ hàng!");
 						$("#size-cart").text(data);

@@ -49,14 +49,6 @@
 									switch(msg){
 										case 1: out.print("<p style='color: green; background: yellow'>Thêm thành công!</p>");
 										break;
-										case 2: out.print("<p style='color: green; background: yellow'>Sửa thành công!</p>");
-										break;
-										case 3: out.print("<p style='color: green; background: yellow'>Xóa thành công!</p>");
-										break;
-										case 4: out.print("<p style='color: red; background: yellow'>Xóa không thành công!</p>");
-										break;
-										case 0: out.print("<p style='color: red; background: yellow'>ID không tồn tại!</p>");
-										break;
 									}
 								}
 							%>
@@ -84,7 +76,7 @@
                                         <td class="center"><%=pro.getCat().getName() %></td>
                                         <td class="center"><%=pro.getRating() %></td>
                                         <td class="center">
-											<img width="200px" height="200px" src="<%=request.getContextPath() %>/uploads/images/<%=pro.getArPicture().get(0) %>" alt="Đổi thay"/>
+											<img width="200px" height="200px" src="<%=request.getContextPath() %>/uploads/images/<%if(pro.getArPicture().size()>0) out.print(pro.getArPicture().get(0)); else out.print("nopicture.jpg"); %>" alt="Đổi thay"/>
                                         </td>
                                         <td class="center">
                                             <a href="" title="" class="btn btn-primary"><i class="fa fa-edit "></i> Sửa</a>

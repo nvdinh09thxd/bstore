@@ -272,7 +272,7 @@
 									%>
 									<tr>
 										<td class="cart-product">
-											<a href="<%=request.getContextPath() %>/detail?id=<%=objCart.getPro().getId()%>"><img alt="Blouse" src="<%=request.getContextPath() %>/uploads/images/<%=objCart.getPro().getArPicture().get(0)%>"></a>
+											<a href="<%=request.getContextPath() %>/detail?id=<%=objCart.getPro().getId()%>"><img alt="Blouse" src="<%=request.getContextPath() %>/uploads/images/<%if(objCart.getPro().getArPicture().size()>0) out.print(objCart.getPro().getArPicture().get(0)); else out.print("nopicture.jpg");%>"></a>
 										</td>
 										<td class="cart-description">
 											<p class="product-name"><a href="#"><%=objCart.getPro().getName() %></a></p>

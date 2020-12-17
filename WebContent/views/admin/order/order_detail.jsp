@@ -58,7 +58,7 @@
                                         <td class="center"><%=cart.getPro().getName() %></td>
                                         <td class="center">
                                         	<img width="100px" height="100px"
-                                            	src="<%=request.getContextPath() %>/uploads/images/<%=cart.getPro().getArPicture().get(0)%>" />
+                                            	src="<%=request.getContextPath() %>/uploads/images/<%if(cart.getPro().getArPicture().size()>0) out.print(cart.getPro().getArPicture().get(0)); else out.print("nopicture.jpg");%>" />
                                         </td>
                                         <td class="center"><%=cart.getPro().getPrice() %></td>
                                         <td class="center"><%=cart.getCounter() %></td>

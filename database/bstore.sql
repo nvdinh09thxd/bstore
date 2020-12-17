@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th12 05, 2020 lúc 10:35 AM
+-- Thời gian đã tạo: Th12 17, 2020 lúc 09:05 AM
 -- Phiên bản máy phục vụ: 10.1.32-MariaDB
--- Phiên bản PHP: 7.2.5
+-- Phiên bản PHP: 7.1.17
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -32,7 +32,6 @@ CREATE TABLE `cart` (
   `id` int(11) NOT NULL,
   `id_pro` int(11) NOT NULL,
   `counter` int(11) NOT NULL,
-  `id_member` int(11) NOT NULL,
   `id_order` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
@@ -143,8 +142,7 @@ INSERT INTO `products` (`id`, `name`, `picture`, `rating`, `old_price`, `price`,
 (15, 'Túi xách đi chơi', '(23)', 0, 100000, 91000, 0, 7),
 (16, 'Túi xách đi làm', '(24)', 0, 100000, 91000, 0, 7),
 (17, 'Áo nam', '(25)', 0, 150000, 121000, 0, 8),
-(18, 'Áo nữ', '(26)', 0, 150000, 121000, 0, 8),
-(19, 'Ão má»i  cÃ  mau', '(27,28,29,30)', 0, 0, 200000, 0, 4);
+(18, 'Áo nữ', '(26)', 0, 150000, 121000, 0, 8);
 
 -- --------------------------------------------------------
 
@@ -186,8 +184,7 @@ INSERT INTO `product_detail` (`id`, `name`) VALUES
 (22, 'tui-xach-di-cho.jpg'),
 (23, 'tui-xach-di-choi.jpg'),
 (24, 'tui-xach-di-lam.jpg'),
-(25, 'ao-nam.jpg'),
-(26, 'ao-nu.jpg');
+(25, 'ao-nam.jpg');
 
 -- --------------------------------------------------------
 
@@ -269,7 +266,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT cho bảng `cart`
 --
 ALTER TABLE `cart`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT cho bảng `categories`
@@ -287,19 +284,19 @@ ALTER TABLE `members`
 -- AUTO_INCREMENT cho bảng `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT cho bảng `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT cho bảng `product_detail`
 --
 ALTER TABLE `product_detail`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT cho bảng `users`

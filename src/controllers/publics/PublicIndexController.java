@@ -14,7 +14,7 @@ import javax.servlet.http.HttpSession;
 
 import daos.ProductsDAO;
 import models.Cart;
-import models.Member;
+import models.Orders;
 import models.Products;
 
 public class PublicIndexController extends HttpServlet {
@@ -55,14 +55,14 @@ public class PublicIndexController extends HttpServlet {
 			idx = listCarts.size();
 		}
 		int idPro = Integer.parseInt(request.getParameter("aidPro"));
-		int idMember = Integer.parseInt(request.getParameter("aidMember"));
 		Products pro = productDao.getProduct(idPro);
-		Cart cart = new Cart(idx++, pro, 1, new Member(idMember));
+		Cart cart = new Cart(idx++, pro, 1, new Orders());
 		boolean check = false;
 		for (Cart objCart : listCarts) {
 			if (objCart.getPro().getId() == idPro) {
 				objCart.setCounter(1 + objCart.getCounter());
 				check = true;
+				break;
 			}
 		}
 		if (!check) {

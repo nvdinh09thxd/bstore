@@ -55,13 +55,18 @@ public class PublicCheckoutController extends HttpServlet {
 		response.setCharacterEncoding("utf-8");
 		response.setContentType("text/html");
 		HttpSession session = request.getSession();
+		Member userLogin = (Member) session.getAttribute("userLogin");
+		if (userLogin == null) {
+			response.sendRedirect(request.getContextPath() + "/login");
+			return;
+		}
 		int idMember = Integer.parseInt(request.getParameter("id"));
 		String note = request.getParameter("note");
 		float total = Float.parseFloat(request.getParameter("total"));
 		Orders order = new Orders(0, new Member(idMember), total, note, null, true);
 		int idOrder = ordersDao.add(order);
 		for (Cart objCart : listCarts) {
-			objCart.setOrderId(idOrder);
+			objCart.getOrder().setId(idOrder);
 			cartDao.add(objCart);
 		}
 		session.removeAttribute("listCarts");

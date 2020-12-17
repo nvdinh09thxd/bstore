@@ -74,6 +74,7 @@ public class PublicCartController extends HttpServlet {
 					listNumber.add(objCart.getCounter());
 				} else {
 					out.print(listNumber);
+					return;
 				}
 				break;
 			}
