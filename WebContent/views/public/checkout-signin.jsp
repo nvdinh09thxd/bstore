@@ -77,7 +77,7 @@
 					<div class="col-sm-12">
 						<!-- LOGO START -->
 						<div class="logo">
-							<a href="index.html"><img src="<%=request.getContextPath() %>/templates/public/img/logo.png" alt="bstore logo" /></a>
+							<a href="<%=request.getContextPath() %>/index"><img src="<%=request.getContextPath() %>/templates/public/img/logo.png" alt="bstore logo" /></a>
 						</div>
 						<!-- LOGO END -->
 						<!-- HEADER-RIGHT-CALLUS START -->
@@ -303,11 +303,11 @@
 								<div class="form-content">
 									<div class="form-group primary-form-group">
 										<label for="loginemail">Email address</label>
-										<input type="text" value="" name="email" id="loginemail" class="form-control input-feild">
+										<input type="text" value="nvdinh0766777123@gmail.com" name="email" id="loginemail" class="form-control input-feild">
 									</div>
 									<div class="form-group primary-form-group">
 										<label for="password">Password</label>
-										<input type="password" value="" name="password" id="password" class="form-control input-feild">
+										<input type="password" value="123" name="password" id="password" class="form-control input-feild">
 									</div>
 									<div class="forget-password">
 										<p><a href="#">Forgot your password?</a></p>

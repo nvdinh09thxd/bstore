@@ -60,7 +60,7 @@ public class PublicIndexController extends HttpServlet {
 		boolean check = false;
 		for (Cart objCart : listCarts) {
 			if (objCart.getPro().getId() == idPro) {
-				objCart.setCounter(1 + objCart.getCounter());
+				objCart.setNumber(1 + objCart.getNumber());
 				check = true;
 				break;
 			}

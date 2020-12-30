@@ -80,7 +80,7 @@
 					<div class="col-sm-12">
 						<!-- LOGO START -->
 						<div class="logo">
-							<a href="index.html"><img src="<%=request.getContextPath() %>/templates/public/img/logo.png" alt="bstore logo" /></a>
+							<a href="<%=request.getContextPath() %>/index"><img src="<%=request.getContextPath() %>/templates/public/img/logo.png" alt="bstore logo" /></a>
 						</div>
 						<!-- LOGO END -->
 						<!-- HEADER-RIGHT-CALLUS START -->

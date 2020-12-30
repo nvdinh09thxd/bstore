@@ -10,14 +10,14 @@ import lombok.NoArgsConstructor;
 public class Cart {
 	private int id;
 	private Products pro;
-	private int counter;
+	private int number;
 	private Orders order;
 
-	public Cart(int id, Products pro, int counter) {
+	public Cart(int id, Products pro, int number) {
 		super();
 		this.id = id;
 		this.pro = pro;
-		this.counter = counter;
+		this.number = number;
 	}
 
 }

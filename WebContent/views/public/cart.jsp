@@ -79,7 +79,7 @@
 					<div class="col-sm-12">
 						<!-- LOGO START -->
 						<div class="logo">
-							<a href="index.html"><img src="<%=request.getContextPath() %>/templates/public/img/logo.png" alt="bstore logo" /></a>
+							<a href="<%=request.getContextPath() %>/index"><img src="<%=request.getContextPath() %>/templates/public/img/logo.png" alt="bstore logo" /></a>
 						</div>
 						<!-- LOGO END -->
 						<!-- HEADER-RIGHT-CALLUS START -->
@@ -288,7 +288,7 @@
 										<td class="cart_quantity text-center">
 											<div class="cart1-plus-minus-button">
 												<button onclick="changeNumber(<%=objCart.getPro().getPrice() %>, <%=objCart.getPro().getId()%>, 1)">+</button>
-												<input class="cart-plus-minus" type="text" name="qtybutton" id="counter_<%=objCart.getPro().getId()%>" value="<%=objCart.getCounter()%>">
+												<input class="cart-plus-minus" type="text" name="qtybutton" id="counter_<%=objCart.getPro().getId()%>" value="<%=objCart.getNumber()%>">
 												<button onclick="changeNumber(<%=objCart.getPro().getPrice() %>, <%=objCart.getPro().getId()%>, 0)">-</button>
 											</div>
 										</td>
@@ -298,7 +298,7 @@
 											</span>
 										</td>
 										<%
-										float price = objCart.getPro().getPrice()*objCart.getCounter();
+										float price = objCart.getPro().getPrice()*objCart.getNumber();
 										totalProduct+=price;
 										%>
 										<td class="cart-total">

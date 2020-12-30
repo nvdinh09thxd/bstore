@@ -42,7 +42,7 @@ public class PublicCheckoutController extends HttpServlet {
 		}
 		listCarts = (List<Cart>) session.getAttribute("listCarts");
 		for (Cart objCart : listCarts) {
-			totalPrice += objCart.getPro().getPrice() * objCart.getCounter();
+			totalPrice += objCart.getPro().getPrice() * objCart.getNumber();
 		}
 		request.setAttribute("totalPrice", totalPrice);
 		RequestDispatcher rd = request.getRequestDispatcher("/views/public/checkout-shipping.jsp");

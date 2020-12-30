@@ -42,7 +42,7 @@ public class PublicCartController extends HttpServlet {
 		listCarts = (List<Cart>) session.getAttribute("listCarts");
 		if (listCarts != null) {
 			for (Cart objCart : listCarts) {
-				totalPrice += objCart.getPro().getPrice() * objCart.getCounter();
+				totalPrice += objCart.getPro().getPrice() * objCart.getNumber();
 			}
 		}
 		RequestDispatcher rd = request.getRequestDispatcher("/views/public/cart.jsp");
@@ -65,13 +65,13 @@ public class PublicCartController extends HttpServlet {
 		for (Cart objCart : listCarts) {
 			if (objCart.getPro().getId() == idPro) {
 				if (number == 1) {
-					objCart.setCounter(objCart.getCounter() + 1);
+					objCart.setNumber(objCart.getNumber() + 1);
 					totalPrice += objCart.getPro().getPrice();
-					listNumber.add(objCart.getCounter());
-				} else if (objCart.getCounter() > 0) {
-					objCart.setCounter(objCart.getCounter() - 1);
+					listNumber.add(objCart.getNumber());
+				} else if (objCart.getNumber() > 0) {
+					objCart.setNumber(objCart.getNumber() - 1);
 					totalPrice -= objCart.getPro().getPrice();
-					listNumber.add(objCart.getCounter());
+					listNumber.add(objCart.getNumber());
 				} else {
 					out.print(listNumber);
 					return;

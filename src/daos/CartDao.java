@@ -13,11 +13,11 @@ public class CartDao extends AbstractDAO {
 	public int add(Cart card) {
 		int result = 0;
 		con = DBConnectionUtil.getConnection();
-		String sql = "INSERT INTO cart (id_pro, counter, id_order) VALUES (?, ?, ?)";
+		String sql = "INSERT INTO cart (id_pro, number, id_order) VALUES (?, ?, ?)";
 		try {
 			pst = con.prepareStatement(sql);
 			pst.setInt(1, card.getPro().getId());
-			pst.setInt(2, card.getCounter());
+			pst.setInt(2, card.getNumber());
 			pst.setInt(3, card.getOrder().getId());
 			result = pst.executeUpdate();
 		} catch (SQLException e) {
@@ -37,7 +37,7 @@ public class CartDao extends AbstractDAO {
 			pst.setInt(1, id);
 			rs = pst.executeQuery();
 			while (rs.next()) {
-				String sqlPicture = "SELECT * FROM product_detail WHERE id IN " + rs.getString("picture");
+				String sqlPicture = "SELECT * FROM product_picture WHERE id IN " + rs.getString("picture");
 				st = con.createStatement();
 				rs2 = st.executeQuery(sqlPicture);
 				ArrayList<String> arPictures = new ArrayList<>();
@@ -45,7 +45,7 @@ public class CartDao extends AbstractDAO {
 					arPictures.add(rs2.getString("name"));
 				}
 				Cart item = new Cart(rs.getInt("id"),
-						new Products(rs.getString("name"), arPictures, rs.getFloat("price")), rs.getInt("counter"));
+						new Products(rs.getString("name"), arPictures, rs.getFloat("price")), rs.getInt("number"));
 				listItems.add(item);
 			}
 		} catch (SQLException e) {

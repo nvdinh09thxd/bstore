@@ -61,8 +61,8 @@
                                             	src="<%=request.getContextPath() %>/uploads/images/<%if(cart.getPro().getArPicture().size()>0) out.print(cart.getPro().getArPicture().get(0)); else out.print("nopicture.jpg");%>" />
                                         </td>
                                         <td class="center"><%=cart.getPro().getPrice() %></td>
-                                        <td class="center"><%=cart.getCounter() %></td>
-                                        <td class="center"><%=cart.getPro().getPrice()*cart.getCounter() %></td>
+                                        <td class="center"><%=cart.getNumber() %></td>
+                                        <td class="center"><%=cart.getPro().getPrice()*cart.getNumber() %></td>
                                     </tr>
 								<%
                                 }}}

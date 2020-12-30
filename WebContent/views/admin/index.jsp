@@ -12,8 +12,8 @@
                     <i class="fa fa-bars"></i>
                 </span>
                     <div class="text-box">
-                        <p class="main-text"><a href="" title="">Quản lý danh mục</a></p>
-                        <p class="text-muted">Có 5 danh mục</p>
+                        <p class="main-text"><a href="" title="">Quản lý sản phẩm</a></p>
+                        <p class="text-muted">Có 5 sản phẩm</p>
                     </div>
                 </div>
             </div>
@@ -23,8 +23,8 @@
                     <i class="fa fa-bell-o"></i>
                 </span>
                     <div class="text-box">
-                        <p class="main-text"><a href="" title="">Quản lý bài hát</a></p>
-                        <p class="text-muted">Có 10 bài hát</p>
+                        <p class="main-text"><a href="<%=request.getContextPath() %>/admin/order/index" title="">Quản lý đơn hàng</a></p>
+                        <p class="text-muted">Có 10 đơn hàng</p>
                     </div>
                 </div>
             </div>
@@ -34,8 +34,8 @@
                     <i class="fa fa-rocket"></i>
                 </span>
                     <div class="text-box">
-                        <p class="main-text"><a href="" title="">Quản lý người dùng</a></p>
-                        <p class="text-muted">Có 15 người dùng</p>
+                        <p class="main-text"><a href="<%=request.getContextPath() %>/admin/product/index" title="">Quản lý sản phẩm</a></p>
+                        <p class="text-muted">Có 15 sản phẩm</p>
                     </div>
                 </div>
             </div>
