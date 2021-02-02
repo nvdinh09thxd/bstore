@@ -43,7 +43,7 @@
 					<!-- DRODOWN-MEGA-MENU END -->
 				</li>
 				<li>
-					<a href="<%=request.getContextPath() %>/cat">Danh mục</a>
+					<a href="javascript:void(0)">Danh mục</a>
 					<!-- DRODOWN-MEGA-MENU START -->
 					<div class="drodown-mega-menu">
 						<div class="mega-menu-list">

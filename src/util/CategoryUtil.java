@@ -17,14 +17,10 @@ public class CategoryUtil {
 		CatDao catDao = new CatDao();
 		ArrayList<Categories> listCatCon = catDao.getCatParent(parentId);
 		if (listCatCon.size() > 0) {
-			out.println("<ul>");
 			for (Categories cat : listCatCon) {
-				out.println("<li><a href='" + request.getContextPath() + "/cat?cid=" + cat.getId() + "'>" + menu + cat.getName() + "</a>");
+				out.println("<a href='" + request.getContextPath() + "/cat?cid=" + cat.getId() + "'>" + menu + cat.getName() + "</a>");
 				showCat(request, out, cat.getId(), menu + "|---"); // đệ quy
 			}
-			out.println("</ul>");
-		} else {
-			out.println("</li>");
 		}
 	}
 }
