@@ -13,20 +13,24 @@ import javax.servlet.http.HttpSession;
 
 import daos.CartDao;
 import daos.OrdersDao;
+import daos.ProductsDAO;
 import models.Cart;
 import models.Member;
 import models.Orders;
+import models.Products;
 
 public class PublicCheckoutController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	OrdersDao ordersDao;
 	CartDao cartDao;
+	ProductsDAO proDao;
 	List<Cart> listCarts;
 
 	public PublicCheckoutController() {
 		super();
 		ordersDao = new OrdersDao();
 		cartDao = new CartDao();
+		proDao = new ProductsDAO();
 		listCarts = new ArrayList<>();
 	}
 
@@ -45,7 +49,7 @@ public class PublicCheckoutController extends HttpServlet {
 			totalPrice += objCart.getPro().getPrice() * objCart.getNumber();
 		}
 		request.setAttribute("totalPrice", totalPrice);
-		RequestDispatcher rd = request.getRequestDispatcher("/views/public/checkout-shipping.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("/views/public/shipping.jsp");
 		rd.forward(request, response);
 	}
 
@@ -68,6 +72,8 @@ public class PublicCheckoutController extends HttpServlet {
 		for (Cart objCart : listCarts) {
 			objCart.getOrder().setId(idOrder);
 			cartDao.add(objCart);
+			Products pro = new Products(objCart.getPro().getId(), objCart.getNumber());
+			proDao.updateNumber(pro);
 		}
 		session.removeAttribute("listCarts");
 		response.sendRedirect(request.getContextPath() + "/index?msg=2");

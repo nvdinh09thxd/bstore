@@ -315,7 +315,7 @@
 											<i class="fa fa-star-half-empty"></i>
 										</div>
 										<div class="read-reviews">
-											<a href="#">Read reviews (<%=itemPro.getPreview() %>)</a>
+											<a href="#">Number item (<%=itemPro.getNumber() %>)</a>
 										</div>
 										<div class="write-review">
 											<a href="#">Write a review</a>
@@ -361,7 +361,7 @@
 										<a class="color-blue" href="#"><span></span></a>
 									</div>
 									<div class="single-product-add-cart" style="<%if(userLogin==null) out.print("display: none");%>">
-										<a class="add-cart-text" title="Add to cart" href="javascript:void(0)" onclick="addToCard(<%=itemPro.getId()%>)">Add to cart</a>
+										<a class="add-cart-text" title="Add to cart" href="javascript:void(0)" onclick="addToCard(<%=itemPro.getNumber()%>, <%=itemPro.getId()%>)">Add to cart</a>
 									</div>
 								</div>
 							</div>
@@ -1110,19 +1110,23 @@
 		<!-- FOOTER-TOP-AREA START -->
 		<%@ include file="/templates/public/inc/footer.jsp" %>
 		<script type="text/javascript">
-			function addToCard(idPro){
-				$.ajax({
-					url: '<%=request.getContextPath()%>/index',
-					type: 'POST',
-					data: {aidPro: idPro},
-					success: function(data){
-						alert("Đã thêm vào giỏ hàng!");
-						$("#size-cart").text(data);
-					},
-					error: function (){
-						alert('Có lỗi xảy ra');
-					}
-				})
+			function addToCard(number, idPro){
+				if(number==0){
+					alert("Sản phẩm này đã hết!");
+				} else {
+					$.ajax({
+						url: '<%=request.getContextPath()%>/index',
+						type: 'POST',
+						data: {aidPro: idPro},
+						success: function(data){
+							alert("Đã thêm vào giỏ hàng!");
+							$("#size-cart").text(data);
+						},
+						error: function (){
+							alert('Có lỗi xảy ra');
+						}
+					})
+				}
 			}
 		</script>
     </body>

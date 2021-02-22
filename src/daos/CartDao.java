@@ -37,7 +37,7 @@ public class CartDao extends AbstractDAO {
 			pst.setInt(1, id);
 			rs = pst.executeQuery();
 			while (rs.next()) {
-				String sqlPicture = "SELECT * FROM product_picture WHERE id IN " + rs.getString("picture");
+				String sqlPicture = "SELECT * FROM product_detail WHERE id IN " + rs.getString("picture");
 				st = con.createStatement();
 				rs2 = st.executeQuery(sqlPicture);
 				ArrayList<String> arPictures = new ArrayList<>();

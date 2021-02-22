@@ -44,7 +44,7 @@
     </div>
 </div>
 <script>
-    document.getElementById("index").classList.add('active-menu');
+    document.getElementById("admin").classList.add('active');
 </script>
 <!-- /. PAGE WRAPPER  -->
 <%@ include file="/templates/admin/inc/footer.jsp" %>

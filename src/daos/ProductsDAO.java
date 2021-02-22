@@ -18,7 +18,7 @@ public class ProductsDAO extends AbstractDAO {
 			st = con.createStatement();
 			rs = st.executeQuery(sql);
 			while (rs.next()) {
-				String sqlPicture = "SELECT * FROM product_picture WHERE id IN " + rs.getString("picture");
+				String sqlPicture = "SELECT * FROM product_detail WHERE id IN " + rs.getString("picture");
 				st2 = con.createStatement();
 				rs2 = st2.executeQuery(sqlPicture);
 				ArrayList<String> arPictures = new ArrayList<>();
@@ -26,7 +26,7 @@ public class ProductsDAO extends AbstractDAO {
 					arPictures.add(rs2.getString("name"));
 				}
 				Products item = new Products(rs.getInt("id"), rs.getString("name"), arPictures, rs.getInt("rating"),
-						rs.getFloat("old_price"), rs.getFloat("price"), rs.getInt("preview"),
+						rs.getFloat("old_price"), rs.getFloat("price"), rs.getInt("number"),
 						new Categories(rs.getInt("cat_id"), rs.getInt("parent_id"), rs.getString("c.name")));
 				listItems.add(item);
 			}
@@ -46,7 +46,7 @@ public class ProductsDAO extends AbstractDAO {
 			st = con.createStatement();
 			rs = st.executeQuery(sql);
 			while (rs.next()) {
-				String sqlPicture = "SELECT * FROM product_picture WHERE id IN " + rs.getString("picture");
+				String sqlPicture = "SELECT * FROM product_detail WHERE id IN " + rs.getString("picture");
 				st2 = con.createStatement();
 				rs2 = st2.executeQuery(sqlPicture);
 				ArrayList<String> arPictures = new ArrayList<>();
@@ -54,7 +54,7 @@ public class ProductsDAO extends AbstractDAO {
 					arPictures.add(rs2.getString("name"));
 				}
 				Products item = new Products(rs.getInt("id"), rs.getString("name"), arPictures, rs.getInt("rating"),
-						rs.getFloat("old_price"), rs.getFloat("price"), rs.getInt("preview"),
+						rs.getFloat("old_price"), rs.getFloat("price"), rs.getInt("number"),
 						new Categories(rs.getInt("cat_id"), rs.getInt("parent_id"), rs.getString("c.name")));
 				listItems.add(item);
 			}
@@ -75,7 +75,7 @@ public class ProductsDAO extends AbstractDAO {
 			pst.setInt(1, catId);
 			rs = pst.executeQuery();
 			while (rs.next()) {
-				String sqlPicture = "SELECT * FROM product_picture WHERE id IN " + rs.getString("picture");
+				String sqlPicture = "SELECT * FROM product_detail WHERE id IN " + rs.getString("picture");
 				st2 = con.createStatement();
 				rs2 = st2.executeQuery(sqlPicture);
 				ArrayList<String> arPictures = new ArrayList<>();
@@ -83,7 +83,7 @@ public class ProductsDAO extends AbstractDAO {
 					arPictures.add(rs2.getString("name"));
 				}
 				Products item = new Products(rs.getInt("id"), rs.getString("name"), arPictures, rs.getInt("rating"),
-						rs.getFloat("old_price"), rs.getFloat("price"), rs.getInt("preview"),
+						rs.getFloat("old_price"), rs.getFloat("price"), rs.getInt("number"),
 						new Categories(rs.getInt("cat_id"), rs.getInt("parent_id"), rs.getString("c.name")));
 				listItems.add(item);
 			}
@@ -104,7 +104,7 @@ public class ProductsDAO extends AbstractDAO {
 			pst.setInt(1, id);
 			rs = pst.executeQuery();
 			if (rs.next()) {
-				String sqlPicture = "SELECT * FROM product_picture WHERE id IN " + rs.getString("picture");
+				String sqlPicture = "SELECT * FROM product_detail WHERE id IN " + rs.getString("picture");
 				st2 = con.createStatement();
 				rs2 = st2.executeQuery(sqlPicture);
 				ArrayList<String> arPictures = new ArrayList<>();
@@ -112,7 +112,7 @@ public class ProductsDAO extends AbstractDAO {
 					arPictures.add(rs2.getString("name"));
 				}
 				itemPro = new Products(rs.getInt("id"), rs.getString("name"), arPictures, rs.getInt("rating"),
-						rs.getFloat("old_price"), rs.getFloat("price"), rs.getInt("preview"),
+						rs.getFloat("old_price"), rs.getFloat("price"), rs.getInt("number"),
 						new Categories(rs.getInt("cat_id"), rs.getInt("parent_id"), rs.getString("c.name")));
 			}
 		} catch (SQLException e) {
@@ -131,7 +131,7 @@ public class ProductsDAO extends AbstractDAO {
 			st = con.createStatement();
 			rs = st.executeQuery(sql);
 			while (rs.next()) {
-				String sqlPicture = "SELECT * FROM product_picture WHERE id IN " + rs.getString("picture");
+				String sqlPicture = "SELECT * FROM product_detail WHERE id IN " + rs.getString("picture");
 				st2 = con.createStatement();
 				rs2 = st2.executeQuery(sqlPicture);
 				ArrayList<String> arPictures = new ArrayList<>();
@@ -139,7 +139,7 @@ public class ProductsDAO extends AbstractDAO {
 					arPictures.add(rs2.getString("name"));
 				}
 				Products item = new Products(rs.getInt("id"), rs.getString("name"), arPictures, rs.getInt("rating"),
-						rs.getFloat("old_price"), rs.getFloat("price"), rs.getInt("preview"),
+						rs.getFloat("old_price"), rs.getFloat("price"), rs.getInt("number"),
 						new Categories(rs.getInt("cat_id"), rs.getInt("parent_id"), rs.getString("c.name")));
 				listItems.add(item);
 			}
@@ -160,11 +160,11 @@ public class ProductsDAO extends AbstractDAO {
 			String picture = "(";
 			String newPic = "";
 			for (String obj : product.getArPicture()) {
-				String sqlPic = "INSERT INTO product_picture (name) VALUES (?)";
+				String sqlPic = "INSERT INTO product_detail (name) VALUES (?)";
 				pst = con.prepareStatement(sqlPic);
 				pst.setString(1, obj);
 				pst.executeUpdate();
-				String sqlSel = "SELECT id FROM product_picture ORDER BY id DESC LIMIT 1";
+				String sqlSel = "SELECT id FROM product_detail ORDER BY id DESC LIMIT 1";
 				st = con.createStatement();
 				rs = st.executeQuery(sqlSel);
 				while (rs.next()) {
@@ -186,5 +186,24 @@ public class ProductsDAO extends AbstractDAO {
 			DBConnectionUtil.close(pst, con);
 		}
 		return result;
+	}
+
+	public int updateNumber(Products pro) {
+		int result = 0;
+		con = DBConnectionUtil.getConnection();
+		String sqlPro = "UPDATE products SET number = number - ? WHERE id = ?";
+
+		try {
+			pst = con.prepareStatement(sqlPro);
+			pst.setInt(1, pro.getNumber());
+			pst.setInt(2, pro.getId());
+			result = pst.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			DBConnectionUtil.close(pst, con);
+		}
+		return result;
+
 	}
 }

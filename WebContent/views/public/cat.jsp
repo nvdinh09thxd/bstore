@@ -640,7 +640,7 @@
 														<%
 														if(userLogin!=null){
 														%>
-														<li><a href="javascript:void(0)" title="Add to cart" onclick="addToCard(<%=pro.getId()%>)"><i class="fa fa-shopping-cart"></i></a></li>
+														<li><a href="javascript:void(0)" title="Add to cart" onclick="addToCard(<%=pro.getNumber()%>, <%=pro.getId()%>)"><i class="fa fa-shopping-cart"></i></a></li>
 														<%} %>
 														<li><a href="#" title="Quick view"><i class="fa fa-retweet"></i></a></li>
 														<li><a href="#" title="Quick view"><i class="fa fa-heart-o"></i></a></li>
@@ -657,7 +657,7 @@
 														<i class="fa fa-star-half-empty"></i>
 													</div>
 													<div class="review-box">
-														<span><%=pro.getPreview() %> Review(s)</span>
+														<span><%=pro.getNumber() %> item(s)</span>
 													</div>
 												</div>
 												<a href="single-product.html"><%=pro.getName() %></a>
@@ -935,19 +935,23 @@
 		<!-- FOOTER-TOP-AREA START -->
 		<%@ include file="/templates/public/inc/footer.jsp" %>
 		<script type="text/javascript">
-		function addToCard(idPro){
-			$.ajax({
-				url: '<%=request.getContextPath()%>/index',
-				type: 'POST',
-				data: {aidPro: idPro},
-				success: function(data){
-					alert("Đã thêm vào giỏ hàng!");
-					$("#size-cart").text(data);
-				},
-				error: function (){
-					alert('Có lỗi xảy ra');
-				}
-			})
+		function addToCard(number, idPro){
+			if(number==0){
+				alert("Sản phẩm này đã hết!");
+			} else {
+				$.ajax({
+					url: '<%=request.getContextPath()%>/index',
+					type: 'POST',
+					data: {aidPro: idPro},
+					success: function(data){
+						alert("Đã thêm vào giỏ hàng!");
+						$("#size-cart").text(data);
+					},
+					error: function (){
+						alert('Có lỗi xảy ra');
+					}
+				})
+			}
 		}
 		</script>
     </body>

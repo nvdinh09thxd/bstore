@@ -46,21 +46,33 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="<%=request.getContextPath() %>/admin/index" class="nav-link active">
+                <a href="<%=request.getContextPath() %>/admin/index" id="admin" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Quản lý danh mục</p>
+                  <p>Trang chủ</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="<%=request.getContextPath() %>/admin/product/index" class="nav-link">
+                <a href="<%=request.getContextPath() %>/admin/product/index" id="product" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Quản lý sản phẩm</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="<%=request.getContextPath() %>/admin/order/index" class="nav-link">
+                <a href="<%=request.getContextPath() %>/admin/order/index" id="order" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Quản lý đơn hàng</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="<%=request.getContextPath() %>/admin/report/product" id="report" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Báo cáo sản phẩm</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="<%=request.getContextPath() %>/admin/report/revenue" id="revenue" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Báo cáo doanh thu</p>
                 </a>
               </li>
             </ul>

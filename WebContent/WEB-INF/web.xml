@@ -132,4 +132,20 @@
     <servlet-name>AdminDetailOrderController</servlet-name>
     <url-pattern>/admin/order/detail</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <servlet-name>AdminReportProductController</servlet-name>
+    <servlet-class>controllers.admins.report.AdminReportProductController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AdminReportProductController</servlet-name>
+    <url-pattern>/admin/report/product</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>AdminReportRevenueController</servlet-name>
+    <servlet-class>controllers.admins.report.AdminReportRevenueController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AdminReportRevenueController</servlet-name>
+    <url-pattern>/admin/report/revenue</url-pattern>
+  </servlet-mapping>
 </web-app>

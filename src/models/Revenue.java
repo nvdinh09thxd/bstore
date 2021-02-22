@@ -9,19 +9,9 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Orders {
+public class Revenue {
 	private int id;
-	private Member member;
 	private float total;
-	private String note;
 	private Timestamp date;
-	private boolean status;
-
-	public Orders(int id, float total, boolean status) {
-		super();
-		this.id = id;
-		this.total = total;
-		this.status = status;
-	}
-
+	private User user;
 }

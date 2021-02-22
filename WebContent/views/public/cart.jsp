@@ -372,9 +372,12 @@
 					</div>
 					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 						<!-- RETURNE-CONTINUE-SHOP START -->
+						<%
+							List<Cart> listCarts = (List<Cart>) session.getAttribute("listCarts");
+						%>
 						<div class="returne-continue-shop">
 							<a href="index.html" class="continueshoping"><i class="fa fa-chevron-left"></i>Continue shopping</a>
-							<a href="<%=request.getContextPath() %>/checkout" class="procedtocheckout">Proceed to checkout<i class="fa fa-chevron-right"></i></a>
+							<a href="<%=request.getContextPath() %>/checkout" class="procedtocheckout" style="<%if(listCarts==null || listCarts.size()==0) out.print("display: none");%>">Proceed to checkout<i class="fa fa-chevron-right"></i></a>
 						</div>	
 						<!-- RETURNE-CONTINUE-SHOP END -->						
 					</div>

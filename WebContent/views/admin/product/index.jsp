@@ -85,4 +85,7 @@
     <!-- /.content -->
   </div>
   <!-- /.content-wrapper -->
+  <script>
+    document.getElementById("product").classList.add('active');
+</script>
  <%@ include file="/templates/admin/inc/footer.jsp" %>

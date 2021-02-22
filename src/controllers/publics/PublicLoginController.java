@@ -31,7 +31,7 @@ public class PublicLoginController extends HttpServlet {
 			return; // thoát luôn, không xử lý tiếp theo
 		}
 		// Chuyển tiếp sang trang login
-		RequestDispatcher rd = request.getRequestDispatcher("/views/public/checkout-signin.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("/views/public/signin.jsp");
 		rd.forward(request, response);
 	}
 
@@ -51,7 +51,7 @@ public class PublicLoginController extends HttpServlet {
 		} else {
 			// Nếu không tồn tại username và password trong csdl thì chuyển tiếp đến trang
 			// login và thông báo lỗi
-			RequestDispatcher rd = request.getRequestDispatcher("/views/public/checkout-signin.jsp?err=0");
+			RequestDispatcher rd = request.getRequestDispatcher("/views/public/signin.jsp?err=0");
 			rd.forward(request, response);
 		}
 	}

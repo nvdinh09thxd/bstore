@@ -37,7 +37,7 @@ public class OrdersDao extends AbstractDAO {
 	public List<Orders> findAll() {
 		con = DBConnectionUtil.getConnection();
 		List<Orders> listItems = new ArrayList<>();
-		String sql = "SELECT * FROM orders o JOIN members m ON o.id_member = m.id WHERE o.status != 0 ORDER BY o.id";
+		String sql = "SELECT * FROM orders o JOIN members m ON o.id_member = m.id ORDER BY o.id";
 		try {
 			st = con.createStatement();
 			rs = st.executeQuery(sql);
@@ -54,14 +54,20 @@ public class OrdersDao extends AbstractDAO {
 		return listItems;
 	}
 
-	public int changeStt(Orders order) {
+	public int changeStt(Orders order, int idUser) {
 		int result = 0;
 		con = DBConnectionUtil.getConnection();
-		String sql = "UPDATE orders SET status = ? WHERE id = ?";
+		String sqlStatus = "UPDATE orders SET status = ? WHERE id = ?";
+		String sqlInsert = "INSERT INTO revenue (total, id_user) VALUES (?, ?)";
 		try {
-			pst = con.prepareStatement(sql);
+			pst = con.prepareStatement(sqlStatus);
 			pst.setBoolean(1, order.isStatus());
 			pst.setInt(2, order.getId());
+			pst.executeUpdate();
+			
+			pst = con.prepareStatement(sqlInsert);
+			pst.setFloat(1, order.getTotal());
+			pst.setInt(2, idUser);
 			result = pst.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();

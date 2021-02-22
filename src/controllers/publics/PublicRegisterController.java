@@ -22,7 +22,7 @@ public class PublicRegisterController extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		RequestDispatcher rd = request.getRequestDispatcher("/views/public/checkout-registration.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("/views/public/registration.jsp");
 		rd.forward(request, response);
 	}
 
@@ -44,7 +44,7 @@ public class PublicRegisterController extends HttpServlet {
 			response.sendRedirect(request.getContextPath() + "/index?msg=1");
 			return;
 		} else {
-			RequestDispatcher rd = request.getRequestDispatcher("/views/public/checkout-registration.jsp?msg=0");
+			RequestDispatcher rd = request.getRequestDispatcher("/views/public/registration.jsp?msg=0");
 			rd.forward(request, response);
 			return;
 		}

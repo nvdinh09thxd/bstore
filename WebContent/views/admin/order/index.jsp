@@ -41,7 +41,7 @@
                                         <th>Tổng tiền</th>
                                         <th>Ghi chú của khách</th>
                                         <th>Ngày mua</th>
-                                        <th>Trạng thái</th>
+                                        <th>Giao hàng</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -59,8 +59,8 @@
                                         <td class="center"><%=order.getNote() %></td>
                                         <td class="center"><%=order.getDate() %></td>
                                         <td class="center">
-                                        	<a href="javascript:void(0)" title="">
-                                            	<img width="50px" height="50px" alt="<%=order.getId() %>"
+                                        	<a href="javascript:void(0)">
+                                            	<img width="50px" height="50px" alt="<%=order.getId() %>" class="<%=order.getTotal() %>"
                                             	src="<%=request.getContextPath() %>/uploads/images/<%if(order.isStatus()) out.print("tick.png"); else out.print("cancel.png"); %>" />
                                             </a>
                                         </td>
@@ -86,6 +86,7 @@
 				data : {
 					aid: image.attr("alt"),
 					asrc : image.attr("src"),
+					atotal : image.attr("class"),
 				},
 				success : function(data) {
 					image.attr("src", data)
@@ -99,6 +100,8 @@
 		function detailOrder(id){
 			window.location.href="<%=request.getContextPath()%>/admin/order/detail?id="+id;
 		}
+
+		document.getElementById("order").classList.add('active');
 	</script>
   </div>
  <%@ include file="/templates/admin/inc/footer.jsp" %>

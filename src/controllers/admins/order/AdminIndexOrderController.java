@@ -9,9 +9,11 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import daos.OrdersDao;
 import models.Orders;
+import models.User;
 
 public class AdminIndexOrderController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -35,20 +37,16 @@ public class AdminIndexOrderController extends HttpServlet {
 		PrintWriter out = response.getWriter();
 		int id = Integer.parseInt(request.getParameter("aid"));
 		String src = request.getParameter("asrc");
+		float total = Float.parseFloat(request.getParameter("atotal"));
 		int idx = src.lastIndexOf("/");
 		String linkUrl = src.substring(0, idx + 1);
-		String picName = src.substring(idx + 1);
 		String fileName = "";
-		boolean active = true;
-		if (picName.equals("tick.png")) {
+		HttpSession session = request.getSession();
+		User userInfo = (User) session.getAttribute("userInfo");
+		if (src.contains("tick.png")) {
 			fileName = linkUrl + "cancel.png";
-			active = false;
-		} else {
-			fileName = linkUrl + "tick.png";
-		}
-		
-		Orders order = new Orders(id, active);
-		if (ordersDao.changeStt(order) > 0) {
+			Orders order = new Orders(id, total, false);
+			ordersDao.changeStt(order, userInfo.getId());
 			out.print(fileName);
 		} else {
 			out.print(src);

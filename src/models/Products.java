@@ -16,7 +16,7 @@ public class Products {
 	private int rating;
 	private float oldPrice;
 	private float price;
-	private int preview;
+	private int number;
 	private Categories cat;
 
 	public Products(int id) {
@@ -37,6 +37,12 @@ public class Products {
 		this.name = name;
 		this.arPicture = arPicture;
 		this.price = price;
+	}
+
+	public Products(int id, int number) {
+		super();
+		this.id = id;
+		this.number = number;
 	}
 
 }

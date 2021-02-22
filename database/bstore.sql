@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th12 17, 2020 lúc 09:05 AM
+-- Thời gian đã tạo: Th2 22, 2021 lúc 10:17 AM
 -- Phiên bản máy phục vụ: 10.1.32-MariaDB
 -- Phiên bản PHP: 7.1.17
 
@@ -31,7 +31,7 @@ SET time_zone = "+00:00";
 CREATE TABLE `cart` (
   `id` int(11) NOT NULL,
   `id_pro` int(11) NOT NULL,
-  `counter` int(11) NOT NULL,
+  `number` int(11) NOT NULL,
   `id_order` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
@@ -116,7 +116,7 @@ CREATE TABLE `products` (
   `rating` int(11) NOT NULL DEFAULT '0',
   `old_price` float NOT NULL DEFAULT '0',
   `price` float NOT NULL,
-  `preview` int(11) NOT NULL DEFAULT '0',
+  `number` int(11) NOT NULL DEFAULT '0',
   `cat_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
@@ -124,25 +124,25 @@ CREATE TABLE `products` (
 -- Đang đổ dữ liệu cho bảng `products`
 --
 
-INSERT INTO `products` (`id`, `name`, `picture`, `rating`, `old_price`, `price`, `preview`, `cat_id`) VALUES
-(1, 'Giầy nam mới', '(1,2,3,4)', 0, 100000, 90000, 0, 5),
-(2, 'Giầy nữ mới', '(5,6,7,8)', 0, 100000, 90000, 0, 5),
+INSERT INTO `products` (`id`, `name`, `picture`, `rating`, `old_price`, `price`, `number`, `cat_id`) VALUES
+(1, 'Giầy nam mới', '(1,2,3,4)', 0, 100000, 90000, 20, 5),
+(2, 'Giầy nữ mới', '(5,6,7,8)', 0, 100000, 90000, 10, 5),
 (3, 'Giầy nam', '(9,10,11)', 0, 100000, 90000, 0, 9),
-(4, 'Giầy nữ', '(12)', 0, 100000, 90000, 0, 9),
+(4, 'Giầy nữ', '(12)', 0, 100000, 90000, 5, 9),
 (5, 'Túi xách đi chợ mới', '(13)', 0, 100000, 90000, 0, 3),
-(6, 'Túi xách đi chơi mới', '(14)', 0, 100000, 90000, 0, 3),
-(7, 'Túi xách đi làm mới', '(15)', 0, 100000, 90000, 0, 3),
-(8, 'Áo nam mới', '(16)', 0, 150000, 120000, 0, 4),
-(9, 'Áo nữ mới', '(17)', 0, 150000, 120000, 0, 4),
-(10, 'Đồng hồ nam mới', '(18)', 0, 2000000, 1800000, 0, 6),
+(6, 'Túi xách đi chơi mới', '(14)', 0, 100000, 90000, 10, 3),
+(7, 'Túi xách đi làm mới', '(15)', 0, 100000, 90000, 10, 3),
+(8, 'Áo nam mới', '(16)', 0, 150000, 120000, 25, 4),
+(9, 'Áo nữ mới', '(17)', 0, 150000, 120000, 10, 4),
+(10, 'Đồng hồ nam mới', '(18)', 0, 2000000, 1800000, 30, 6),
 (11, 'Đồng hồ nữ mới', '(19)', 0, 2000000, 1800000, 0, 6),
-(12, 'Đồng hồ nam', '(20)', 0, 2000000, 1810000, 0, 10),
-(13, 'Đồng hồ nữ', '(21)', 0, 2000000, 1810000, 0, 10),
-(14, 'Túi xách đi chợ', '(22)', 0, 100000, 91000, 0, 7),
-(15, 'Túi xách đi chơi', '(23)', 0, 100000, 91000, 0, 7),
-(16, 'Túi xách đi làm', '(24)', 0, 100000, 91000, 0, 7),
-(17, 'Áo nam', '(25)', 0, 150000, 121000, 0, 8),
-(18, 'Áo nữ', '(26)', 0, 150000, 121000, 0, 8);
+(12, 'Đồng hồ nam', '(20)', 0, 2000000, 1810000, 10, 10),
+(13, 'Đồng hồ nữ', '(21)', 0, 2000000, 1810000, 10, 10),
+(14, 'Túi xách đi chợ', '(22)', 0, 100000, 91000, 20, 7),
+(15, 'Túi xách đi chơi', '(23)', 0, 100000, 91000, 10, 7),
+(16, 'Túi xách đi làm', '(24)', 0, 100000, 91000, 15, 7),
+(17, 'Áo nam', '(25)', 0, 150000, 121000, 10, 8),
+(18, 'Áo nữ', '(26)', 0, 150000, 121000, 10, 8);
 
 -- --------------------------------------------------------
 
@@ -185,6 +185,19 @@ INSERT INTO `product_detail` (`id`, `name`) VALUES
 (23, 'tui-xach-di-choi.jpg'),
 (24, 'tui-xach-di-lam.jpg'),
 (25, 'ao-nam.jpg');
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `revenue`
+--
+
+CREATE TABLE `revenue` (
+  `id` int(11) NOT NULL,
+  `total` float NOT NULL,
+  `date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `id_user` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -244,12 +257,19 @@ ALTER TABLE `orders`
 -- Chỉ mục cho bảng `products`
 --
 ALTER TABLE `products`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `cat_id` (`cat_id`);
 
 --
 -- Chỉ mục cho bảng `product_detail`
 --
 ALTER TABLE `product_detail`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Chỉ mục cho bảng `revenue`
+--
+ALTER TABLE `revenue`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -266,7 +286,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT cho bảng `cart`
 --
 ALTER TABLE `cart`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT cho bảng `categories`
@@ -284,7 +304,7 @@ ALTER TABLE `members`
 -- AUTO_INCREMENT cho bảng `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT cho bảng `products`
@@ -299,10 +319,26 @@ ALTER TABLE `product_detail`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
+-- AUTO_INCREMENT cho bảng `revenue`
+--
+ALTER TABLE `revenue`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT cho bảng `users`
 --
 ALTER TABLE `users`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+
+--
+-- Các ràng buộc cho các bảng đã đổ
+--
+
+--
+-- Các ràng buộc cho bảng `products`
+--
+ALTER TABLE `products`
+  ADD CONSTRAINT `products_ibfk_1` FOREIGN KEY (`cat_id`) REFERENCES `categories` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
