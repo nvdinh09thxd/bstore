@@ -65,6 +65,14 @@ public class DBConnectionUtil {
 		}
 	}
 
+	public static void close(ResultSet rs, ResultSet rs2, Statement st, Statement st2, Connection conn) {
+		close(rs);
+		close(rs2);
+		close(st);
+		close(st2);
+		close(conn);
+	}
+
 	public static void close(ResultSet rs, Statement st, Connection conn) {
 		close(rs);
 		close(st);

@@ -18,10 +18,11 @@ import models.Member;
 public class PublicCartController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	float totalPrice = 0;
-	List<Cart> listCarts = new ArrayList<>();
+	List<Cart> listCarts;
 
 	public PublicCartController() {
 		super();
+		listCarts = new ArrayList<>();
 	}
 
 	@SuppressWarnings("unchecked")
@@ -32,8 +33,8 @@ public class PublicCartController extends HttpServlet {
 		try {
 			int id = Integer.parseInt(request.getParameter("aid"));
 			listCarts.removeIf(obj -> obj.getId() == id);
-		} catch (Exception e) {
-		}
+			return;
+		} catch (Exception e) {}
 		Member userLogin = (Member) session.getAttribute("userLogin");
 		if (userLogin == null) {
 			response.sendRedirect(request.getContextPath() + "/login");

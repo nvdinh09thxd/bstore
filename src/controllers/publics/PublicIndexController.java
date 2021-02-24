@@ -20,7 +20,7 @@ import models.Products;
 public class PublicIndexController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	ProductsDAO productDao;
-	List<Cart> listCarts = new ArrayList<>();
+	List<Cart> listCarts;
 
 	public PublicIndexController() {
 		super();

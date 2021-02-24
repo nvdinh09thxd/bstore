@@ -370,7 +370,7 @@
 							<!-- SINGLE ADDRESS END -->
 						</div>
 					</div>
-					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" id="checkout">
 						<!-- RETURNE-CONTINUE-SHOP START -->
 						<%
 							List<Cart> listCarts = (List<Cart>) session.getAttribute("listCarts");
@@ -635,8 +635,10 @@
 						url: '<%=request.getContextPath()%>/cart',
 						type: 'GET',
 						data: {aid: id},
-						success: function(data){
-							$('body').html(data);
+						success: function(){
+							$('table').load(' table');
+							$('#checkout').load(' #checkout');
+							$('#sizecart').load(' #sizecart');
 						},
 						error: function (){
 							alert('Có lỗi xảy ra');

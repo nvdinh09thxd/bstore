@@ -33,7 +33,7 @@ public class ProductsDAO extends AbstractDAO {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
-			DBConnectionUtil.close(rs, st, con);
+			DBConnectionUtil.close(rs, rs2, st2, st, con);
 		}
 		return listItems;
 	}

@@ -29,14 +29,6 @@
     <url-pattern>/detail</url-pattern>
   </servlet-mapping>
   <servlet>
-    <servlet-name>PublicAboutController</servlet-name>
-    <servlet-class>controllers.publics.PublicAboutController</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>PublicAboutController</servlet-name>
-    <url-pattern>/about</url-pattern>
-  </servlet-mapping>
-  <servlet>
     <servlet-name>PublicCartController</servlet-name>
     <servlet-class>controllers.publics.PublicCartController</servlet-class>
   </servlet>
