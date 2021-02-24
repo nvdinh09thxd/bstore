@@ -264,7 +264,6 @@
 								<tbody>	
 									<!-- SINGLE CART_ITEM START -->
 									<%
-									float totalProduct = 0;
 									if(session.getAttribute("listCarts")!=null){
 										List<Cart> listCarts = (List<Cart>) session.getAttribute("listCarts");
 										if(listCarts.size()>0){
@@ -299,7 +298,6 @@
 										</td>
 										<%
 										float price = objCart.getPro().getPrice()*objCart.getNumber();
-										totalProduct+=price;
 										%>
 										<td class="cart-total">
 											<span class="price" id="price_<%=objCart.getPro().getId()%>"><%=String.format("%.3f", price) %></span>
@@ -318,7 +316,7 @@
 											<span>Total</span>
 										</td>
 										<td id="total-price-container" class="price" colspan="1">
-											<span id="total_product"><%=totalProduct %></span>
+											<span id="total_product">${totalPrice}</span>
 										</td>
 									</tr>
 								</tfoot>		

@@ -46,6 +46,7 @@ public class PublicCartController extends HttpServlet {
 				totalPrice += objCart.getPro().getPrice() * objCart.getNumber();
 			}
 		}
+		request.setAttribute("totalPrice", totalPrice);
 		RequestDispatcher rd = request.getRequestDispatcher("/views/public/cart.jsp");
 		rd.forward(request, response);
 	}
