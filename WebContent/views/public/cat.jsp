@@ -640,7 +640,7 @@
 														<%
 														if(userLogin!=null){
 														%>
-														<li><a href="javascript:void(0)" title="Add to cart" onclick="addToCard(<%=pro.getNumber()%>, <%=pro.getId()%>)"><i class="fa fa-shopping-cart"></i></a></li>
+														<li><a href="javascript:void(0)" title="Add to cart" onclick="addToCart(<%=pro.getNumber()%>, <%=pro.getId()%>)"><i class="fa fa-shopping-cart"></i></a></li>
 														<%} %>
 														<li><a href="#" title="Quick view"><i class="fa fa-retweet"></i></a></li>
 														<li><a href="#" title="Quick view"><i class="fa fa-heart-o"></i></a></li>
@@ -935,7 +935,7 @@
 		<!-- FOOTER-TOP-AREA START -->
 		<%@ include file="/templates/public/inc/footer.jsp" %>
 		<script type="text/javascript">
-		function addToCard(number, idPro){
+		function addToCart(number, idPro){
 			if(number==0){
 				alert("Sản phẩm này đã hết!");
 			} else {
