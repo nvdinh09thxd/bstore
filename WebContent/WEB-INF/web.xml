@@ -109,6 +109,14 @@
     <url-pattern>/admin/product/add</url-pattern>
   </servlet-mapping>
   <servlet>
+    <servlet-name>AdminEditProductController</servlet-name>
+    <servlet-class>controllers.admins.product.AdminEditProductController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AdminEditProductController</servlet-name>
+    <url-pattern>/admin/product/edit</url-pattern>
+  </servlet-mapping>
+  <servlet>
     <servlet-name>AdminIndexOrderController</servlet-name>
     <servlet-class>controllers.admins.order.AdminIndexOrderController</servlet-class>
   </servlet>

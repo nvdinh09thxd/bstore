@@ -21,10 +21,14 @@ public class PublicIndexController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	ProductsDAO productDao;
 	List<Cart> listCarts;
+	List<Products> listNewProducts;
+	List<Products> listSaleProducts;
 
 	public PublicIndexController() {
 		super();
 		productDao = new ProductsDAO();
+		listNewProducts = new ArrayList<>();
+		listSaleProducts = new ArrayList<>();
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -33,8 +37,12 @@ public class PublicIndexController extends HttpServlet {
 		if (session.getAttribute("listCarts") == null) {
 			listCarts = new ArrayList<>();
 		}
-		List<Products> listNewProducts = productDao.getNewProducts();
-		List<Products> listSaleProducts = productDao.getSaleProducts();
+		if (listNewProducts.size() == 0) {
+			listNewProducts = productDao.getNewProducts();
+		}
+		if (listSaleProducts.size() == 0) {
+			listSaleProducts = productDao.getSaleProducts();
+		}
 		request.setAttribute("listNewProducts", listNewProducts);
 		request.setAttribute("listSaleProducts", listSaleProducts);
 		RequestDispatcher rd = request.getRequestDispatcher("/views/public/index.jsp");

@@ -8,6 +8,7 @@ import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -25,12 +26,13 @@ import models.Categories;
 import models.Products;
 import util.FileUtil;
 
-public class AdminAddProductController extends HttpServlet {
+@MultipartConfig
+public class AdminEditProductController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	ProductsDAO proDao;
 	CatDao catDao;
 
-	public AdminAddProductController() {
+	public AdminEditProductController() {
 		super();
 		proDao = new ProductsDAO();
 		catDao = new CatDao();
@@ -38,9 +40,20 @@ public class AdminAddProductController extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		int proId = 0;
+		try {
+			proId = Integer.parseInt(request.getParameter("id"));
+		} catch (NumberFormatException e) {
+			System.out.println("no");
+			return;
+		}
+		Products itemPro = proDao.getProduct(proId);
+		request.setAttribute("itemPro", itemPro);
+		
 		List<Categories> listCats = catDao.findCatChild();
 		request.setAttribute("listCats", listCats);
-		RequestDispatcher rd = request.getRequestDispatcher("/views/admin/product/add.jsp");
+
+		RequestDispatcher rd = request.getRequestDispatcher("/views/admin/product/edit.jsp");
 		rd.forward(request, response);
 	}
 
@@ -49,6 +62,8 @@ public class AdminAddProductController extends HttpServlet {
 		request.setCharacterEncoding("utf-8");
 		response.setCharacterEncoding("utf-8");
 		response.setContentType("text/html");
+		
+		int idPro = 0;
 		String name = "";
 		int idCat = 0;
 		float price = 0;
@@ -78,6 +93,9 @@ public class AdminAddProductController extends HttpServlet {
 							System.out.println("file not found");
 						}
 					} else {
+						if (item.getFieldName().equals("id")) {
+							idPro = Integer.parseInt(item.getString());
+						}
 						if (item.getFieldName().equals("name")) {
 							name = item.getString();
 						}
@@ -97,17 +115,14 @@ public class AdminAddProductController extends HttpServlet {
 		} else {
 			System.out.println("Not Multipart");
 		}
-
-		// System.out.println(name);
-
-		Products product = new Products(0, name, arPictures, 0, (float) 0.0, price, 0, new Categories(idCat, 0, ""));
-
-		if (proDao.addPro(product) > 0) {
+		
+		Products product = new Products(idPro, name, arPictures, 0, (float) 0.0, price, 0, new Categories(idCat, 0, ""));
+		
+		if (proDao.editPro(product) > 0) {
 			response.sendRedirect(request.getContextPath() + "/admin/product/index?msg=1");
 		} else {
 			System.out.println("no");
 		}
-
+		
 	}
-
 }

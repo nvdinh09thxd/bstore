@@ -56,6 +56,7 @@
                                 List<Products> listProducts = (List<Products>) request.getAttribute("listProducts");
                                 if(listProducts.size()>0){
                                 	for(Products pro: listProducts){
+                                		String urlEdit = request.getContextPath() + "/admin/product/edit?id="+pro.getId();
                                 %>
                                     <tr>
                                         <td><%=pro.getId() %></td>
@@ -66,7 +67,7 @@
 											<img width="200px" height="200px" src="<%=request.getContextPath() %>/uploads/images/<%if(pro.getArPicture().size()>0) out.print(pro.getArPicture().get(0)); else out.print("nopicture.jpg"); %>" alt="Đổi thay"/>
                                         </td>
                                         <td class="center">
-                                            <a href="" title="" class="btn btn-primary"><i class="fa fa-edit "></i> Sửa</a>
+                                            <a href="<%=urlEdit %>" title="" class="btn btn-primary"><i class="fa fa-edit "></i> Sửa</a>
                                             <a href="" title="" class="btn btn-danger"><i class="fa fa-pencil"></i> Xóa</a>
                                         </td>
                                     </tr>

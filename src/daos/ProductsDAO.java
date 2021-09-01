@@ -2,6 +2,7 @@ package daos;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import models.Categories;
@@ -205,5 +206,61 @@ public class ProductsDAO extends AbstractDAO {
 		}
 		return result;
 
+	}
+
+	public int editPro(Products product) {
+		int result = 0;
+		con = DBConnectionUtil.getConnection();
+		String sqlPro = "UPDATE products SET name = ?, picture = ?, price = ?, cat_id = ? WHERE id = ?";
+
+		try {
+			ArrayList<String> arPicture = new ArrayList<>(); 
+			String sqlPic = "SELECT picture FROM products WHERE id = ?";
+			pst = con.prepareStatement(sqlPic);
+			pst.setInt(1, product.getId());
+			rs = pst.executeQuery();
+			
+			if (rs.next()) {
+				String ar = rs.getString("picture");
+				String arP = ar.substring(1, ar.length()-1);
+				arPicture = new ArrayList<String>(Arrays.asList(arP.split(",")));
+			}
+			String delPic = "DELETE FROM product_detail WHERE id = ?";
+			for (String pic : arPicture) {
+				pst = con.prepareStatement(delPic);
+				pst.setString(1, pic);
+				pst.executeUpdate();
+			}
+			
+			String picture = "(";
+			String newPic = "";
+			for (String obj : product.getArPicture()) {
+				String sqlPicIns = "INSERT INTO product_detail (name) VALUES (?)";
+				pst = con.prepareStatement(sqlPicIns);
+				pst.setString(1, obj);
+				pst.executeUpdate();
+				String sqlSel = "SELECT id FROM product_detail ORDER BY id DESC LIMIT 1";
+				st = con.createStatement();
+				rs = st.executeQuery(sqlSel);
+				while (rs.next()) {
+					picture += rs.getInt("id") + ",";
+				}
+			}
+			int idx = picture.length() - 1;
+			newPic = picture.substring(0, idx) + ')' + picture.substring(idx + 1);
+
+			pst2 = con.prepareStatement(sqlPro);
+			pst2.setString(1, product.getName());
+			pst2.setString(2, newPic);
+			pst2.setFloat(3, product.getPrice());
+			pst2.setInt(4, product.getCat().getId());
+			pst2.setInt(5, product.getId());
+			result = pst2.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			DBConnectionUtil.close(pst, con);
+		}
+		return result;
 	}
 }
