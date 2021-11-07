@@ -66,6 +66,7 @@ public class PublicIndexController extends HttpServlet {
 		Products pro = productDao.getProduct(idPro);
 		boolean check = false;
 		// Kiểm tra sản phẩm đã có trong giỏ hàng chưa?
+		// Nếu đã có thì tăng số lượng lên 1
 		for (Cart objCart : listCarts) {
 			if (objCart.getPro().getId() == idPro) {
 				objCart.setNumber(1 + objCart.getNumber());
@@ -73,6 +74,7 @@ public class PublicIndexController extends HttpServlet {
 				break;
 			}
 		}
+		// Nếu chưa có thì thêm vào giỏ hàng
 		if (!check) {
 			Cart cart = new Cart(idx, pro, 1, new Orders());
 			listCarts.add(cart);
