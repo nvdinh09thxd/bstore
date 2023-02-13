@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th2 22, 2021 lúc 10:17 AM
+-- Thời gian đã tạo: Th2 13, 2023 lúc 03:34 AM
 -- Phiên bản máy phục vụ: 10.1.32-MariaDB
--- Phiên bản PHP: 7.1.17
+-- Phiên bản PHP: 7.2.5
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -34,6 +34,16 @@ CREATE TABLE `cart` (
   `number` int(11) NOT NULL,
   `id_order` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `cart`
+--
+
+INSERT INTO `cart` (`id`, `id_pro`, `number`, `id_order`) VALUES
+(1, 1, 1, 1),
+(2, 2, 1, 1),
+(3, 4, 2, 1),
+(4, 2, 3, 2);
 
 -- --------------------------------------------------------
 
@@ -103,6 +113,14 @@ CREATE TABLE `orders` (
   `status` tinyint(1) NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
+--
+-- Đang đổ dữ liệu cho bảng `orders`
+--
+
+INSERT INTO `orders` (`id`, `id_member`, `total`, `note`, `date`, `status`) VALUES
+(1, 1, 360000, '', '2021-11-03 07:10:05', 1),
+(2, 1, 270000, '333', '2022-01-19 03:49:02', 1);
+
 -- --------------------------------------------------------
 
 --
@@ -125,10 +143,10 @@ CREATE TABLE `products` (
 --
 
 INSERT INTO `products` (`id`, `name`, `picture`, `rating`, `old_price`, `price`, `number`, `cat_id`) VALUES
-(1, 'Giầy nam mới', '(1,2,3,4)', 0, 100000, 90000, 20, 5),
-(2, 'Giầy nữ mới', '(5,6,7,8)', 0, 100000, 90000, 10, 5),
+(1, 'Giầy nam mới', '(1,2,3,4)', 0, 100000, 90000, 19, 5),
+(2, 'Giầy nữ mới', '(5,6,7,8)', 0, 100000, 90000, 6, 5),
 (3, 'Giầy nam', '(9,10,11)', 0, 100000, 90000, 0, 9),
-(4, 'Giầy nữ', '(12)', 0, 100000, 90000, 5, 9),
+(4, 'Giầy nữ', '(12)', 0, 100000, 90000, 3, 9),
 (5, 'Túi xách đi chợ mới', '(13)', 0, 100000, 90000, 0, 3),
 (6, 'Túi xách đi chơi mới', '(14)', 0, 100000, 90000, 10, 3),
 (7, 'Túi xách đi làm mới', '(15)', 0, 100000, 90000, 10, 3),
@@ -142,7 +160,9 @@ INSERT INTO `products` (`id`, `name`, `picture`, `rating`, `old_price`, `price`,
 (15, 'Túi xách đi chơi', '(23)', 0, 100000, 91000, 10, 7),
 (16, 'Túi xách đi làm', '(24)', 0, 100000, 91000, 15, 7),
 (17, 'Áo nam', '(25)', 0, 150000, 121000, 10, 8),
-(18, 'Áo nữ', '(26)', 0, 150000, 121000, 10, 8);
+(18, 'Áo nữ', '(26)', 0, 150000, 121000, 10, 8),
+(19, 'Tania', '(26)', 0, 0, 411000, 0, 6),
+(20, 'admin', '(27)', 0, 0, 200000, 0, 4);
 
 -- --------------------------------------------------------
 
@@ -184,7 +204,9 @@ INSERT INTO `product_detail` (`id`, `name`) VALUES
 (22, 'tui-xach-di-cho.jpg'),
 (23, 'tui-xach-di-choi.jpg'),
 (24, 'tui-xach-di-lam.jpg'),
-(25, 'ao-nam.jpg');
+(25, 'ao-nam.jpg'),
+(26, 'it-992209258600.jpg'),
+(27, 'it-1774539470900.jpg');
 
 -- --------------------------------------------------------
 
@@ -286,7 +308,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT cho bảng `cart`
 --
 ALTER TABLE `cart`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT cho bảng `categories`
@@ -304,19 +326,19 @@ ALTER TABLE `members`
 -- AUTO_INCREMENT cho bảng `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT cho bảng `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT cho bảng `product_detail`
 --
 ALTER TABLE `product_detail`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 
 --
 -- AUTO_INCREMENT cho bảng `revenue`

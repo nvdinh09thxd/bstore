@@ -1,11 +1,2 @@
 eclipse.preferences.version=1
-encoding//WebContent/templates/public/css/style.css=UTF-8
-encoding//WebContent/views/admin/order/index.jsp=UTF-8
-encoding//src/controllers/auth/LoginController.java=UTF-8
-encoding//src/controllers/publics/PublicCartController.java=UTF-8
-encoding//src/controllers/publics/PublicDetailController.java=UTF-8
-encoding//src/controllers/publics/PublicIndexController.java=UTF-8
-encoding//src/controllers/publics/PublicLoginController.java=UTF-8
-encoding//src/controllers/publics/PublicRegisterController.java=UTF-8
-encoding//src/util/CategoryUtil.java=UTF-8
-encoding//src/util/StringUtil.java=UTF-8
+encoding//src/main/java/controllers=UTF-8
